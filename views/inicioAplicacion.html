@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
+    
+    <link rel="shortcut icon" href="/images/icons8-login-64.png" />
+
+    <link rel="stylesheet" href="/css/ok/inicio.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ="
+      crossorigin="anonymous"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="w-screen h-screen">
+    <div class="isolate bg-white w-screen h-screen overflow-hidden">
+      <div
+        class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+      >
+        <svg
+          class="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
+          viewBox="0 0 1155 678"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
+            fill-opacity=".3"
+            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+          />
+          <defs>
+            <linearGradient
+              id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
+              x1="1155.49"
+              x2="-78.208"
+              y1=".177"
+              y2="474.645"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#9089FC"></stop>
+              <stop offset="1" stop-color="#FF80B5"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="px-6 pt-6 lg:px-8">
+        <div>
+          <nav
+            class="flex h-9 items-center justify-between"
+            aria-label="Global"
+          >
+            <div class="flex lg:min-w-0 lg:flex-1" aria-label="Global">
+              <a>
+                <span class="sr-only">Your Company</span>
+                <i class="logo fas fa-gamepad"></i>
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <main>
+        <div class="relative px-6 lg:px-8">
+          <div class="mx-auto max-w-3xl pt-20 pb-32 sm:pt-64 sm:pb-40">
+            <div>
+              <div>
+                <h1
+                  class="text-4xl font-bold tracking-tight sm:text-center sm:text-5xl"
+                >
+                  Bienvenido a la herramienta de autor para la configuración del
+                  videojuego
+                </h1>
+                <p class="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
+                  Sistema dedicado a configurar el videojuego educativo.
+                </p>
+                <div class="mt-8 flex gap-x-4 sm:justify-center">
+                  <a
+                    id="iniciarSesion"
+                    onclick="iniciarSesion()"
+                    class="iniciarSesion inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
+                  >
+                    Iniciar sesión
+                    <span class="text-indigo-200" aria-hidden="true"
+                      >&rarr;</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <div
+                class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+              >
+                <svg
+                  class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
+                  viewBox="0 0 1155 678"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
+                    fill-opacity=".3"
+                    d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="ecb5b0c9-546c-4772-8c71-4d3f06d544bc"
+                      x1="1155.49"
+                      x2="-78.208"
+                      y1=".177"
+                      y2="474.645"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-color="#8257e5"></stop>
+                      <stop offset="1" stop-color="#57b6e0"></stop>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="modal fade" id="login" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-white text-white">
+          <div class="modal-body">
+            <div
+              class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+            >
+              <div class="w-full max-w-md space-y-8">
+                <div>
+                  <img
+                    class="mx-auto h-12 w-auto"
+                    src="/images/logo.png"
+                    alt="Your Company"
+                  />
+                  <h2
+                    class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
+                  >
+                    Accede con tu cuenta
+                  </h2>
+                </div>
+                <form class="mt-8 space-y-6" id="formulario">
+                  <input type="hidden" name="remember" value="true" />
+                  <div class="-space-y-px rounded-md shadow-sm">
+                    <div>
+                      <label for="typeUsuarioName" class="sr-only"
+                        >Nombre de usuario</label
+                      >
+                      <input
+                        type="text"
+                        name="typeUsuarioName"
+                        id="typeUsuarioName"
+                        required
+                        onkeyup="cambio()"
+                        class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Nombre de usuario"
+                      />
+                    </div>
+                    <div>
+                      <label for="typePassword" class="sr-only"
+                        >Contraseña</label
+                      >
+                      <input
+                        type="password"
+                        name="typePassword"
+                        id="typePassword"
+                        required
+                        onkeyup="cambio()"
+                        autocomplete="current-password"
+                        class="password1 relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Contraseña"
+                      /><i class="far fa-eye password-icon show-password"></i>
+                    </div>
+                    <div class="noValidas" id="noValidas"></div>
+                  </div>
+                  <div>
+                    <button
+                      id="botonLogin"
+                      class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                      <span
+                        class="candado absolute inset-y-0 left-0 flex items-center pl-3"
+                      >
+                        <!-- Heroicon name: mini/lock-closed -->
+                        <svg
+                          class="h-5 w-5 text-white-500 group-hover:text-indigo-400"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                          id="candado"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+
+                        <svg
+                          class="w-5 h-5 text-white-500 animate-spin"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          id="charger"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                          />
+                        </svg>
+                      </span>
+
+                      Acceder
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="internet" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-white text-white">
+          <div class="modal-body">
+            <div
+              class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+            >
+              <div class="w-full max-w-md space-y-8">
+                <div
+                  class="icono flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                >
+                  <!-- Heroicon name: outline/exclamation-triangle -->
+                  <svg
+                    class="h-6 w-6 text-yellow-600"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+
+                <div>
+                  <h2
+                    class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
+                  >
+                    No hay conexión a Internet
+                  </h2>
+
+                  <h3
+                    class="mt-6 text-lg leading-8 text-gray-600 sm:text-center"
+                  >
+                    Al parecer no tienes conexión a internet.
+                  </h3>
+                </div>
+
+                <div>
+                  <button
+                    type="button"
+                    data-bs-dismiss="modal"
+                    class="aceptar mt-3 inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  >
+                    Aceptar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="serverCaido" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-white text-white">
+          <div class="modal-body">
+            <div
+              class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+            >
+              <div class="w-full max-w-md space-y-8">
+                <div
+                  class="icono flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                >
+                  <!-- Heroicon name: outline/exclamation-triangle -->
+                  <svg
+                    class="h-6 w-6 text-yellow-600"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+
+                <div>
+                  <h2
+                    class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
+                  >
+                    Server no conectado
+                  </h2>
+
+                  <h3
+                    class="mt-6 text-lg leading-8 text-gray-600 sm:text-center"
+                  >
+                    Al parecer el servidor en estos momentos esta presentando
+                    problemas. Intente más tarde.
+                  </h3>
+                </div>
+
+                <div>
+                  <button
+                    type="button"
+                    data-bs-dismiss="modal"
+                    class="aceptar mt-3 inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  >
+                    Aceptar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="estudiante" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-white text-white">
+          <div class="modal-body">
+            <div
+              class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+            >
+              <div class="w-full max-w-md space-y-8">
+                <div
+                  class="icono flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                >
+                  <!-- Heroicon name: outline/exclamation-triangle -->
+                  <svg
+                    class="h-6 w-6 text-yellow-600"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+
+                <div>
+                  <h2
+                    class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
+                  >
+                    Usuario no autorizado
+                  </h2>
+
+                  <h3
+                    class="mt-6 text-lg leading-8 text-gray-600 sm:text-center"
+                  >
+                    Los estudiantes no estan autorizado en esta aplicación.
+                  </h3>
+                </div>
+
+                <div>
+                  <button
+                    type="button"
+                    data-bs-dismiss="modal"
+                    class="aceptar mt-3 inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  >
+                    Aceptar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+    integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+    crossorigin="anonymous"
+  ></script>
+
+  <script src="/js/funcionesMias/inicio.js"></script>
+
+  <script
+    src="https://kit.fontawesome.com/a076d05399.js"
+    crossorigin="anonymous"
+  ></script>
+</html>

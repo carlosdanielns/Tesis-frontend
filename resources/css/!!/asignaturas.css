@@ -1,0 +1,137 @@
+.columnaID {
+  visibility: hidden;
+  display: none;
+}
+
+.charger {
+  position: absolute;
+  top: 87px;
+  bottom: 0;
+  left: 233px;
+  right: 0;
+}
+
+.clickInformacion {
+  cursor: pointer;
+}
+
+.chargerTable {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+}
+
+.chargerInsertar {
+  position: absolute;
+  top: 86%;
+  left: 63%;
+  right: 0;
+  bottom: 0;
+}
+.chargerModificar {
+  position: absolute;
+  top: 85%;
+  left: 63%;
+  right: 0;
+  bottom: 0;
+}
+.chargerEliminar {
+  position: absolute;
+  top: 70%;
+  left: 77%;
+  right: 0;
+  bottom: 0;
+}
+
+.comboBox {
+  position: absolute;
+  top: 56.5%;
+  left: 87%;
+  right: 0;
+  bottom: 0;
+}
+
+.comboBoxUpdate {
+  position: absolute;
+  top: 59%;
+  left: 87%;
+  right: 0;
+  bottom: 0;
+}
+.acciones {
+  font-size: 20px;
+}
+.logo,
+.user {
+  font-size: 40px;
+}
+
+.inicio {
+  font-size: 15px;
+}
+
+.modificar {
+  font-size: 25px;
+}
+
+.eliminar {
+  font-size: 25px;
+}
+
+.aceptar {
+  margin-left: 160px !important;
+}
+
+.icono {
+  margin-left: 45% !important;
+}
+
+.comboMal {
+  position: absolute;
+  top: 61.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.descripcionMal {
+  position: absolute;
+  top: 41%;
+  left: 7%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.descripcionSVG {
+  position: absolute;
+  top: 52%;
+  left: 38%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.comboMalUpdate {
+  position: absolute;
+  top: 61.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.descripcionMalUpdate {
+  position: absolute;
+  top: 43%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}

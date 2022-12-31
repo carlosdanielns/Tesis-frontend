@@ -1,0 +1,115 @@
+.columnaID {
+  visibility: hidden;
+  display: none;
+}
+
+.charger {
+  position: relative;
+  top: 74px;
+  bottom: 0;
+  left: 187px;
+  right: 0;
+}
+
+.clickInformacion {
+  cursor: pointer;
+}
+img {
+  cursor: pointer;
+}
+
+.chargerTable {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+}
+
+.fotoModal {
+  width: 300px;
+  height: 300px;
+  margin-left: 45px;
+}
+.chargerInsertar4x1 {
+  position: absolute;
+  top: 70.5%;
+  left: 33%;
+  right: 0;
+  bottom: 0;
+}
+
+.chargerModificar4x1 {
+  position: absolute;
+  top: 73%;
+  left: 33%;
+  right: 0;
+  bottom: 0;
+}
+
+.chargerInsertarVoF {
+  position: absolute;
+  top: 58.5%;
+  left: 33%;
+  right: 0;
+  bottom: 0;
+}
+
+.chargerModificarVoF {
+  position: absolute;
+  top: 61.5%;
+  left: 33%;
+  right: 0;
+  bottom: 0;
+}
+.chargerInsertarImagen {
+  position: absolute;
+  top: 73%;
+  left: 33%;
+  right: 0;
+  bottom: 0;
+}
+.chargerModificarImagen {
+  position: absolute;
+  top: 73%;
+  left: 33%;
+  right: 0;
+  bottom: 0;
+}
+
+.chargerEliminar {
+  position: absolute;
+  top: 70%;
+  left: 77%;
+  right: 0;
+  bottom: 0;
+}
+
+.chargerEliminarPregunta {
+  position: absolute;
+  top: 70%;
+  left: 77%;
+  right: 0;
+  bottom: 0;
+}
+
+.logo,
+.user {
+  font-size: 45px;
+}
+
+.inicio {
+  font-size: 15px;
+}
+
+.modificar {
+  font-size: 20px;
+}
+
+.eliminar {
+  font-size: 20px;
+}
+
+.listarNivel {
+  font-size: 20px;
+}

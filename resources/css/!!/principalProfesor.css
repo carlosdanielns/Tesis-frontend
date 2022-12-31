@@ -1,0 +1,28 @@
+.clickInformacion {
+  cursor: pointer;
+}
+
+.charger {
+  position: absolute;
+  top: 87px;
+  bottom: 0;
+  left: 223px;
+  right: 0;
+}
+
+.logo,
+.user{
+  font-size: 40px;
+}
+
+.inicio{
+  font-size: 15px;
+}
+
+.aceptar{
+  margin-left: 160px !important;
+}
+
+.icono{
+  margin-left: 45% !important;
+}

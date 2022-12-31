@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#form {
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #8257e5, #57b6e0);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #8257e5, #57b6e0);
+  border-radius: 20px;
+}
+
+#imagen {
+  width: 10%;
+  height: 10%;
+}
+
+.password-icon {
+  float: right;
+  position: relative;
+  margin: -26px 14px 0 0px;
+  cursor: pointer;
+  color: black;
+}
+
+.boton {
+  height: 40px !important;
+  background: #8257e5 !important;
+  font-size: 25px !important;
+  color: #fff !important;
+  margin-top: 50px;
+}
+
+#typeUsuarioName {
+  margin-bottom: 10px;
+}
+
+.noValidas {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.labelCredenciales {
+  color: black;
+  font-size: 20px;
+}
+
+#h2Iniciar {
+  margin-bottom: 50px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.charger {
+  position: relative;
+  top: 0%;
+  left: -44%;
+  right: 0;
+  bottom: 0;
+}
+
+.iniciarSesion {
+  cursor: pointer;
+}
+
+.logo{
+  font-size: 40px;
+}
+
+.aceptar{
+  margin-left: 160px !important;
+}
+
+.icono{
+  margin-left: 45% !important;
+}

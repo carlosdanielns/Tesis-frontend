@@ -1,0 +1,13 @@
+#nombreLogin {
+  font-size: 30px !important;
+}
+
+#nombreUsuario,
+#nombreContrasenna {
+  font-size: 25px;
+}
+
+#nombreUsuarioFallido,
+#nombreContrasennaFallido {
+  font-size: 20px;
+}
