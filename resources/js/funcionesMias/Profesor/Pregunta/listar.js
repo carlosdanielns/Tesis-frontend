@@ -8,11 +8,6 @@ function modalInformacion() {
   var descripcionNivel = document.getElementById("descripcionNivel");
   var nota5Nivel = document.getElementById("nota5Nivel");
   var tiempoDuracionNivel = document.getElementById("tiempoDuracionNivel");
-  console.log(nombreUsuario.innerHTML);
-  console.log(nombreAsigantura.innerHTML);
-  console.log(descripcionNivel.innerHTML);
-  console.log(nota5Nivel.innerHTML);
-  console.log(tiempoDuracionNivel.innerHTML);
 
   if (
     nombreUsuario.innerHTML == "" &&
@@ -47,36 +42,47 @@ function llenarTabla(tipo) {
   let token = JSON.parse(localStorage.getItem("token"));
 
   const urlNivel = "http://localhost:3000/api/v2/nivel/";
-  fetch(urlNivel + nivel.id, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json, text/plain, */ /*",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((resById) => resById.json())
-    .then((resById) => {
-      if (resById.status == 401 || resById.statusCode == 401) {
-        $("#modal401").modal({
-          backdrop: "static",
-          keyboard: false,
-        });
-        $("#modal401").modal("show");
-      } else if (resById.status != 500 || resById.statusCode != 500) {
-        crearTbody(resById.preguntas, tipo);
-      }
-    })
-    .finally(() => {
-      var divPrincipal = document.getElementById("divPrincipal");
-      var mainPrincipal = document.getElementById("mainPrincipal");
-      var chargerTable = document.getElementById("chargerTable");
 
-      chargerTable.style.visibility = "hidden";
-      chargerTable.style.opacity = "0";
-      mainPrincipal.style.display = "block";
-      divPrincipal.style.display = "block";
-    });
+  if (navigator.onLine) {
+    server(urlNivel);
+
+    fetch(urlNivel + nivel.id, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/plain, */ /*",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((resById) => resById.json())
+      .then((resById) => {
+        if (resById.status == 401 || resById.statusCode == 401) {
+          $("#modal401").modal({
+            backdrop: "static",
+            keyboard: false,
+          });
+          $("#modal401").modal("show");
+        } else if (resById.status != 500 || resById.statusCode != 500) {
+          crearTbody(resById.preguntas, tipo);
+        }
+      })
+      .finally(() => {
+        quitarTable();
+      });
+  } else {
+    $("#internet").modal("show");
+  }
+}
+
+function quitarTable() {
+  var divPrincipal = document.getElementById("divPrincipal");
+  var mainPrincipal = document.getElementById("mainPrincipal");
+  var chargerTable = document.getElementById("chargerTable");
+
+  chargerTable.style.visibility = "hidden";
+  chargerTable.style.opacity = "0";
+  mainPrincipal.style.display = "block";
+  divPrincipal.style.display = "block";
 }
 
 function crearThead(tipo) {
@@ -85,7 +91,7 @@ function crearThead(tipo) {
   table.id = "table";
   table.className = "w-full text-sm text-center text-gray-500";
   var thead = document.createElement("thead");
-  thead.className="text-xs text-gray-700 uppercase bg-gray-50";
+  thead.className = "text-lg text-gray-700 bg-gray-50";
   var tbody = document.createElement("tbody");
   tbody.id = "tbody";
 
@@ -198,7 +204,7 @@ function crearThead(tipo) {
     let heading_3 = document.createElement("th");
     heading_3.innerHTML = "Imagen";
     heading_3.scope = "col";
-    heading_3.className = "py-3 px-6";
+    heading_3.className = "py-3";
 
     let heading_4 = document.createElement("th");
     heading_4.innerHTML = "Descripcion";
@@ -250,22 +256,22 @@ function crearTbody(res, tipo) {
     if (res[i].tiposDePregunta == tipo && tipo == "4 x 1") {
       tbody.append(`
         <tr class="bg-white border-b hover:bg-gray-50">
-        <td class="p-4 w-32 id columnaID">${res[i]._id}</td>
-          <td class="p-4 w-32 numero">${i + 1}</td>
-          <td class="p-4 w-32 descripcion">${res[i].descripcion}</td>
-          <td class="p-4 w-32 respuestaCorrecta">${
+        <td class="text-base p-4 w-2 id columnaID">${res[i]._id}</td>
+          <td class="text-base p-4 w-32 numero">${i + 1}</td>
+          <td class="text-base p-4 w-32 descripcion">${res[i].descripcion}</td>
+          <td class="text-base p-4 w-32 respuestaCorrecta">${
             res[i].respuestaCorrecta
           }</td>
-          <td class="p-4 w-32 respuestaIncorrecta">${
+          <td class="text-base p-4 w-32 respuestaIncorrecta">${
             res[i].respuestaIncorrecta
           }</td>
-          <td class="p-4 w-32 respuestaIncorrecta1">${
+          <td class="text-base p-4 w-32 respuestaIncorrecta1">${
             res[i].respuestaIncorrecta1
           }</td>
-          <td class="p-4 w-32 respuestaIncorrecta2">${
+          <td class="text-base p-4 w-32 respuestaIncorrecta2">${
             res[i].respuestaIncorrecta2
           }</td>
-          <td class="p-4" >
+          <td class="text-base p-4 w-32"  >
           <button class="modificar font-medium text-cyan-600 hover:underline" onclick="update('${
             res[i]._id
           }','${res[i].descripcion}','${res[i].respuestaCorrecta}','${
@@ -282,16 +288,16 @@ function crearTbody(res, tipo) {
     } else if (res[i].tiposDePregunta == tipo && tipo == "V o F") {
       tbody.append(`
         <tr class="bg-white border-b hover:bg-gray-50">
-        <td class="p-4 w-32 id columnaID">${res[i]._id}</td>
-          <td class="p-4 w-32 numero">${i + 1}</td>
-          <td class="p-4 w-32 descripcion">${res[i].descripcion}</td>
-          <td class="p-4 w-32 respuestaCorrecta">${
+        <td class="text-base p-4 w-32 id columnaID">${res[i]._id}</td>
+          <td class="text-base p-4 w-2 numero">${i + 1}</td>
+          <td class="text-base p-4 w-32 descripcion">${res[i].descripcion}</td>
+          <td class="text-base p-4 w-32 respuestaCorrecta">${
             res[i].respuestaCorrecta
           }</td>
-          <td class="p-4 w-32 respuestaIncorrecta">${
+          <td class="text-base p-4 w-32 respuestaIncorrecta">${
             res[i].respuestaIncorrecta
           }</td>
-          <td class="p-4" >
+          <td class="text-base p-4 w-32" >
           <button class="modificar font-medium text-cyan-600 hover:underline" onclick="update('${
             res[i]._id
           }','${res[i].descripcion}','${res[i].respuestaCorrecta}','${
@@ -306,23 +312,25 @@ function crearTbody(res, tipo) {
     } else if (res[i].tiposDePregunta == tipo && tipo == "Imagen") {
       tbody.append(`
       <tr class="bg-white border-b hover:bg-gray-50">
-      <td class="p-4 w-32 id columnaID">${res[i]._id}</td>
-        <td class="p-4 w-32 numero">${i + 1}</td>
-        <td  class="p-4 w-32 imagen" id="imagenTabla"><img onclick="mostrar('${
+      <td class="text-base p-4 w-32 id columnaID">${res[i]._id}</td>
+        <td class="text-base p-4 w-2 numero">${i + 1}</td>
+        <td  class="text-base content-center p-4 w-6 imagen" id="imagenTabla"><img onclick="mostrar('${
           res[i].imagen
         }')" src="${res[i].imagen}" width="100" height="80"></td>
-        <td class="p-4 w-32 descripcion">${res[i].descripcion}</td>
-        <td class="p-4 w-32 respuestaCorrecta">${res[i].respuestaCorrecta}</td>
-        <td class="p-4 w-32 respuestaIncorrecta">${
+        <td class="text-base p-4 w-32 descripcion">${res[i].descripcion}</td>
+        <td class="text-base p-4 w-32 respuestaCorrecta">${
+          res[i].respuestaCorrecta
+        }</td>
+        <td class="text-base p-4 w-32 respuestaIncorrecta">${
           res[i].respuestaIncorrecta
         }</td>
-        <td class="p-4 w-32 respuestaIncorrecta1">${
+        <td class="text-base p-4 w-32 respuestaIncorrecta1">${
           res[i].respuestaIncorrecta1
         }</td>
-        <td class="p-4 w-32 respuestaIncorrecta2">${
+        <td class="text-base p-4 w-32 respuestaIncorrecta2">${
           res[i].respuestaIncorrecta2
         }</td>
-        <td class="p-4" >
+        <td class="text-base p-4 w-32" >
         <button class="modificar font-medium text-cyan-600 hover:underline" onclick="update('${
           res[i]._id
         }','${res[i].descripcion}','${res[i].respuestaCorrecta}','${
@@ -362,45 +370,88 @@ function buscarProfesor() {
   var urlProfesor = "http://localhost:3000/api/v2/profesor/";
   let token = JSON.parse(localStorage.getItem("token"));
   console.log(urlProfesor + usuario.CI);
-  fetch(urlProfesor + usuario.CI, {
-    method: "get",
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((resByCI) => resByCI.json())
-    .then((resByCI) => {
-      var urlNivel = "http://localhost:3000/api/v2/nivel/";
-      let token = JSON.parse(localStorage.getItem("token"));
+  if (navigator.onLine) {
+    server(urlProfesor);
+    fetch(urlProfesor + usuario.CI, {
+      method: "get",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((resByCI) => resByCI.json())
+      .then((resByCI) => {
+        var urlNivel = "http://localhost:3000/api/v2/nivel/";
+        let token = JSON.parse(localStorage.getItem("token"));
 
-      fetch(urlNivel + nivel.id, {
-        method: "get",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((resById) => resById.json())
-        .then((resById) => {
-          console.log(resById);
-          var nombreUsuario = document.getElementById("nombreUsuario");
-          nombreUsuario.innerHTML = "" + resByCI.name;
-          var nombreAsigantura = document.getElementById("nombreAsigantura");
-          nombreAsigantura.innerHTML = "" + resByCI.asignatura;
-          var descripcionNivel = document.getElementById("descripcionNivel");
-          var nota5Nivel = document.getElementById("nota5Nivel");
-          var tiempoDuracionNivel = document.getElementById(
-            "tiempoDuracionNivel"
-          );
-          descripcionNivel.innerHTML = "" + resById.descripcion;
-          nota5Nivel.innerHTML = "" + resById.nota5;
-          tiempoDuracionNivel.innerHTML = "" + resById.tiempoDuracion;
+        fetch(urlNivel + nivel.id, {
+          method: "get",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .finally(() => {
-          quitarDiv();
-        });
-    });
+          .then((resById) => resById.json())
+          .then((resById) => {
+            console.log(resById);
+            var nombreUsuario = document.getElementById("nombreUsuario");
+            nombreUsuario.innerHTML = "" + resByCI.name;
+            var nombreAsigantura = document.getElementById("nombreAsigantura");
+            nombreAsigantura.innerHTML = "" + resByCI.asignatura;
+            var descripcionNivel = document.getElementById("descripcionNivel");
+            var nota5Nivel = document.getElementById("nota5Nivel");
+            var tiempoDuracionNivel = document.getElementById(
+              "tiempoDuracionNivel"
+            );
+            descripcionNivel.innerHTML = "" + resById.descripcion;
+            nota5Nivel.innerHTML = "" + resById.nota5;
+            tiempoDuracionNivel.innerHTML = "" + resById.tiempoDuracion;
+          })
+          .finally(() => {
+            quitarDiv();
+          });
+      });
+  } else {
+    $("#modalInformacion").modal("hide");
+    $("#internet").modal("show");
+  }
+}
+
+function server(url) {
+  var source = new EventSource(url);
+  var isOpen = false;
+
+  source.addEventListener(
+    "message",
+    function (e) {
+      console.log(e.data);
+    },
+    false
+  );
+
+  source.addEventListener(
+    "open",
+    function (e) {
+      // Server up
+      console.log("El server esta corriendo");
+      isOpen = true;
+    },
+    false
+  );
+
+  source.addEventListener(
+    "error",
+    function (e) {
+      if (!isOpen && source.readyState == EventSource.CONNECTING) {
+        // Server down
+        $("#serverCaido").modal("show");
+      } else if (source.readyState == EventSource.CLOSED) {
+        // Server error
+      }
+      isOpen = false;
+    },
+    false
+  );
 }
