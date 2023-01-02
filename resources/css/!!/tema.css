@@ -28,7 +28,14 @@
   height: 300px;
   margin-left: 45px;
 }
-.chargerInsertar,
+.chargerInsertar{
+  position: absolute;
+  top: 82%;
+  left: 63%;
+  right: 0;
+  bottom: 0;
+}
+
 .chargerModificar {
   position: absolute;
   top: 81%;
@@ -72,4 +79,40 @@
 
 .listarNivel {
   font-size: 20px;
+}
+
+.aceptar {
+  margin-left: 160px !important;
+}
+
+.icono {
+  margin-left: 45% !important;
+}
+
+.descripcionMal {
+  position: absolute;
+  top: 51.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.descripcionSVG {
+  position: absolute;
+  top: 52%;
+  left: 38%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.descripcionMalUpdate {
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
 }

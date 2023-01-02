@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Listado de Temas</title>
-    <link rel="shortcut icon" href="/images/icons8-configuration-64.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -55,25 +54,25 @@
         </svg>
       </div>
       <div
-        class="chargerTable animate-bounce border-1 bg-white p-2 w-12 h-12 ring-1 ring-violet-200 rounded-full flex items-center justify-center"
+      class="chargerTable animate-spin border-1 bg-white p-2 w-12 h-12 ring-1 ring-violet-200 rounded-full flex items-center justify-center"
         id="chargerTable"
       >
-        <svg
-          class="w-6 h-6 text-violet-500"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          ></path>
-        </svg>
+      <svg
+      class="w-6 h-6 text-violet-500"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+      />
+    </svg>
       </div>
       <div class="px-6 pt-6 lg:px-8" id="divPrincipal" style="display: none">
         <div>
@@ -90,9 +89,9 @@
             <div class="flex min-w-0 flex-1 justify-center gap-x-12">
               <a
                 href="/profesor/principal"
-                class="font-semibold text-gray-900 hover:text-gray-900"
-                ><i class="inicio fas fa-reply"></i>Pantalla principal</a
-              >
+                class="font-semibold text-gray-900 hover:text-gray-900">
+                <i class="inicio fas fa-arrow-left"></i>
+                <span class="ml-2">Pantalla principal</span></a>
             </div>
             <div class="flex min-w-0 flex-1 justify-end">
               <a
@@ -138,7 +137,7 @@
                 >
                   <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-center text-gray-500">
-                      <thead class="text-base text-gray-700 bg-gray-50">
+                      <thead class="text-lg text-gray-700 bg-gray-50">
                         <tr>
                           <th scope="col" class="py-3 px-6 columnaID">_id</th>
                           <th scope="col" class="py-3 px-6">#</th>
@@ -202,26 +201,26 @@
               <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start sm:justify-start">
                   <div
-                  class="charger animate-bounce border-1 bg-white p-2 w-12 h-12 ring-1 ring-violet-200 rounded-full flex items-center justify-center"
+                  class="charger animate-spin border-1 bg-white p-2 w-12 h-12 ring-1 ring-violet-200 rounded-full flex items-center justify-center"
                     id="charger"
                   >
-                    <svg
-                      class="w-6 h-6 text-violet-500"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                      ></path>
-                    </svg>
-                  </div>
+                  <svg
+                  class="w-5 h-5 text-violet-500"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                  </div> 
                   <div
                     class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 sm:mx-0 sm:h-10 sm:w-10"
                   >
@@ -280,33 +279,6 @@
     </div>
     <!-- Fin Modal Informacion-->
 
-    <!--Modal Error 401-->
-    <div class="modal fade" id="modal401" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-white text-dark">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exModalLabel">Error Autenticación</h5>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid" id="textEliminado">
-              No se encuentra autenticado
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              id="closeModal401"
-              class="btn btn-outline-dark"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--Fin Modal Error 401-->
-
     <!--Modal de Crear-->
     <div class="modal fade" id="modalCrear" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -328,11 +300,11 @@
                   <div class="-space-y-px rounded-md shadow-sm">
                     <div>
                       <label
-                        class="block text-sm font-medium text-gray-700"
+                        class="block text-base font-medium text-gray-700"
                         for="descripcion"
                         >Descripcion (*):</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="text"
                           class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -340,7 +312,22 @@
                           name="descripcion"
                           required="true"
                         />
-                      </div>
+
+                        <span id="descripcionBien" class="descripcionBien inline-flex text-sm text-green-700">¡Descripción ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="descripcionMal" class="descripcionMal inline-flex text-base text-red-700">La descripción solo puede contener letras y espacios, pueden llevar acentos.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="descripcionSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
+
                     </div>
                   </div>
             
@@ -414,11 +401,11 @@
                   <div class="-space-y-px rounded-md shadow-sm">
                     <div>
                       <label
-                        class="block text-sm font-medium text-gray-700"
+                        class="block text-base font-medium text-gray-700"
                         for="descripcionUpdate"
-                        >Descripcion (*):</label
+                        >Descripcion:</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="text"
                           class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -426,14 +413,26 @@
                           name="descripcionUpdate"
                           required="true"
                         />
-                      </div>
+
+                        <span id="descripcionBienUpdate" class="descripcionBienUpdate inline-flex text-sm text-green-700">¡Descripción ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="descripcionMalUpdate" class="descripcionMalUpdate inline-flex text-base text-red-700">La descripción solo puede contener letras y espacios, pueden llevar acentos.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="descripcionSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
                     </div>
                   </div>
         
               </div>
             </div>
-
-            <span>(*) campos obligatorios</span>
             <div
               class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
             >
@@ -670,6 +669,190 @@
       </div>
     </div>
     <!--Fin de Modal de Eliminar-->
+
+    <!--Modal de Internet-->
+<div class="modal fade" id="internet" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-white text-white">
+      <div class="modal-body">
+        <div
+          class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+        >
+          <div class="w-full max-w-md space-y-8">
+            <div
+              class="icono flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+            >
+              <!-- Heroicon name: outline/exclamation-triangle -->
+              <svg
+                class="h-6 w-6 text-yellow-600"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+                />
+              </svg>
+            </div>
+
+            <div>
+              <h2
+                class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
+              >
+                No hay conexión a Internet
+              </h2>
+
+              <h3
+                class="mt-6 text-lg leading-8 text-gray-600 sm:text-center"
+              >
+                Al parecer no tienes conexión a internet.
+              </h3>
+            </div>
+
+            <div>
+              <button
+                type="button"
+                data-bs-dismiss="modal"
+                class="aceptar mt-3 inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              >
+                Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Fin modal de Internet-->
+
+<!--Modal de Sever Caido-->
+<div class="modal fade" id="serverCaido" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-white text-white">
+      <div class="modal-body">
+        <div
+          class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+        >
+          <div class="w-full max-w-md space-y-8">
+            <div
+              class="icono flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+            >
+              <!-- Heroicon name: outline/exclamation-triangle -->
+              <svg
+                class="h-6 w-6 text-yellow-600"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+                />
+              </svg>
+            </div>
+
+            <div>
+              <h2
+                class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
+              >
+                Server no conectado
+              </h2>
+
+              <h3
+                class="mt-6 text-lg leading-8 text-gray-600 sm:text-center"
+              >
+                Al parecer el servidor en estos momentos esta presentando
+                problemas. Intente más tarde.
+              </h3>
+            </div>
+
+            <div>
+              <button
+                type="button"
+                data-bs-dismiss="modal"
+                class="aceptar mt-3 inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              >
+                Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Fin Modal de Sever Caido-->
+
+<!--Modal de Modal 401-->
+<div class="modal fade" id="modal401" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-white text-white">
+      <div class="modal-body">
+        <div
+          class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+        >
+          <div class="w-full max-w-md space-y-8">
+            <div
+              class="icono flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+            >
+              <!-- Heroicon name: outline/exclamation-triangle -->
+              <svg
+                class="h-6 w-6 text-yellow-600"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+                />
+              </svg>
+            </div>
+
+            <div>
+              <h2
+                class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
+              >
+              Error autenticación
+              </h2>
+
+              <h3
+                class="mt-6 text-lg leading-8 text-gray-600 sm:text-center"
+              >
+              No se encuentra autenticado
+              </h3>
+            </div>
+
+            <div>
+              <button
+                type="button"
+                data-bs-dismiss="modal"
+                class="aceptar mt-3 inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              >
+                Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal de Modal 401-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script

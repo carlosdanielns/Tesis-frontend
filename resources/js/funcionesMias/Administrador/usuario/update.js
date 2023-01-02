@@ -292,7 +292,7 @@ function modificar(id, name, usernameOK, emailOK, rol, username, email) {
         });
     }
   } else {
-    $("#modalCrear").modal("hide");
+    $("#modalUpdate").modal("hide");
     $("#internet").modal("show");
   }
 }

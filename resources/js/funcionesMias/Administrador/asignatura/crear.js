@@ -143,7 +143,6 @@ const validarCampo = (expresion, input, campo) => {
   var descripcionMal = document.getElementById("descripcionMal");
   var descripcionBien = document.getElementById("descripcionBien");
   descripcionBien.style.visibility = "hidden";
-  descripcionBien.style.visibility = "hidden";
   descripcionMal.style.visibility = "hidden";
 
   if (expresion.test(input.value)) {

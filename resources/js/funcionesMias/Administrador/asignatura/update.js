@@ -204,7 +204,6 @@ function modificar(id, descripcionOK, annoOK, descripcion, anno) {
               );
               descripcionBienUpdate.style.visibility = "visible";
               find = true;
-              console.log("entroe awureiothresjbgkjfdgjkdfsgkjdfsgkjsfd");
             }
           }
 
@@ -216,6 +215,10 @@ function modificar(id, descripcionOK, annoOK, descripcion, anno) {
           quitarDivModificar();
         });
     }
+  }
+  else {
+    $("#modalUpdate").modal("hide");
+    $("#internet").modal("show");
   }
 }
 
