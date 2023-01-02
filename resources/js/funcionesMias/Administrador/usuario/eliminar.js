@@ -1,10 +1,41 @@
-function eliminar(id, CI) {
-  $("#eliminado").modal({
-    backdrop: "static",
-    keyboard: false,
-  });
-  $("#eliminado").modal("show");
-  quitarDivEliminar();
+function eliminar(id, rol) {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const urlUserRol = "http://localhost:3000/api/v2/user/rol/";
+  if (rol == "Administrador") {
+    fetch(urlUserRol + "Administrador", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/plain, */*",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((resCantidadAdmin) => resCantidadAdmin.json())
+      .then((resCantidadAdmin) => {
+        if (resCantidadAdmin == 1) {
+          $("#eliminarAdministrador").modal({
+            backdrop: "static",
+            keyboard: false,
+          });
+          $("#eliminarAdministrador").modal("show");
+        } else {
+          $("#eliminado").modal({
+            backdrop: "static",
+            keyboard: false,
+          });
+          $("#eliminado").modal("show");
+          quitarDivEliminar();
+        }
+      });
+  } else {
+    $("#eliminado").modal({
+      backdrop: "static",
+      keyboard: false,
+    });
+    $("#eliminado").modal("show");
+    quitarDivEliminar();
+  }
+
   localStorage.setItem("id", JSON.stringify(id));
 }
 

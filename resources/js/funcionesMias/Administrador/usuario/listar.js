@@ -65,7 +65,9 @@ function cargarDatos() {
             }','${resAll[i].rol}')"><i class="far fa-edit"></i></button>
                               <button class="eliminar font-medium text-red-600 hover:underline" onclick="eliminar('${
                                 resAll[i]._id
-                              }')"><i class="far fa-trash-alt"></i></button>
+                              }','${
+              resAll[i].rol
+            }')"><i class="far fa-trash-alt"></i></button>
                               </td>
                             </tr>                        
                           `);
