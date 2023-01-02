@@ -27,10 +27,8 @@ function borrar() {
 
 $("#formularioCreate").on("submit", function (e) {
   e.preventDefault();
-  onClickBotonCrear();
 
   const urlEstudiante = "http://localhost:3000/api/v2/estudiante";
-  let token = JSON.parse(localStorage.getItem("token"));
 
   if (navigator.onLine) {
     server(urlEstudiante);
@@ -48,6 +46,17 @@ $("#formularioCreate").on("submit", function (e) {
     if (newAnno == "Seleccione un Año") {
       var comboMal = document.getElementById("comboMal");
       comboMal.style.visibility = "visible";
+      return;
+    }
+    if (!expresiones.nombre.test(newNombre.val())) {
+      var nombreMal = document.getElementById("nombreMal");
+      nombreMal.style.visibility = "visible";
+      return;
+    }
+
+    if (!expresiones.CI.test(newCI.val())) {
+      var CIMal = document.getElementById("CIMal");
+      CIMal.style.visibility = "visible";
       return;
     }
 
@@ -68,16 +77,12 @@ function onClickBotonCrear() {
 }
 
 function quitarDivCrear() {
-  /*var nombreBien = document.getElementById("nombreBien");
-  nombreBien.style.visibility = "hidden";
   var nombreMal = document.getElementById("nombreMal");
   nombreMal.style.visibility = "hidden";
-  var CIBien = document.getElementById("CIBien");
-  CIBien.style.visibility = "hidden";
   var CIMal = document.getElementById("CIMal");
   CIMal.style.visibility = "hidden";
   var CIBien = document.getElementById("comboMal");
-  CIBien.style.visibility = "hidden";*/
+  CIBien.style.visibility = "hidden";
 
   var boton = document.getElementById("botonInsertar");
   var chargerInsertar = document.getElementById("chargerInsertar");
@@ -131,52 +136,150 @@ function server(url) {
   );
 }
 
-function agregar() {
-  const data = {
-    name: newNombre.val(),
-    CI: newCI.val(),
-    annoCurso: newAnno,
-  };
+const validarFormulario = (e) => {
+  switch (e.target.name) {
+    case "nombre":
+      validarCampo(expresiones.nombre, e.target, "nombre");
+      break;
+    case "CI":
+      validarCampo(expresiones.CI, e.target, "CI");
+      break;
+  }
+};
 
-  fetch(urlEstudiante, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json, text/plain, */*",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      const CI = res.CI;
-      const name = res.name;
-      var nameN = name.split(" ");
-      const tipo = "Estudiante";
-      const urlUser =
-        "http://localhost:3000/api/v2/user/" + nameN[0] + "/" + CI + "/" + tipo;
+const validarCampo = (expresion, input, campo) => {
+  var nombreMal = document.getElementById("nombreMal");
+  var CIMal = document.getElementById("CIMal");
 
-      fetch(urlUser, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json, text/plain, */*",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.status == 401 || res.statusCode == 401) {
-            $("#modal401").modal({
-              backdrop: "static",
-              keyboard: false,
-            });
-            $("#modal401").modal("show");
+  CIMal.style.visibility = "hidden";
+  nombreMal.style.visibility = "hidden";
+
+  if (expresion.test(input.value)) {
+    campos[campo] = true;
+  } else if (campo == "nombre") {
+    nombreMal.style.visibility = "visible";
+    campos[campo] = false;
+  } else if (campo == "CI") {
+    CIMal.style.visibility = "visible";
+    campos[campo] = false;
+  }
+};
+
+const inputs = document.querySelectorAll("#formularioCreate input");
+
+inputs.forEach((input) => {
+  input.addEventListener("keyup", validarFormulario);
+});
+
+function agregar(nombre, CI, anno) {
+  console.log(nombre);
+  console.log(CI);
+  console.log(anno);
+  onClickBotonCrear();
+
+  const urlEstudiante = "http://localhost:3000/api/v2/estudiante";
+  let token = JSON.parse(localStorage.getItem("token"));
+
+  if (navigator.onLine) {
+    server(urlEstudiante);
+    fetch(urlEstudiante, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/plain, */*",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        var find = false;
+        console.log(nombre);
+        console.log(CI);
+        console.log(anno);
+        console.log(res);
+
+        for (let j = 0; j < res.length && find == false; j++) {
+          if (res[j].name == nombre && res[j].CI == CI) {
+            var nombreBien = document.getElementById("nombreBien");
+            nombreBien.style.visibility = "visible";
+            var CIBien = document.getElementById("CIBien");
+            CIBien.style.visibility = "visible";
+            find = true;
+          } else if (res[j].CI == CI) {
+            var CIBien = document.getElementById("CIBien");
+            console.log(CIBien);
+            CIBien.style.visibility = "visible";
+            console.log("entro en CI");
+            find = true;
+          } else if (res[j].name == nombre) {
+            var nombreBien = document.getElementById("nombreBien");
+            nombreBien.style.visibility = "visible";
           }
-        })
-        .finally(() => {
-          quitarDivCrear();
-          location.replace("/estudiante/listado");
-        });
-    });
+        }
+
+        if (find == false) {
+          onClickBotonCrear();
+          const data = {
+            name: nombre,
+            CI: CI,
+            annoCurso: anno,
+          };
+
+          console.log(data);
+          fetch(urlEstudiante, {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json, text/plain, */*",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res);
+              const CI = res.CI;
+              const name = res.name;
+              var nameN = name.split(" ");
+              const tipo = "Estudiante";
+              const urlUser =
+                "http://localhost:3000/api/v2/user/" +
+                nameN[0] +
+                "/" +
+                CI +
+                "/" +
+                tipo;
+
+              fetch(urlUser, {
+                method: "get",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json, text/plain, */*",
+                  Authorization: `Bearer ${token}`,
+                },
+              })
+                .then((res) => res.json())
+                .then((res) => {
+                  if (res.status == 401 || res.statusCode == 401) {
+                    $("#modal401").modal({
+                      backdrop: "static",
+                      keyboard: false,
+                    });
+                    $("#modal401").modal("show");
+                  }
+                })
+                .finally(() => {
+                  quitarDivCrear();
+                  location.replace("/estudiante/listado");
+                });
+            });
+        }
+      })
+      .finally(() => {
+        quitarDivCrear();
+      });
+  } else {
+    $("#modalCrear").modal("hide");
+    $("#internet").modal("show");
+  }
 }

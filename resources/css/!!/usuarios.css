@@ -30,15 +30,15 @@
 }
 .chargerInsertar {
   position: absolute;
-  top: 89%;
+  top: 91.5%;
   left: 63%;
   right: 0;
-  bottom: 0
+  bottom: 0;
 }
 
 .chargerModificar {
   position: absolute;
-  top: 85%;
+  top: 87.7%;
   left: 63%;
   right: 0;
   bottom: 0;
@@ -101,10 +101,154 @@
   font-size: 25px;
 }
 
-.aceptar{
+.aceptar {
   margin-left: 160px !important;
 }
 
-.icono{
+.icono {
   margin-left: 45% !important;
+}
+
+.nombreMal {
+  position: absolute;
+  top: 25.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.nombreMalSVG {
+  position: absolute;
+  top: 49%;
+  left: 99px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.usernameMal {
+  position: absolute;
+  top: 39%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.usernameMalSVG {
+  position: absolute;
+  top: 49%;
+  left: 271px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.correoMal {
+  position: absolute;
+  top: 51.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.correoSVG {
+  position: absolute;
+  top: 49%;
+  left: 153px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.contrasenaMal {
+  position: absolute;
+  top: 66%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 27px;
+  width: 421px;
+}
+
+.contrasenaSVG {
+  position: absolute;
+  top: 0%;
+  left: 321px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.CIMal {
+  position: absolute;
+  top: 77%;
+  left: 9%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.CISvg {
+  position: absolute;
+  top: 49%;
+  left: 155px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.nombreMalUpdate {
+  position: absolute;
+  top: 35.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.nombreMalUpdateSVG {
+  position: absolute;
+  top: 49%;
+  left: 102px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.usernameMalUpdate {
+  position: absolute;
+  top: 53.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.usernameMalUpdateSVG {
+  position: absolute;
+  top: 49%;
+  left: 277px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.correoMalUpdate {
+  position: absolute;
+  top: 71.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.correoUpdateSVG {
+  position: absolute;
+  top: 50%;
+  left: 155px;
+  right: 0px;
+  bottom: 0px;
 }

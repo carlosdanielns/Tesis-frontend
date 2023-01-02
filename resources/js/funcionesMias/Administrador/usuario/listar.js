@@ -6,7 +6,7 @@ function modalInformacion() {
   $("#modalInformacion").modal("show");
   var nombreUsuario = document.getElementById("nombreUsuario");
   if (nombreUsuario.innerHTML == "") {
-    onClickModal();
+    //onClickModal();
     buscarProfesor();
   }
 }
@@ -44,22 +44,28 @@ function cargarDatos() {
                               <td class="p-4 w-6 id columnaID">${
                                 resAll[i]._id
                               }</td>
-                              <td class="p-4 w-6 #">${i + 1}</td>
-                              <td class="p-4 w-6 name">${resAll[i].name}</td>
-                              <td class="p-4 w-6 username">${
+                              <td class="text-base p-4 w-6 #">${i + 1}</td>
+                              <td class="text-base p-4 w-6 name">${
+                                resAll[i].name
+                              }</td>
+                              <td class="text-base p-4 w-6 username">${
                                 resAll[i].username
                               }</td>
-                              <td class="p-4 w-6 email">${resAll[i].email}</td>
-                              <td class="p-4 w-6 rol">${resAll[i].rol}</td>
-                              <td class="p-4 w-6>
+                              <td class="text-base p-4 w-6 email">${
+                                resAll[i].email
+                              }</td>
+                              <td class="text-base p-4 w-6 rol">${
+                                resAll[i].rol
+                              }</td>
+                              <td class="text-base p-4 w-6">
                               <button class="modificar font-medium text-cyan-600 hover:underline" onclick="update('${
                                 resAll[i]._id
                               }','${resAll[i].name}','${resAll[i].username}','${
               resAll[i].email
             }','${resAll[i].rol}')"><i class="far fa-edit"></i></button>
-              <button class="eliminar font-medium text-red-600 hover:underline" onclick="eliminar('${
-                resAll[i]._id
-              }')"><i class="far fa-trash-alt"></i></button>
+                              <button class="eliminar font-medium text-red-600 hover:underline" onclick="eliminar('${
+                                resAll[i]._id
+                              }')"><i class="far fa-trash-alt"></i></button>
                               </td>
                             </tr>                        
                           `);
@@ -70,7 +76,7 @@ function cargarDatos() {
         var divPrincipal = document.getElementById("divPrincipal");
         var mainPrincipal = document.getElementById("mainPrincipal");
         var chargerTable = document.getElementById("chargerTable");
-        
+
         chargerTable.style.visibility = "hidden";
         chargerTable.style.opacity = "0";
         mainPrincipal.style.display = "block";
@@ -81,7 +87,7 @@ function cargarDatos() {
   }
 }
 
-function onClickModal() {
+/*function onClickModal() {
   var charger = document.getElementById("charger");
   charger.style.visibility = "visible";
   charger.style.opacity = "100";
@@ -91,32 +97,14 @@ function quitarDiv() {
   var charger = document.getElementById("charger");
   charger.style.visibility = "hidden";
   charger.style.opacity = "0";
-}
+}*/
 
 function buscarProfesor() {
-  var urlProfesor = "http://localhost:3000/api/v2/profesor/";
   let token = JSON.parse(localStorage.getItem("token"));
 
   if (navigator.onLine) {
-    server(urlProfesor);
-
-    console.log(urlProfesor + usuario.CI);
-    fetch(urlProfesor + usuario.CI, {
-      method: "get",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resByCI) => resByCI.json())
-      .then((resByCI) => {
-        var nombreUsuario = document.getElementById("nombreUsuario");
-        nombreUsuario.innerHTML = "" + usuario.name;
-      })
-      .finally(() => {
-        quitarDiv();
-      });
+    var nombreUsuario = document.getElementById("nombreUsuario");
+    nombreUsuario.innerHTML = "" + usuario.name;
   } else {
     $("#modalInformacion").modal("hide");
     $("#internet").modal("show");

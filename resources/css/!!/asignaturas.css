@@ -90,7 +90,7 @@
 
 .comboMal {
   position: absolute;
-  top: 61.5%;
+  top: 60.5%;
   left: 8%;
   right: 0px;
   bottom: 0px;
@@ -101,11 +101,11 @@
 .descripcionMal {
   position: absolute;
   top: 41%;
-  left: 7%;
+  left: 9%;
   right: 0px;
   bottom: 0px;
   height: 49px;
-  width: 421px;
+  width: 417px;
 }
 
 .descripcionSVG {
@@ -135,3 +135,4 @@
   height: 49px;
   width: 421px;
 }
+

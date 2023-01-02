@@ -300,11 +300,11 @@
                   <div class="-space-y-px rounded-md shadow-sm">
                     <div>
                       <label
-                        class="mt-2 block text-base font-medium text-gray-700"
+                        class="block text-base font-medium text-gray-700"
                         for="nombre"
                         >Nombre (*):</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="text"
                           class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -312,16 +312,29 @@
                           name="nombre"
                           required="true"
                         />
-                      </div>
+                        <span id="nombreBien" class="nombreBien inline-flex text-sm text-green-700">¡Nombre ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="nombreMal" class="nombreMal inline-flex text-base text-red-700">El nombre solo puede contener letras y espacios, pueden llevar acentos.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="nombreMalSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
                     </div>
 
                     <div>
                       <label
-                        class="mt-2 block text-base font-medium text-gray-700"
+                        class="mt-4 block text-base font-medium text-gray-700"
                         for="CI"
                         >CI (*):</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="text"
                           class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -329,14 +342,26 @@
                           name="CI"
                           required="true"
                         />
-                      </div>
+<span id="CIBien" class="CIBien inline-flex text-sm text-green-700">¡CI ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="CIMal" class="CIMal inline-flex text-base text-red-700">El carnet de identidad tiene que ser máximo 11 dígitos y solo admite números.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="CISvg w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
                     </div>
 
                     <div>
-                      <label for="asignatura" class="mt-2 block text-base font-medium text-gray-700"
+                      <label for="asignatura" class="mt-4 block text-base font-medium text-gray-700"
                         >Asignatura (*):</label
                       >
-                      <div class="mt-1 flex items-center">
                         <svg
                           class="comboBox h-5 w-5 text-gray-400"
                           xmlns="http://www.w3.org/2000/svg"
@@ -353,11 +378,16 @@
                         <select
                           name="asignatura"
                           class="form-control"
+                          onchange="borrar()"
                           id="asignatura"
                         >
+                        <option value="asignatura">Seleccione una asignatura</option>
                       </select>
-                        
-                      </div>
+                        <span id="comboMal" class="mt-2 comboMal inline-flex text-base text-red-700">Debe seleccionar un año
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg></span>
                     </div>
                   </div>
               
@@ -431,11 +461,11 @@
                   <div class="-space-y-px rounded-md shadow-sm">
                     <div>
                       <label
-                        class="mt-2 block text-base font-medium text-gray-700"
+                        class="block text-base font-medium text-gray-700"
                         for="nombreUpdate"
                         >Nombre:</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="text"
                           class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -443,16 +473,31 @@
                           name="nombreUpdate"
                           required="true"
                         />
-                      </div>
+
+                        <span id="nombreBienUpdate" class="nombreBienUpdate inline-flex text-sm text-green-700">¡Nombre ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="nombreMalUpdate" class="nombreMalUpdate inline-flex text-base text-red-700">El nombre solo puede contener letras y espacios, pueden llevar acentos.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="nombreMalSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </span>
                     </div>
 
                     <div>
                       <label
-                        class="mt-2 block text-base font-medium text-gray-700"
+                        class="mt-4 block text-base font-medium text-gray-700"
                         for="CIUpdate"
                         >CI:</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="text"
                           class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -460,16 +505,30 @@
                           name="CIUpdate"
                           required="true"
                         />
-                      </div>
+
+                        <span id="CIBienUpdate" class="CIBienUpdate inline-flex text-sm text-green-700">¡CI ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="CIMalUpdate" class="CIMalUpdate inline-flex text-base text-red-700">El carnet de identidad tiene que ser máximo 11 dígitos y solo admite números.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="CISvg w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
                     </div>
 
                     <div>
                       <label
-                        class="mt-2 block text-base font-medium text-gray-700"
+                        class="mt-4 block text-base font-medium text-gray-700"
                         for="asiganturaUpdate"
-                        >Asignatura (*):</label
+                        >Asignatura:</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <svg
                           class="comboBoxUpdate h-5 w-5 text-gray-400"
                           xmlns="http://www.w3.org/2000/svg"
@@ -488,15 +547,20 @@
                         class="form-control"
                         id="asignaturaUpdate"
                       >
+                      <option value="asiganturaUpdate">Seleccione una asignatura</option>
                     </select>
-                      </div>
+
+                    <span id="comboMalUpdate" class="mt-2 comboMalUpdate inline-flex text-base text-red-700">Debe seleccionar un año
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg></span>
                     </div>
                   </div>
                
               </div>
             </div>
 
-            <span>(*) campos obligatorios</span>
             <div
               class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
             >

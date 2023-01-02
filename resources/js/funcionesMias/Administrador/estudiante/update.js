@@ -1,6 +1,20 @@
+const expresionesUpdate = {
+  nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+  CI: /^.{11}$/, // 4 a 12 digitos.
+};
+
+const camposUpdate = {
+  nombreUpdate: false,
+  CIUpdate: false,
+};
+
 function cargarModal() {
   $("#modalUpdate").modal({ backdrop: "static", keyboard: false });
   $("#modalUpdate").modal("show");
+  var nombreBienUpdate = document.getElementById("nombreBienUpdate");
+  nombreBienUpdate.style.visibility = "hidden";
+  var CIBienUpdate = document.getElementById("CIBienUpdate");
+  CIBienUpdate.style.visibility = "hidden";
   quitarDivModificar();
 }
 
@@ -17,14 +31,14 @@ function update(id, name, CI, annoCurso) {
 function updateAsignatura(id, nameTabla, CITabla, annoTabla) {
   $("#formularioUpdate").on("submit", function (e) {
     e.preventDefault();
-    onClickBotonModificar();
-    const urlEstudiante = "http://localhost:3000/api/v2/estudiante/";
-    const token = JSON.parse(localStorage.getItem("token"));
 
+    const urlEstudiante = "http://localhost:3000/api/v2/estudiante/";
     if (navigator.onLine) {
       server(urlEstudiante);
       var newNombre = $("#nombreUpdate");
       var newCI = $("#CIUpdate");
+      var newAnno;
+
       const selectElement = document.getElementById("annoUpdate");
       selectElement.addEventListener("onchange", annoUpdate());
 
@@ -33,40 +47,39 @@ function updateAsignatura(id, nameTabla, CITabla, annoTabla) {
       }
 
       var nameOK;
-      var nameInput = newNombre.val();
-      var nameSplit = nameInput.split(" ");
-
-      var nameSplitTabla = nameTabla.split(" ");
       if (newNombre.val() == "") {
-        nameOK = nameSplitTabla[0];
+        nameOK = nameTabla;
       } else {
-        nameOK = nameSplit[0];
+        if (!expresionesUpdate.nombre.test(newNombre.val())) {
+          var nombreMalUpdate = document.getElementById("nombreMalUpdate");
+          nombreMalUpdate.style.visibility = "visible";
+          return;
+        } else {
+          nameOK = newNombre.val();
+        }
       }
 
       var CIOk;
       if (newCI.val() == "") {
         CIOk = CITabla;
       } else {
-        CIOk = newCI.val();
+        if (!expresionesUpdate.CI.test(newCI.val())) {
+          var CIMalUpdate = document.getElementById("CIMalUpdate");
+          CIMalUpdate.style.visibility = "visible";
+          return;
+        } else {
+          CIOk = newCI.val();
+        }
       }
 
-      const data = {
-        name: nameOK,
-        CI: CIOk,
-        annoCurso: newAnno,
-      };
-
-      const name = newNombre.val();
-      const CI = newCI.val();
-      const tipo = "Estudiante";
-
-      if (CI == CITabla && nameSplitTabla[0] == nameSplit[0]) {
-        updateEstudiante(urlEstudiante, id, token, data);
-      } else if (nameSplitTabla[0] != nameSplit[0] || CITabla != newCI.val()) {
-        eliminarUser(CITabla, token);
-        createUser(nameSplit[0], CI, tipo, token);
-        updateEstudiante(urlEstudiante, id, token, data);
+      var annoOK;
+      if (newAnno == "Seleccione un Año") {
+        annoOK = annoTabla;
+      } else {
+        annoOK = newAnno;
       }
+
+      modificar(id, nameOK, CIOk, annoOK, nameTabla, CITabla);
     } else {
       $("#modalUpdate").modal("hide");
       $("#internet").modal("show");
@@ -74,28 +87,77 @@ function updateAsignatura(id, nameTabla, CITabla, annoTabla) {
   });
 }
 
-function onClickBotonModificar() {
-  var boton = document.getElementById("botonModificar");
-  var chargerModificar = document.getElementById("chargerModificar");
+function modificar(id, nameOK, CIOk, annoOK, nameTabla, CITabla, annoTabla) {
+  onClickBotonModificar();
+  const urlEstudiante = "http://localhost:3000/api/v2/estudiante/";
+  let token = JSON.parse(localStorage.getItem("token"));
 
-  chargerModificar.style.visibility = "visible";
-  chargerModificar.style.opacity = "100";
-  boton.innerHTML = "Procesando...";
-  boton.disabled = true;
+  const data = {
+    name: nameOK,
+    CI: CIOk,
+    annoCurso: annoOK,
+  };
+  var tipo = "Estudiante";
+
+  if (CIOk == CITabla && nameOK == nameTabla) {
+    updateEstudiante(urlEstudiante, id, token, data);
+  } else if (nameOK != nameTabla || CIOk != CITabla) {
+    eliminarUser(CIOk, token, nameOK.split(" ")[0], tipo, id, data, CITabla);
+  }
 }
 
-function quitarDivModificar() {
-  var boton = document.getElementById("botonModificar");
-  var chargerModificar = document.getElementById("chargerModificar");
-  chargerModificar.style.visibility = "hidden";
-  chargerModificar.style.opacity = "0";
-  boton.innerHTML = "Modificar Tema";
-  boton.disabled = false;
+function eliminarUser(ciEstudiante, token, name, tipo, id, data, CITabla) {
+  console.log(ciEstudiante);
+  console.log(name);
+  console.log(tipo);
+  console.log(id);
+  console.log(data);
+  console.log(CITabla);
+
+  const urlUser = "http://localhost:3000/api/v2/user/" + CITabla;
+
+  if (navigator.onLine) {
+    server(urlUser);
+    fetch(urlUser, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/plain, */*",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((resUserCI) => resUserCI.json())
+      .then((resUserCI) => {
+        console.log(resUserCI);
+        //TODO: este metodo es para el eliminar el usuario
+        const url = "http://localhost:3000/api/v2/user/" + resUserCI._id;
+        fetch(url, {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((resUserDelete) => resUserDelete.json())
+          .then((resUserDelete) => {
+            console.log(resUserDelete);
+          })
+          .finally(() => {
+            createUser(name, ciEstudiante, tipo, token, id, data);
+          });
+      });
+  } else {
+    $("#modalUpdate").modal("hide");
+    $("#internet").modal("show");
+  }
 }
 
-function createUser(name, CI, tipo, token) {
+function createUser(name, CI, tipo, token, id, data) {
   const urlUser =
     "http://localhost:3000/api/v2/user/" + name + "/" + CI + "/" + tipo;
+
+  const urlEstudiante = "http://localhost:3000/api/v2/estudiante/";
 
   if (navigator.onLine) {
     server(urlUser);
@@ -109,6 +171,7 @@ function createUser(name, CI, tipo, token) {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         if (res.status == 401 || res.statusCode == 401) {
           $("#modal401").modal({
             backdrop: "static",
@@ -116,7 +179,9 @@ function createUser(name, CI, tipo, token) {
           });
           $("#modal401").modal("show");
         }
-        console.log("se creo el usuario");
+      })
+      .finally(() => {
+        updateEstudiante(urlEstudiante, id, token, data);
       });
   } else {
     $("#modalUpdate").modal("hide");
@@ -147,7 +212,7 @@ function updateEstudiante(urlEstudiante, idEstudiante, token, data) {
         }
       })
       .finally(() => {
-        quitarDivCrear();
+        quitarDivModificar();
         location.replace("/estudiante/listado");
       });
   } else {
@@ -156,40 +221,30 @@ function updateEstudiante(urlEstudiante, idEstudiante, token, data) {
   }
 }
 
-function eliminarUser(ciEstudiante, token) {
-  const urlUser = "http://localhost:3000/api/v2/user/" + ciEstudiante;
+function onClickBotonModificar() {
+  var boton = document.getElementById("botonModificar");
+  var chargerModificar = document.getElementById("chargerModificar");
 
-  if (navigator.onLine) {
-    server(urlUser);
-    fetch(urlUser, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */*",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resUserCI) => resUserCI.json())
-      .then((resUserCI) => {
-        //TODO: este metoodo es para el eliminar el usuario
-        const url = "http://localhost:3000/api/v2/user/" + resUserCI._id;
-        fetch(url, {
-          method: "delete",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((resUserDelete) => resUserDelete.json())
-          .then((resUserDelete) => {
-            console.log("ser elimino el usuario");
-          });
-      });
-  } else {
-    $("#modalUpdate").modal("hide");
-    $("#internet").modal("show");
-  }
+  chargerModificar.style.visibility = "visible";
+  chargerModificar.style.opacity = "100";
+  boton.innerHTML = "Procesando...";
+  boton.disabled = true;
+}
+
+function quitarDivModificar() {
+  var nombreMalUpdate = document.getElementById("nombreMalUpdate");
+  nombreMalUpdate.style.visibility = "hidden";
+  var CIMalUpdate = document.getElementById("CIMalUpdate");
+  CIMalUpdate.style.visibility = "hidden";
+  var comboMalUpdate = document.getElementById("comboMalUpdate");
+  comboMalUpdate.style.visibility = "hidden";
+
+  var boton = document.getElementById("botonModificar");
+  var chargerModificar = document.getElementById("chargerModificar");
+  chargerModificar.style.visibility = "hidden";
+  chargerModificar.style.opacity = "0";
+  boton.innerHTML = "Modificar Tema";
+  boton.disabled = false;
 }
 
 function server(url) {
@@ -228,3 +283,39 @@ function server(url) {
     false
   );
 }
+
+const validarFormularioUpdate = (e) => {
+  console.log(e);
+  switch (e.target.name) {
+    case "nombreUpdate":
+      validarCampoUpdate(expresionesUpdate.nombre, e.target, "nombreUpdate");
+      break;
+    case "CIUpdate":
+      validarCampoUpdate(expresionesUpdate.CI, e.target, "CIUpdate");
+      break;
+  }
+};
+
+const validarCampoUpdate = (expresion, input, campo) => {
+  var nombreMalUpdate = document.getElementById("nombreMalUpdate");
+  nombreMalUpdate.style.visibility = "hidden";
+
+  var CIMalUpdate = document.getElementById("CIMalUpdate");
+  CIMalUpdate.style.visibility = "hidden";
+
+  if (expresion.test(input.value)) {
+    camposUpdate[campo] = true;
+  } else if (campo == "nombreUpdate") {
+    nombreMalUpdate.style.visibility = "visible";
+    camposUpdate[campo] = false;
+  } else if (campo == "CIUpdate") {
+    CIMalUpdate.style.visibility = "visible";
+    camposUpdate[campo] = false;
+  }
+};
+
+const inputsUpdate = document.querySelectorAll("#formularioUpdate input");
+
+inputsUpdate.forEach((input) => {
+  input.addEventListener("keyup", validarFormularioUpdate);
+});

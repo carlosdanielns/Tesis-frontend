@@ -1,6 +1,20 @@
+const expresionesUpdate = {
+  nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+  CI: /^.{11}$/, // 4 a 12 digitos.
+};
+
+const camposUpdate = {
+  nombreUpdate: false,
+  CIUpdate: false,
+};
+
 function cargarModal() {
   $("#modalUpdate").modal({ backdrop: "static", keyboard: false });
   $("#modalUpdate").modal("show");
+  var nombreBienUpdate = document.getElementById("nombreBienUpdate");
+  nombreBienUpdate.style.visibility = "hidden";
+  var CIBienUpdate = document.getElementById("CIBienUpdate");
+  CIBienUpdate.style.visibility = "hidden";
   quitarDivModificar();
 }
 
@@ -35,26 +49,26 @@ function cargar() {
 window.addEventListener("load", cargar);
 
 function update(id, name, CI, asignatura) {
+  console.log(asignatura);
   cargarModal();
   const nombreUpdate = document.getElementById("nombreUpdate");
   nombreUpdate.value = name;
   const CIUpdate = document.getElementById("CIUpdate");
   CIUpdate.value = CI;
 
-  updateAsignatura(id, name, CI, asignatura);
+  updateprofesor(id, name, CI, asignatura);
 }
 
-function updateAsignatura(id, nameTabla, CITabla, asignaturaTabla) {
+function updateprofesor(id, nameTabla, CITabla, asignaturaTabla) {
   $("#formularioUpdate").on("submit", function (e) {
     e.preventDefault();
-    onClickBotonModificar();
     const urlProfesor = "http://localhost:3000/api/v2/profesor/";
-    var newNombre = $("#nombreUpdate");
-    var newCI = $("#CIUpdate");
-    var newAsignatura;
 
     if (navigator.onLine) {
       server(urlProfesor);
+      var newNombre = $("#nombreUpdate");
+      var newCI = $("#CIUpdate");
+      var newAsignatura;
 
       const selectElement = document.getElementById("asignaturaUpdate");
       selectElement.addEventListener("onchange", asignatura());
@@ -63,42 +77,49 @@ function updateAsignatura(id, nameTabla, CITabla, asignaturaTabla) {
         newAsignatura = selectElement.options[selectElement.selectedIndex].text;
       }
 
-      var asignaturaOK;
-
       var nombreOk;
-      var nombreSinSplit = newNombre.val();
-      var nombreSplit = nombreSinSplit.split(" ");
-
-      var nombreTablaSplit = nameTabla.split(" ");
       if (newNombre.val() == "") {
-        nombreOk = nombreTablaSplit[0];
+        nombreOk = nameTabla;
       } else {
-        nombreOk = nombreSplit[0];
+        if (!expresionesUpdate.nombre.test(newNombre.val())) {
+          var nombreMalUpdate = document.getElementById("nombreMalUpdate");
+          nombreMalUpdate.style.visibility = "visible";
+          return;
+        } else {
+          nombreOk = newNombre.val();
+        }
       }
 
-      var CIOK;
-
+      var CIOk;
       if (newCI.val() == "") {
-        CIOK = CITabla;
+        CIOk = CITabla;
       } else {
-        CIOK = newCI.val();
+        if (!expresionesUpdate.CI.test(newCI.val())) {
+          var CIMalUpdate = document.getElementById("CIMalUpdate");
+          CIMalUpdate.style.visibility = "visible";
+          return;
+        } else {
+          CIOk = newCI.val();
+        }
       }
 
-      const data = {
-        name: nombreOk,
-        CI: CIOK,
-        asignatura: newAsignatura,
-      };
-
-      const tipo = "Profesor";
-      let token = JSON.parse(localStorage.getItem("token"));
-      if (CITabla == CIOK && nombreTablaSplit[0] == nombreSplit[0]) {
-        updateProfesor(urlProfesor, id, token, data);
-      } else if (nombreTablaSplit[0] != nombreSplit[0] || CITabla != CIOK) {
-        eliminarUser(CITabla, token);
-        createUser(nombreSplit[0], CIOK, tipo, token);
-        updateProfesor(urlProfesor, id, token, data);
+      var asignaturaOK;
+      if (newAsignatura == "Seleccione una asignatura") {
+        asignaturaOK = asignaturaTabla;
+      } else {
+        asignaturaOK = newAsignatura;
       }
+      console.log(asignaturaOK);
+
+      modificar(
+        id,
+        nombreOk,
+        CIOk,
+        asignaturaOK,
+        nameTabla,
+        CITabla,
+        asignaturaTabla
+      );
     } else {
       $("#modalUpdate").modal("hide");
       $("#internet").modal("show");
@@ -106,28 +127,78 @@ function updateAsignatura(id, nameTabla, CITabla, asignaturaTabla) {
   });
 }
 
-function onClickBotonModificar() {
-  var boton = document.getElementById("botonModificar");
-  var chargerModificar = document.getElementById("chargerModificar");
+function modificar(
+  id,
+  nameOK,
+  CIOk,
+  asignaturaOK,
+  nameTabla,
+  CITabla,
+  asignaturaTabla
+) {
+  onClickBotonModificar();
 
-  chargerModificar.style.visibility = "visible";
-  chargerModificar.style.opacity = "100";
-  boton.innerHTML = "Procesando...";
-  boton.disabled = true;
+  const urlProfesor = "http://localhost:3000/api/v2/profesor/";
+  let token = JSON.parse(localStorage.getItem("token"));
+
+  const data = {
+    name: nameOK,
+    CI: CIOk,
+    asignatura: asignaturaOK,
+  };
+  const tipo = "Profesor";
+
+  if (CITabla == CIOk && nameOK == nameTabla) {
+    updateProfesor(urlProfesor, id, token, data);
+  } else if (nameOK != nameTabla || CIOk != CITabla) {
+    eliminarUser(CIOk, token, nameOK.split(" ")[0], tipo, id, data, CITabla);
+  }
 }
 
-function quitarDivModificar() {
-  var boton = document.getElementById("botonModificar");
-  var chargerModificar = document.getElementById("chargerModificar");
-  chargerModificar.style.visibility = "hidden";
-  chargerModificar.style.opacity = "0";
-  boton.innerHTML = "Modificar Tema";
-  boton.disabled = false;
+function eliminarUser(CI, token, name, tipo, id, data, CITabla) {
+  const urlUser = "http://localhost:3000/api/v2/user/" + CITabla;
+
+  if (navigator.onLine) {
+    server(urlUser);
+    fetch(urlUser, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/plain, */*",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((resUserCI) => resUserCI.json())
+      .then((resUserCI) => {
+        //TODO: este metoodo es para el eliminar el usuario
+        const url = "http://localhost:3000/api/v2/user/" + resUserCI._id;
+        fetch(url, {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((resUserDelete) => resUserDelete.json())
+          .then((resUserDelete) => {
+            console.log("ser elimino el usuario");
+          });
+      })
+      .finally(() => {
+        createUser(name, CI, tipo, token, id, data);
+      });
+  } else {
+    $("#modalUpdate").modal("hide");
+    $("#internet").modal("show");
+  }
 }
 
-function createUser(name, CI, tipo, token) {
+function createUser(name, CI, tipo, token, id, data) {
   const urlUser =
     "http://localhost:3000/api/v2/user/" + name + "/" + CI + "/" + tipo;
+
+  const urlProfesor = "http://localhost:3000/api/v2/profesor/";
 
   if (navigator.onLine) {
     server(urlUser);
@@ -149,6 +220,9 @@ function createUser(name, CI, tipo, token) {
           $("#modal401").modal("show");
         }
         console.log("se creo el usuario");
+      })
+      .finally(() => {
+        updateProfesor(urlProfesor, id, token, data);
       });
   } else {
     $("#modalUpdate").modal("hide");
@@ -179,7 +253,7 @@ function updateProfesor(urlProfesor, idProfesor, token, data) {
         }
       })
       .finally(() => {
-        quitarDivCrear();
+        quitarDivModificar();
         location.replace("/profesor/listado");
       });
   } else {
@@ -188,40 +262,30 @@ function updateProfesor(urlProfesor, idProfesor, token, data) {
   }
 }
 
-function eliminarUser(ciProfesor, token) {
-  const urlUser = "http://localhost:3000/api/v2/user/" + ciProfesor;
+function onClickBotonModificar() {
+  var boton = document.getElementById("botonModificar");
+  var chargerModificar = document.getElementById("chargerModificar");
 
-  if (navigator.onLine) {
-    server(urlUser);
-    fetch(urlUser, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */*",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resUserCI) => resUserCI.json())
-      .then((resUserCI) => {
-        //TODO: este metoodo es para el eliminar el usuario
-        const url = "http://localhost:3000/api/v2/user/" + resUserCI._id;
-        fetch(url, {
-          method: "delete",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((resUserDelete) => resUserDelete.json())
-          .then((resUserDelete) => {
-            console.log("ser elimino el usuario");
-          });
-      });
-  } else {
-    $("#modalUpdate").modal("hide");
-    $("#internet").modal("show");
-  }
+  chargerModificar.style.visibility = "visible";
+  chargerModificar.style.opacity = "100";
+  boton.innerHTML = "Procesando...";
+  boton.disabled = true;
+}
+
+function quitarDivModificar() {
+  var nombreMalUpdate = document.getElementById("nombreMalUpdate");
+  nombreMalUpdate.style.visibility = "hidden";
+  var CIMalUpdate = document.getElementById("CIMalUpdate");
+  CIMalUpdate.style.visibility = "hidden";
+  var comboMalUpdate = document.getElementById("comboMalUpdate");
+  comboMalUpdate.style.visibility = "hidden";
+
+  var boton = document.getElementById("botonModificar");
+  var chargerModificar = document.getElementById("chargerModificar");
+  chargerModificar.style.visibility = "hidden";
+  chargerModificar.style.opacity = "0";
+  boton.innerHTML = "Modificar Tema";
+  boton.disabled = false;
 }
 
 function server(url) {
@@ -260,3 +324,39 @@ function server(url) {
     false
   );
 }
+
+const validarFormularioUpdate = (e) => {
+  console.log(e);
+  switch (e.target.name) {
+    case "nombreUpdate":
+      validarCampoUpdate(expresionesUpdate.nombre, e.target, "nombreUpdate");
+      break;
+    case "CIUpdate":
+      validarCampoUpdate(expresionesUpdate.CI, e.target, "CIUpdate");
+      break;
+  }
+};
+
+const validarCampoUpdate = (expresion, input, campo) => {
+  var nombreMalUpdate = document.getElementById("nombreMalUpdate");
+  nombreMalUpdate.style.visibility = "hidden";
+
+  var CIMalUpdate = document.getElementById("CIMalUpdate");
+  CIMalUpdate.style.visibility = "hidden";
+
+  if (expresion.test(input.value)) {
+    camposUpdate[campo] = true;
+  } else if (campo == "nombreUpdate") {
+    nombreMalUpdate.style.visibility = "visible";
+    camposUpdate[campo] = false;
+  } else if (campo == "CIUpdate") {
+    CIMalUpdate.style.visibility = "visible";
+    camposUpdate[campo] = false;
+  }
+};
+
+const inputsUpdate = document.querySelectorAll("#formularioUpdate input");
+
+inputsUpdate.forEach((input) => {
+  input.addEventListener("keyup", validarFormularioUpdate);
+});

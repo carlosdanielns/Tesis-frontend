@@ -26,7 +26,7 @@
 .chargerInsertar,
 .chargerModificar {
   position: absolute;
-  top: 86%;
+  top: 87.7%;
   left: 63%;
   right: 0;
   bottom: 0;
@@ -42,7 +42,7 @@
 
 .comboBox {
   position: absolute;
-  top: 62.5%;
+  top: 67%;
   left: 87%;
   right: 0;
   bottom: 0;
@@ -50,7 +50,7 @@
 
 .comboBoxUpdate {
   position: absolute;
-  top: 62.5%;
+  top: 70%;
   left: 87%;
   right: 0;
   bottom: 0;
@@ -83,4 +83,80 @@
 
 .icono {
   margin-left: 45% !important;
+}
+
+.nombreMal {
+  position: absolute;
+  top: 35.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.nombreMalUpdate {
+  position: absolute;
+  top: 37%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.comboMal {
+  position: absolute;
+  top: 71.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.comboMalUpdate {
+  position: absolute;
+  top: 73.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.nombreMalSVG {
+  position: absolute;
+  top: 53%;
+  left: 100px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.CIMal {
+  position: absolute;
+  top: 54%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.CIMalUpdate {
+  position: absolute;
+  top: 56%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.CISvg {
+  position: absolute;
+  top: 51%;
+  left: 154px;
+  right: 0px;
+  bottom: 0px;
 }

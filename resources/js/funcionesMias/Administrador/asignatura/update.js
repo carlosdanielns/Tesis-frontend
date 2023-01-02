@@ -14,7 +14,7 @@ function cargarModal() {
   quitarDivModificar();
 }
 
-function borrar() {
+function borrarUpdate() {
   var comboMal = document.getElementById("comboMalUpdate");
   comboMal.style.visibility = "hidden";
 }
@@ -46,7 +46,15 @@ function updateAsignatura(id, descripcion, anno) {
       if (newDescripcion.val() == "") {
         descripcionOK = descripcion;
       } else {
-        descripcionOK = newDescripcion.val();
+        if (!expresionesUpdate.descripcion.test(newDescripcion.val())) {
+          var descripcionBien = document.getElementById(
+            "descripcionMalUpdate"
+          );
+          descripcionBien.style.visibility = "visible";
+          return;
+        } else {
+          descripcionOK = newDescripcion.val();
+        }
       }
 
       var annoOK;
@@ -143,7 +151,6 @@ const validarFormularioUpdate = (e) => {
 const validarCampoUpdate = (expresion, input, campo) => {
   var descripcionMal = document.getElementById("descripcionMalUpdate");
   var descripcionBien = document.getElementById("descripcionBienUpdate");
-  descripcionBien.style.visibility = "hidden";
   descripcionBien.style.visibility = "hidden";
   descripcionMal.style.visibility = "hidden";
 

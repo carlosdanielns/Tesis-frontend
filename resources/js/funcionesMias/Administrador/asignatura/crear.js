@@ -16,19 +16,21 @@ function abrirModalCrear() {
 }
 //Fin modal Crear
 
-function borrar() {
+function borrarCreate() {
   var comboMal = document.getElementById("comboMal");
   comboMal.style.visibility = "hidden";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("formularioCreate").addEventListener("submit", a);
+  document
+    .getElementById("formularioCreate")
+    .addEventListener("submit", agregarAsignatura);
 });
 
-function a(e) {
+function agregarAsignatura(e) {
   e.preventDefault();
   const urlAsignatura = "http://localhost:3000/api/v2/asignatura";
-  
+
   if (navigator.onLine) {
     server(urlAsignatura);
     var newDescripcion = $("#descripcion");
@@ -43,6 +45,12 @@ function a(e) {
     if (newAnno == "Seleccione un Año") {
       var comboMal = document.getElementById("comboMal");
       comboMal.style.visibility = "visible";
+      return;
+    }
+
+    if (!expresiones.descripcion.test(newDescripcion.val())) {
+      var descripcionMal = document.getElementById("descripcionMal");
+      descripcionMal.style.visibility = "visible";
       return;
     }
 
@@ -156,62 +164,69 @@ function agregar(descripcion, anno) {
   const urlAsignatura = "http://localhost:3000/api/v2/asignatura";
   let token = JSON.parse(localStorage.getItem("token"));
   onClickBotonCrear();
-  fetch(urlAsignatura, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json, text/plain, */*",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      var find = false;
-      console.log(res);
-      console.log(descripcion);
-      console.log(anno);
-      for (let j = 0; j < res.length && find == false; j++) {
-        if (res[j].descripcion == descripcion && res[j].anno == anno) {
-          var descripcionBien = document.getElementById("descripcionBien");
-          descripcionBien.style.visibility = "visible";
-          find = true;
-        }
-      }
 
-      if (find == false) {
-        onClickBotonCrear();
-
-        const data = {
-          descripcion: descripcion,
-          anno: anno,
-        };
-
-        fetch(urlAsignatura, {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json, text/plain, */*",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            if (res.status == 401 || res.statusCode == 401) {
-              $("#modal401").modal({
-                backdrop: "static",
-                keyboard: false,
-              });
-              $("#modal401").modal("show");
-            }
-          })
-          .finally(() => {
-            quitarDivCrear();
-            location.replace("/asignatura/listado");
-          });
-      }
+  if (navigator.onLine) {
+    server(urlAsignatura);
+    fetch(urlAsignatura, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/plain, */*",
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .finally(() => {
-      quitarDivCrear();
-    });
+      .then((res) => res.json())
+      .then((res) => {
+        var find = false;
+        console.log(res);
+        console.log(descripcion);
+        console.log(anno);
+        for (let j = 0; j < res.length && find == false; j++) {
+          if (res[j].descripcion == descripcion && res[j].anno == anno) {
+            var descripcionBien = document.getElementById("descripcionBien");
+            descripcionBien.style.visibility = "visible";
+            find = true;
+          }
+        }
+
+        if (find == false) {
+          onClickBotonCrear();
+
+          const data = {
+            descripcion: descripcion,
+            anno: anno,
+          };
+
+          fetch(urlAsignatura, {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json, text/plain, */*",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.status == 401 || res.statusCode == 401) {
+                $("#modal401").modal({
+                  backdrop: "static",
+                  keyboard: false,
+                });
+                $("#modal401").modal("show");
+              }
+            })
+            .finally(() => {
+              quitarDivCrear();
+              location.replace("/asignatura/listado");
+            });
+        }
+      })
+      .finally(() => {
+        quitarDivCrear();
+      });
+  } else {
+    $("#modalCrear").modal("hide");
+    $("#internet").modal("show");
+  }
 }
