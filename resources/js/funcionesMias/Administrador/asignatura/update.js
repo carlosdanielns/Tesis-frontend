@@ -136,7 +136,6 @@ function server(url) {
 }
 
 const validarFormularioUpdate = (e) => {
-  console.log(e);
   switch (e.target.name) {
     case "descripcionUpdate":
       validarCampoUpdate(
@@ -169,8 +168,6 @@ inputsUpdate.forEach((input) => {
 });
 
 function modificar(id, descripcionOK, annoOK, descripcion, anno) {
-  console.log(descripcion);
-  console.log(anno);
 
   const urlAsignatura = "http://localhost:3000/api/v2/asignatura/";
   const token = JSON.parse(localStorage.getItem("token"));
@@ -182,7 +179,7 @@ function modificar(id, descripcionOK, annoOK, descripcion, anno) {
       put(urlAsignatura, id, descripcionOK, annoOK, token);
     } else {
       onClickBotonModificar();
-      console.log("entro as");
+
       fetch(urlAsignatura, {
         method: "get",
         headers: {
@@ -194,9 +191,7 @@ function modificar(id, descripcionOK, annoOK, descripcion, anno) {
         .then((res) => res.json())
         .then((res) => {
           var find = false;
-          console.log(res);
-          console.log(descripcionOK);
-          console.log(annoOK);
+
           for (let j = 0; j < res.length && find == false; j++) {
             if (res[j].descripcion == descripcionOK && res[j].anno == annoOK) {
               var descripcionBienUpdate = document.getElementById(

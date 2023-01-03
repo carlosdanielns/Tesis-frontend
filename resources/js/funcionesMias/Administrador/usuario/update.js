@@ -146,14 +146,13 @@ function modificar(id, name, usernameOK, emailOK, rol, username, email) {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
+
           var find = false;
           for (let j = 0; j < res.length && find == false; j++) {
             if (res[j].username == usernameOK) {
               var usernameBien = document.getElementById("usernameBienUpdate");
               usernameBien.style.visibility = "visible";
               find = true;
-              console.log("tercer");
             }
           }
 
@@ -204,14 +203,13 @@ function modificar(id, name, usernameOK, emailOK, rol, username, email) {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
+
           var find = false;
           for (let j = 0; j < res.length && find == false; j++) {
             if (res[j].email == emailOK) {
               var correoBien = document.getElementById("correoBienUpdate");
               correoBien.style.visibility = "visible";
               find = true;
-              console.log("cuarto");
             }
           }
 
@@ -262,7 +260,7 @@ function modificar(id, name, usernameOK, emailOK, rol, username, email) {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
+
           var find = false;
           for (let j = 0; j < res.length && find == false; j++) {
             if (res[j].username == usernameOK && res[j].email == emailOK) {
@@ -271,17 +269,17 @@ function modificar(id, name, usernameOK, emailOK, rol, username, email) {
               var correoBien = document.getElementById("correoBienUpdate");
               correoBien.style.visibility = "visible";
               find = true;
-              console.log("primer");
+
             } else if (res[j].username == usernameOK) {
               var usernameBien = document.getElementById("usernameBienUpdate");
               usernameBien.style.visibility = "visible";
               find = true;
-              console.log("tercer");
+
             } else if (res[j].email == emailOK) {
               var correoBien = document.getElementById("correoBienUpdate");
               correoBien.style.visibility = "visible";
               find = true;
-              console.log("cuarto");
+
             }
           }
 
@@ -392,7 +390,6 @@ function server(url) {
 }
 
 const validarFormularioUpdate = (e) => {
-  console.log(e);
   switch (e.target.name) {
     case "nameUpdate":
       validarCampoUpdate(expresionesUpdate.name, e.target, "name");

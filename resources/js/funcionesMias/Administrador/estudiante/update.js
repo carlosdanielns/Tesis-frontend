@@ -107,12 +107,6 @@ function modificar(id, nameOK, CIOk, annoOK, nameTabla, CITabla, annoTabla) {
 }
 
 function eliminarUser(ciEstudiante, token, name, tipo, id, data, CITabla) {
-  console.log(ciEstudiante);
-  console.log(name);
-  console.log(tipo);
-  console.log(id);
-  console.log(data);
-  console.log(CITabla);
 
   const urlUser = "http://localhost:3000/api/v2/user/" + CITabla;
 
@@ -128,7 +122,6 @@ function eliminarUser(ciEstudiante, token, name, tipo, id, data, CITabla) {
     })
       .then((resUserCI) => resUserCI.json())
       .then((resUserCI) => {
-        console.log(resUserCI);
         //TODO: este metodo es para el eliminar el usuario
         const url = "http://localhost:3000/api/v2/user/" + resUserCI._id;
         fetch(url, {
@@ -141,7 +134,6 @@ function eliminarUser(ciEstudiante, token, name, tipo, id, data, CITabla) {
         })
           .then((resUserDelete) => resUserDelete.json())
           .then((resUserDelete) => {
-            console.log(resUserDelete);
           })
           .finally(() => {
             createUser(name, ciEstudiante, tipo, token, id, data);
@@ -171,7 +163,6 @@ function createUser(name, CI, tipo, token, id, data) {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         if (res.status == 401 || res.statusCode == 401) {
           $("#modal401").modal({
             backdrop: "static",
@@ -285,7 +276,6 @@ function server(url) {
 }
 
 const validarFormularioUpdate = (e) => {
-  console.log(e);
   switch (e.target.name) {
     case "nombreUpdate":
       validarCampoUpdate(expresionesUpdate.nombre, e.target, "nombreUpdate");

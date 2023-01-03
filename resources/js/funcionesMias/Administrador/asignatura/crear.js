@@ -131,7 +131,6 @@ function server(url) {
 }
 
 const validarFormulario = (e) => {
-  console.log(e);
   switch (e.target.name) {
     case "descripcion":
       validarCampo(expresiones.descripcion, e.target, "descripcion");
@@ -177,9 +176,6 @@ function agregar(descripcion, anno) {
       .then((res) => res.json())
       .then((res) => {
         var find = false;
-        console.log(res);
-        console.log(descripcion);
-        console.log(anno);
         for (let j = 0; j < res.length && find == false; j++) {
           if (res[j].descripcion == descripcion && res[j].anno == anno) {
             var descripcionBien = document.getElementById("descripcionBien");

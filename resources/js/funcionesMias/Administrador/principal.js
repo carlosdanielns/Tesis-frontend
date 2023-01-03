@@ -1,6 +1,5 @@
 const usuario = JSON.parse(localStorage.getItem("usuario"));
 const token = JSON.parse(localStorage.getItem("token"));
-console.log(usuario);
 
 function modalInformacion() {
   $("#modalInformacion").modal("show");

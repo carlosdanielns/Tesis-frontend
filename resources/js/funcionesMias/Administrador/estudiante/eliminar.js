@@ -13,8 +13,6 @@ function eliminarCorrecto() {
   onClickBotonEliminar();
   var id = JSON.parse(localStorage.getItem("id"));
   var CI = JSON.parse(localStorage.getItem("CI"));
-  console.log(id);
-  console.log(CI);
   const token = JSON.parse(localStorage.getItem("token"));
   const urlUser = "http://localhost:3000/api/v2/user/";
 

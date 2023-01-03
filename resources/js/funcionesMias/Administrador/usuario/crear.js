@@ -86,12 +86,6 @@ $("#formularioCreate").on("submit", function (e) {
 });
 
 function agregar(name, username, email, password, cI) {
-  console.log(name);
-  console.log(username);
-  console.log(email);
-  console.log(password);
-  console.log(cI);
-
   onClickBotonCrear();
   const urlUser = "http://localhost:3000/api/v2/user/";
   let token = JSON.parse(localStorage.getItem("token"));
@@ -108,7 +102,7 @@ function agregar(name, username, email, password, cI) {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+
         var find = false;
         for (let j = 0; j < res.length && find == false; j++) {
           if (
@@ -123,28 +117,27 @@ function agregar(name, username, email, password, cI) {
             var CIBien = document.getElementById("CIBien");
             CIBien.style.visibility = "visible";
             find = true;
-            console.log("primer");
+
           } else if (res[j].CI == CI) {
             var CIBien = document.getElementById("CIBien");
-            console.log(CIBien);
+
             CIBien.style.visibility = "visible";
             find = true;
-            console.log("segundo");
+
           } else if (res[j].username == username) {
             var usernameBien = document.getElementById("usernameBien");
             usernameBien.style.visibility = "visible";
             find = true;
-            console.log("tercer");
+
           } else if (res[j].email == email) {
             var correoBien = document.getElementById("correoBien");
             correoBien.style.visibility = "visible";
             find = true;
-            console.log("cuarto");
           }
         }
 
         if (find == false) {
-          console.log("entro");
+          
           onClickBotonCrear();
 
           const data = {
@@ -264,7 +257,6 @@ function server(url) {
 }
 
 const validarFormulario = (e) => {
-  console.log(e);
   switch (e.target.name) {
     case "name":
       validarCampo(expresiones.name, e.target, "name");

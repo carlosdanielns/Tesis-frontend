@@ -49,7 +49,6 @@ function cargar() {
 window.addEventListener("load", cargar);
 
 function update(id, name, CI, asignatura) {
-  console.log(asignatura);
   cargarModal();
   const nombreUpdate = document.getElementById("nombreUpdate");
   nombreUpdate.value = name;
@@ -109,7 +108,6 @@ function updateprofesor(id, nameTabla, CITabla, asignaturaTabla) {
       } else {
         asignaturaOK = newAsignatura;
       }
-      console.log(asignaturaOK);
 
       modificar(
         id,
@@ -181,9 +179,7 @@ function eliminarUser(CI, token, name, tipo, id, data, CITabla) {
           },
         })
           .then((resUserDelete) => resUserDelete.json())
-          .then((resUserDelete) => {
-            console.log("ser elimino el usuario");
-          });
+          .then((resUserDelete) => {});
       })
       .finally(() => {
         createUser(name, CI, tipo, token, id, data);
@@ -219,7 +215,6 @@ function createUser(name, CI, tipo, token, id, data) {
           });
           $("#modal401").modal("show");
         }
-        console.log("se creo el usuario");
       })
       .finally(() => {
         updateProfesor(urlProfesor, id, token, data);
@@ -326,7 +321,6 @@ function server(url) {
 }
 
 const validarFormularioUpdate = (e) => {
-  console.log(e);
   switch (e.target.name) {
     case "nombreUpdate":
       validarCampoUpdate(expresionesUpdate.nombre, e.target, "nombreUpdate");

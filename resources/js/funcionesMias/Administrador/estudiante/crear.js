@@ -172,9 +172,6 @@ inputs.forEach((input) => {
 });
 
 function agregar(nombre, CI, anno) {
-  console.log(nombre);
-  console.log(CI);
-  console.log(anno);
   onClickBotonCrear();
 
   const urlEstudiante = "http://localhost:3000/api/v2/estudiante";
@@ -193,10 +190,6 @@ function agregar(nombre, CI, anno) {
       .then((res) => res.json())
       .then((res) => {
         var find = false;
-        console.log(nombre);
-        console.log(CI);
-        console.log(anno);
-        console.log(res);
 
         for (let j = 0; j < res.length && find == false; j++) {
           if (res[j].name == nombre && res[j].CI == CI) {
@@ -207,9 +200,7 @@ function agregar(nombre, CI, anno) {
             find = true;
           } else if (res[j].CI == CI) {
             var CIBien = document.getElementById("CIBien");
-            console.log(CIBien);
             CIBien.style.visibility = "visible";
-            console.log("entro en CI");
             find = true;
           } else if (res[j].name == nombre) {
             var nombreBien = document.getElementById("nombreBien");
@@ -225,7 +216,6 @@ function agregar(nombre, CI, anno) {
             annoCurso: anno,
           };
 
-          console.log(data);
           fetch(urlEstudiante, {
             method: "post",
             headers: {
@@ -237,7 +227,6 @@ function agregar(nombre, CI, anno) {
           })
             .then((res) => res.json())
             .then((res) => {
-              console.log(res);
               const CI = res.CI;
               const name = res.name;
               var nameN = name.split(" ");
