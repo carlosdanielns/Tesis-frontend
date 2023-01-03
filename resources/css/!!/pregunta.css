@@ -40,11 +40,11 @@ img {
 }
 
 .chargerModificar4x1 {
-    position: absolute;
-    top: 91%;
-    left: 63%;
-    right: 0;
-    bottom: 0;
+  position: absolute;
+  top: 91%;
+  left: 63%;
+  right: 0;
+  bottom: 0;
 }
 
 .chargerInsertarVoF {
@@ -57,8 +57,8 @@ img {
 
 .chargerModificarVoF {
   position: absolute;
-  top: 61.5%;
-  left: 33%;
+  top: 83.5%;
+  left: 45%;
   right: 0;
   bottom: 0;
 }
@@ -71,8 +71,8 @@ img {
 }
 .chargerModificarImagen {
   position: absolute;
-  top: 73%;
-  left: 33%;
+  top: 91.5%;
+  left: 44%;
   right: 0;
   bottom: 0;
 }
@@ -325,7 +325,7 @@ img {
 }
 
 .botones {
-  margin-top: 50px;
+  margin-top: 18px;
 }
 
 .imagenSVG {
@@ -347,11 +347,11 @@ img {
 }
 
 .descripcionUpdateSVG {
-    position: absolute;
-    top: 52%;
-    left: 20%;
-    right: 0px;
-    bottom: 0px;
+  position: absolute;
+  top: 52%;
+  left: 20%;
+  right: 0px;
+  bottom: 0px;
 }
 
 .respuestaCorrectaMalUpdate4x1 {
@@ -392,4 +392,82 @@ img {
   bottom: 0px;
   height: 49px;
   width: 417px;
+}
+
+.descripcionMalUpdateVoF {
+  position: absolute;
+  top: 49%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.descripcionMalImagenUpdate {
+  position: absolute;
+  top: 20.6%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.imagenMalUpdate {
+  position: absolute;
+  top: 34%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.respuestaCorrectaMalImagenUpdate {
+  position: absolute;
+  top: 46.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.respuestaIncorrectaMalImagenUpdate {
+  position: absolute;
+  top: 59%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.respuestaIncorrecta1MalImagenUpdate {
+  position: absolute;
+  top: 71.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.respuestaIncorrecta2MalImagenUpdate {
+  position: absolute;
+  top: 83.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.imagenImagenSVG {
+  position: absolute;
+  top: 52%;
+  left: 26%;
+  right: 0px;
+  bottom: 0px;
 }
