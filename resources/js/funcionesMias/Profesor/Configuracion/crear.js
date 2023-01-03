@@ -1,5 +1,4 @@
 const configuracionCrear = JSON.parse(localStorage.getItem("asignatura"));
-console.log(configuracionCrear);
 
 //Abrir modal Crear
 function abrirModalCrear() {
@@ -23,7 +22,6 @@ function abrirModalCrear() {
 
 function validarExtensionArchivo() {
   var fileInput = document.getElementById("foto");
-  console.log(fileInput);
   var filePath = fileInput.value;
   var allowedExtensions = /\.(jpg|jpeg|png)$/i;
   if (!allowedExtensions.exec(filePath)) {
@@ -41,7 +39,6 @@ function validarExtensionArchivo() {
 
 function validarExtensionArchivoSonido() {
   var fileInput = document.getElementById("sonido");
-  console.log(fileInput);
   var filePath = fileInput.value;
   var allowedExtensions = /(\.wav|\.mp3)$/i;
   if (!allowedExtensions.exec(filePath)) {
@@ -68,10 +65,9 @@ function imageChanged() {
     var imageSelected = document.getElementById("imageSelected");
     imageSelected.style.visibility = "visible";
 
-    var comboBien = document.getElementById("comboBien");
-    comboBien.style.visibility = "hidden";
+    var comboMal = document.getElementById("comboMal");
+    comboMal.style.visibility = "hidden";
 
-    console.log(selector);
     let divImage = document.querySelector("#imageSelected");
     let selectedOption = selector.options[selector.selectedIndex];
 
@@ -87,7 +83,6 @@ $("#formularioCreate").on("submit", function (e) {
   let selector = document.querySelector("#icono");
   let selectedOption = selector.options[selector.selectedIndex].text;
   let selectedOptionIcono = selector.options[selector.selectedIndex];
-  console.log(selectedOption);
   var icono;
 
   if (selectedOption == "Seleccione un icono") {
@@ -130,7 +125,6 @@ function crearConfiguracion(foto, sonido, icono) {
       .then((resFindByDescripcion) => resFindByDescripcion.json())
       .then((resFindByDescripcion) => {
         if (resFindByDescripcion.configuracion.length != 0) {
-          console.log("entro en el eliminar configuracion");
           eliminando(
             token,
             urlConfiguracion,
@@ -139,7 +133,7 @@ function crearConfiguracion(foto, sonido, icono) {
           );
         }
         var formData = new FormData();
-        console.log(foto);
+
         formData.append("file", foto);
         formData.append("icono", icono);
 
@@ -152,7 +146,7 @@ function crearConfiguracion(foto, sonido, icono) {
         })
           .then((resCreate) => resCreate.json())
           .then((resCreate) => {
-            console.log(resCreate);
+
             const urlSonido =
               "http://localhost:3000/api/v2/sonido/" + resCreate._id;
             var formDataSonido = new FormData();
@@ -167,7 +161,8 @@ function crearConfiguracion(foto, sonido, icono) {
             })
               .then((resUpdate) => resUpdate.json())
               .then((resUpdate) => {
-                console.log(resUpdate);
+
+              
                 var urlAsignatura =
                   "http://localhost:3000/api/v2/asignatura/" +
                   resFindByDescripcion._id +
@@ -182,7 +177,7 @@ function crearConfiguracion(foto, sonido, icono) {
                 })
                   .then((resAgregarConfi) => resAgregarConfi.json())
                   .then((resAgregarConfi) => {
-                    console.log(resAgregarConfi);
+
                     if (
                       resAgregarConfi.status == 401 ||
                       resAgregarConfi.statusCode == 401
@@ -212,10 +207,6 @@ function crearConfiguracion(foto, sonido, icono) {
 }
 
 function eliminando(token, urlConfiguracion, configuracionId, asignaturaID) {
-  console.log(token);
-  console.log(urlConfiguracion);
-  console.log(configuracionId);
-  console.log(asignaturaID);
 
   if (navigator.onLine) {
     server(urlConfiguracion);
@@ -229,7 +220,6 @@ function eliminando(token, urlConfiguracion, configuracionId, asignaturaID) {
     })
       .then((resEliminarConfiguracion) => resEliminarConfiguracion.json())
       .then((resEliminarConfiguracion) => {
-        console.log(resEliminarConfiguracion);
         var urlAsignatura =
           "http://localhost:3000/api/v2/asignatura/" +
           asignaturaID +
@@ -246,7 +236,7 @@ function eliminando(token, urlConfiguracion, configuracionId, asignaturaID) {
         })
           .then((resDelete) => resDelete.json())
           .then((resDelete) => {
-            console.log(resDelete);
+
             if (resDelete.status == 401 || resDelete.statusCode == 401) {
               $("#modal401").modal({
                 backdrop: "static",

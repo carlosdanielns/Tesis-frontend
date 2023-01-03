@@ -2,7 +2,6 @@ const usuario = JSON.parse(localStorage.getItem("usuario"));
 const token = JSON.parse(localStorage.getItem("token"));
 const asignatura = JSON.parse(localStorage.getItem("asignatura"));
 
-console.log(usuario);
 function modalInformacion() {
   $("#modalInformacion").modal("show");
   var nombreUsuario = document.getElementById("nombreUsuario");
@@ -69,14 +68,13 @@ function cargarListado() {
               var imagenTabla = document.getElementById("imagenTabla");
               iconoTabla.addEventListener("click", () => {
                 var imagen = document.getElementById("fotoModal");
-                console.log(imagen);
                 imagen.src = `/images/iconos/${resFindDescripcion.configuracion[0].icono}`;
                 $("#modalFoto").modal("show");
               });
 
               imagenTabla.addEventListener("click", () => {
                 var imagen = document.getElementById("fotoModal");
-                console.log(imagen);
+
                 imagen.src = `${resFindDescripcion.configuracion[0].imagen}`;
                 $("#modalFoto").modal("show");
               });
@@ -113,7 +111,6 @@ function quitarDiv() {
 
 function buscarProfesor() {
   var urlProfesor = "http://localhost:3000/api/v2/profesor/";
-  console.log(urlProfesor + usuario.CI);
 
   if ((navigator.onLine)) {
     server(urlProfesor);

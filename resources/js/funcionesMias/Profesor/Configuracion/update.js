@@ -20,7 +20,6 @@ function cargarModal() {
 
 function validarExtensionArchivoUpdate() {
   var fileInput = document.getElementById("fotoUpdate");
-  console.log(fileInput);
   var filePath = fileInput.value;
   var allowedExtensions = /\.(jpg|jpeg|png)$/i;
   if (!allowedExtensions.exec(filePath)) {
@@ -38,7 +37,6 @@ function validarExtensionArchivoUpdate() {
 
 function validarExtensionArchivoSonidoUpdate() {
   var fileInput = document.getElementById("sonidoUpdate");
-  console.log(fileInput);
   var filePath = fileInput.value;
   var allowedExtensions = /(\.wav|\.mp3)$/i;
   if (!allowedExtensions.exec(filePath)) {
@@ -64,10 +62,8 @@ function imageChangedUpdate() {
   } else {
     var imageSelectedUpdate = document.getElementById("imageSelectedUpdate");
     imageSelectedUpdate.style.visibility = "visible";
-
-    console.log("aqui");
-    var comboBienUpdate = document.getElementById("comboBienUpdate");
-    comboBienUpdate.style.visibility = "hidden";
+    var comboMalUpdate = document.getElementById("comboMalUpdate");
+    comboMalUpdate.style.visibility = "hidden";
 
     let divImage = document.querySelector("#imageSelectedUpdate");
     let selectedOption = selector.options[selector.selectedIndex];
@@ -102,7 +98,6 @@ function updateConfiguracion(id, imagen, iconoBD, sonidoBD) {
     }
     var foto = $("#fotoUpdate")[0].files[0];
 
-    console.log(icono);
     var sonido = $("#sonidoUpdate")[0].files[0];
     modificarConfiguracion(foto, sonido, icono.id);
   });
@@ -224,10 +219,6 @@ function eliminarUpdate(
   configuracionId,
   asignaturaID
 ) {
-  console.log(token);
-  console.log(urlConfiguracion);
-  console.log(configuracionId);
-  console.log(asignaturaID);
 
   if (navigator.onLine) {
     server(urlConfiguracion);
