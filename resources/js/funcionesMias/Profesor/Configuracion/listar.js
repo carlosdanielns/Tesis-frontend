@@ -2,10 +2,6 @@ const usuario = JSON.parse(localStorage.getItem("usuario"));
 const token = JSON.parse(localStorage.getItem("token"));
 const asignatura = JSON.parse(localStorage.getItem("asignatura"));
 
-if (navigator.onLine) {
-  server(urlProfesor);
-}
-
 console.log(usuario);
 function modalInformacion() {
   $("#modalInformacion").modal("show");
@@ -119,7 +115,7 @@ function buscarProfesor() {
   var urlProfesor = "http://localhost:3000/api/v2/profesor/";
   console.log(urlProfesor + usuario.CI);
 
-  if ((navigator, onLine)) {
+  if ((navigator.onLine)) {
     server(urlProfesor);
     fetch(urlProfesor + usuario.CI, {
       method: "get",

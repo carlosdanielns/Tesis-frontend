@@ -1,6 +1,6 @@
 const expresiones = {
   nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-  CI: /^.{11}$/, // 4 a 12 digitos.
+  CI: /^[a-zA-Z0-9]{11}$/, // 4 a 12 digitos.
 };
 
 const campos = {

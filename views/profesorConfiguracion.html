@@ -339,7 +339,7 @@
                         for="foto"
                         >Imagen Fondo (*):</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="file"
                           accept="image/*"
@@ -347,14 +347,30 @@
                           id="foto"
                           name="foto"
                           required="true"
+                          onchange="return validarExtensionArchivo()"
                         />
-                      </div>
+
+                        <span id="imagenBien" class="imagenBien inline-flex text-base text-green-700">Imagen ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="imagenMal" class="imagenMal inline-flex text-base text-red-700">Solo se permite archivos de audio con esta extensión .jpg/.jpeg/.png.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="imagenSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
+
                     </div>
 
                     <div>
                       <label
                         for="icono"
-                        class="mt-2 block text-base font-medium text-gray-700"
+                        class="mt-4 block text-base font-medium text-gray-700"
                         >Icono (*):</label
                       >
                       <div class="imageSelected" id="imageSelected"></div>
@@ -376,6 +392,7 @@
                         id="icono"
                         onChange="imageChanged()"
                       >
+                        <option value="Anno">Seleccione un icono</option>
                         <option
                           meta-img="/images/iconos/Certificate.svg"
                           id="Certificate.svg"
@@ -478,15 +495,30 @@
                         Icono 16
                         </option>
                       </select>
+
+                      <span id="comboBien" class="inline-flex text-sm text-green-700">Username available!
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            
+                        </svg>
+                      
+                      </span>
+
+                      <span id="comboMal" class="mt-2 comboMal inline-flex text-base text-red-700">Debe seleccionar un icono
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg></span>
                     </div>
 
                     <div>
                       <label
-                        class="mt-2 block text-sm font-medium text-gray-700"
+                        class="mt-4 block text-sm font-medium text-gray-700"
                         for="sonido"
                         >Sonido (*):</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="file"
                           accept="audio/*"
@@ -494,8 +526,24 @@
                           id="sonido"
                           name="sonido"
                           required="true"
+                          onchange="return validarExtensionArchivoSonido()"
                         />
-                      </div>
+
+                        <span id="sonidoBien" class="sonidoBien inline-flex text-base text-green-700">Imagen ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="sonidoMal" class="sonidoMal inline-flex text-base text-red-700">Solo se permite archivos de audio con esta extensión .jpg/.jpeg/.png.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="imagenSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
+
                     </div>
                   </div>          
               </div>
@@ -572,7 +620,7 @@
                         for="fotoUpdate"
                         >Imagen Fondo (*):</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="file"
                           accept="image/*"
@@ -580,14 +628,30 @@
                           id="fotoUpdate"
                           name="fotoUpdate"
                           required="true"
+                          onchange="return validarExtensionArchivoUpdate()"
                         />
-                      </div>
+
+                        <span id="imagenBienUpdate" class="imagenBienUpdate inline-flex text-base text-green-700">Imagen ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="imagenMalUpdate" class="imagenMalUpdate inline-flex text-base text-red-700">Solo se permite archivos de audio con esta extensión .jpg/.jpeg/.png.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="imagenMalUpdateSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
+
                     </div>
 
                     <div>
                       <label
                         for="iconoUpdate"
-                        class="mt-2 block text-base font-medium text-gray-700"
+                        class="mt-4 block text-base font-medium text-gray-700"
                         >Icono:</label
                       >
                       <div class="imageSelected" id="imageSelectedUpdate"></div>
@@ -609,6 +673,7 @@
                         id="iconoUpdate"
                         onChange="imageChangedUpdate()"
                       >
+                        <option value="Anno">Seleccione un icono</option>
                         <option
                           meta-img="/images/iconos/Certificate.svg"
                           id="Certificate.svg"
@@ -711,15 +776,30 @@
                         Icono 16
                         </option>
                       </select>
+
+                      <span id="comboBienUpdate" class="inline-flex text-sm text-green-700">Username available!
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            
+                        </svg>
+                      
+                      </span>
+
+                      <span id="comboMalUpdate" class="mt-2 comboMalUpdate inline-flex text-base text-red-700">Debe seleccionar un icono
+                        <svg xmlns="http://www.w3.org/2000/svg" class="comboMalUpdateSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg></span>
                     </div>
 
                     <div>
                       <label
-                        class="mt-2 block text-base font-medium text-gray-700"
-                        for="fotoUpdate"
+                        class="mt-4 block text-base font-medium text-gray-700"
+                        for="sonidoUpdate"
                         >Sonido (*):</label
                       >
-                      <div class="mt-1 flex items-center">
+
                         <input
                           type="file"
                           accept="audio/*"
@@ -727,8 +807,23 @@
                           id="sonidoUpdate"
                           name="sonidoUpdate"
                           required="true"
+                          onchange="return validarExtensionArchivoSonidoUpdate()"
                         />
-                      </div>
+
+                        <span id="sonidoBienUpdate" class="sonidoBienUpdate inline-flex text-base text-green-700">Imagen ya existe!
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              
+                          </svg>
+                        
+                        </span>
+
+                        <span id="sonidoMalUpdate" class="sonidoMalUpdate inline-flex text-base text-red-700">Solo se permite archivos de audio con esta extensión .jpg/.jpeg/.png.
+                          <svg xmlns="http://www.w3.org/2000/svg" class="sonidoMalUpdateSVG w-6 h-6" fill="none" viewBox="0 0 24 24"
+                              stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg></span>
                     </div>
                   </div>
        

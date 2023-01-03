@@ -104,7 +104,38 @@ function modificar(id, name, usernameOK, emailOK, rol, username, email) {
     server(urlUSer);
     onClickBotonModificar();
 
-    if (usernameOK != username && emailOK == email) {
+    if (usernameOK == username && emailOK == email) {
+      onClickBotonModificar();
+      const data = {
+        name: name,
+        username: usernameOK,
+        email: emailOK,
+      };
+
+      fetch(urlUSer + id, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json, text/plain, */*",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      })
+        .then((resPut) => resPut.json())
+        .then((resPut) => {
+          if (resPut.status == 401 || resPut.statusCode == 401) {
+            $("#modal401").modal({
+              backdrop: "static",
+              keyboard: false,
+            });
+            $("#modal401").modal("show");
+          }
+        })
+        .finally(() => {
+          quitarDivModificar();
+          location.replace("/usuario/listado");
+        });
+    } else if (usernameOK != username && emailOK == email) {
       fetch(urlUSer, {
         method: "get",
         headers: {
@@ -212,7 +243,7 @@ function modificar(id, name, usernameOK, emailOK, rol, username, email) {
                 }
               })
               .finally(() => {
-                quitarDivCrear();
+                quitarDivModificar();
                 location.replace("/usuario/listado");
               });
           }
@@ -282,7 +313,7 @@ function modificar(id, name, usernameOK, emailOK, rol, username, email) {
                 }
               })
               .finally(() => {
-                quitarDivCrear();
+                quitarDivModificar();
                 location.replace("/usuario/listado");
               });
           }

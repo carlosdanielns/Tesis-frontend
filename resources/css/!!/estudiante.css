@@ -23,10 +23,17 @@
   bottom: 0;
 }
 
-.chargerInsertar,
-.chargerModificar {
+.chargerInsertar {
   position: absolute;
   top: 87.7%;
+  left: 63%;
+  right: 0;
+  bottom: 0;
+}
+
+.chargerModificar {
+  position: absolute;
+  top: 87.4%;
   left: 63%;
   right: 0;
   bottom: 0;

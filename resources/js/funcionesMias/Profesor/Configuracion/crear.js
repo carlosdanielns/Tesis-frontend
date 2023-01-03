@@ -3,42 +3,116 @@ console.log(configuracionCrear);
 
 //Abrir modal Crear
 function abrirModalCrear() {
+  var imagenBien = document.getElementById("imagenBien");
+  imagenBien.style.visibility = "hidden";
+
+  var comboBien = document.getElementById("comboBien");
+  comboBien.style.visibility = "hidden";
+
+  var sonidoBien = document.getElementById("sonidoBien");
+  sonidoBien.style.visibility = "hidden";
+
+  var imageSelected = document.getElementById("imageSelected");
+  imageSelected.style.visibility = "hidden";
+
   $("#modalCrear").modal({ backdrop: "static", keyboard: false });
   $("#modalCrear").modal("show");
   quitarDivCrear();
 }
 //Fin modal Crear
 
+function validarExtensionArchivo() {
+  var fileInput = document.getElementById("foto");
+  console.log(fileInput);
+  var filePath = fileInput.value;
+  var allowedExtensions = /\.(jpg|jpeg|png)$/i;
+  if (!allowedExtensions.exec(filePath)) {
+    var imagenMal = document.getElementById("imagenMal");
+    imagenMal.style.visibility = "visible";
+
+    fileInput.value = "";
+    return false;
+  } else {
+    var imagenMal = document.getElementById("imagenMal");
+    imagenMal.style.visibility = "hidden";
+    return true;
+  }
+}
+
+function validarExtensionArchivoSonido() {
+  var fileInput = document.getElementById("sonido");
+  console.log(fileInput);
+  var filePath = fileInput.value;
+  var allowedExtensions = /(\.wav|\.mp3)$/i;
+  if (!allowedExtensions.exec(filePath)) {
+    var sonidoMal = document.getElementById("sonidoMal");
+    sonidoMal.style.visibility = "visible";
+
+    fileInput.value = "";
+    return false;
+  } else {
+    var sonidoMal = document.getElementById("sonidoMal");
+    sonidoMal.style.visibility = "hidden";
+    return true;
+  }
+}
+
 function imageChanged() {
   let selector = document.querySelector("#icono");
-  let divImage = document.querySelector("#imageSelected");
-  let selectedOption = selector.options[selector.selectedIndex];
-  let image = selectedOption.getAttribute("meta-img");
+  let seleccioneIcono = selector.options[selector.selectedIndex].text;
 
-  divImage.innerHTML = "<img src='" + image + "' style='width:100px;'>";
+  if (seleccioneIcono == "Seleccione un icono") {
+    var imageSelected = document.getElementById("imageSelected");
+    imageSelected.style.visibility = "hidden";
+  } else {
+    var imageSelected = document.getElementById("imageSelected");
+    imageSelected.style.visibility = "visible";
+
+    var comboBien = document.getElementById("comboBien");
+    comboBien.style.visibility = "hidden";
+
+    console.log(selector);
+    let divImage = document.querySelector("#imageSelected");
+    let selectedOption = selector.options[selector.selectedIndex];
+
+    let image = selectedOption.getAttribute("meta-img");
+
+    divImage.innerHTML = "<img src='" + image + "' style='width:100px;'>";
+  }
 }
 imageChanged();
 
 $("#formularioCreate").on("submit", function (e) {
   e.preventDefault();
-  onClickBotonCrear();
-    let selector = document.querySelector("#icono");
-    let selectedOption = selector.options[selector.selectedIndex];
+  let selector = document.querySelector("#icono");
+  let selectedOption = selector.options[selector.selectedIndex].text;
+  let selectedOptionIcono = selector.options[selector.selectedIndex];
+  console.log(selectedOption);
+  var icono;
 
-    var foto = $("#foto")[0].files[0];
-    var icono = selectedOption;
-    var sonido = $("#sonido")[0].files[0];
+  if (selectedOption == "Seleccione un icono") {
+    var comboMal = document.getElementById("comboMal");
+    comboMal.style.visibility = "visible";
+    return;
+  } else {
+    icono = selectedOptionIcono;
+  }
 
-    if (foto == undefined && sonido == undefined) {
-      crearConfiguracion("", "", icono.id);
-    } else if (foto == undefined) {
-      crearConfiguracion("", sonido, icono.id);
-    } else if (sonido == undefined) {
-      crearConfiguracion(foto, "", icono.id);
-    } else crearConfiguracion(foto, sonido, icono.id);
+  var foto = $("#foto")[0].files[0];
+
+  var sonido = $("#sonido")[0].files[0];
+
+  if (foto == undefined && sonido == undefined) {
+    crearConfiguracion("", "", icono.id);
+  } else if (foto == undefined) {
+    crearConfiguracion("", sonido, icono.id);
+  } else if (sonido == undefined) {
+    crearConfiguracion(foto, "", icono.id);
+  } else crearConfiguracion(foto, sonido, icono.id);
 });
 
 function crearConfiguracion(foto, sonido, icono) {
+  onClickBotonCrear();
   const urlConfiguracion = "http://localhost:3000/api/v2/configuracion/";
   const urlAsignatura = "http://localhost:3000/api/v2/asignatura/descripcion/";
   let token = JSON.parse(localStorage.getItem("token"));
@@ -205,6 +279,15 @@ function onClickBotonCrear() {
 }
 
 function quitarDivCrear() {
+  var imagenMal = document.getElementById("imagenMal");
+  imagenMal.style.visibility = "hidden";
+
+  var comboMal = document.getElementById("comboMal");
+  comboMal.style.visibility = "hidden";
+
+  var sonidoMal = document.getElementById("sonidoMal");
+  sonidoMal.style.visibility = "hidden";
+
   var boton = document.getElementById("botonInsertar");
   var chargerInsertar = document.getElementById("chargerInsertar");
   chargerInsertar.style.visibility = "hidden";

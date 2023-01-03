@@ -6,7 +6,6 @@ function modalInformacion() {
   $("#modalInformacion").modal("show");
   var nombreUsuario = document.getElementById("nombreUsuario");
   if (nombreUsuario.innerHTML == "") {
-    onClickModal();
     buscarProfesor();
   }
 }
@@ -32,9 +31,13 @@ function cargarListado() {
         for (var i = 0; i < res.length; i++) {
           tbody.append(`
                         <tr class="bg-white border-b hover:bg-gray-50">
-                          <td class="text-base p-4 w-6 id columnaID">${res[i]._id}</td>
+                          <td class="text-base p-4 w-6 id columnaID">${
+                            res[i]._id
+                          }</td>
                           <td class="text-base p-4 w-6 #">${i + 1}</td>
-                          <td class="text-base p-4 w-6 nombre">${res[i].name}</td>
+                          <td class="text-base p-4 w-6 nombre">${
+                            res[i].name
+                          }</td>
                           <td class="text-base p-4 w-6 CI">${res[i].CI}</td>
                           <td class="text-base p-4 w-6 asignatur1a">${
                             res[i].asignatura
@@ -68,41 +71,10 @@ function cargarListado() {
   }
 }
 
-function onClickModal() {
-  var charger = document.getElementById("charger");
-  charger.style.visibility = "visible";
-  charger.style.opacity = "100";
-}
-
-function quitarDiv() {
-  var charger = document.getElementById("charger");
-  charger.style.visibility = "hidden";
-  charger.style.opacity = "0";
-}
-
 function buscarProfesor() {
-  var urlProfesor = "http://localhost:3000/api/v2/profesor/";
-  let token = JSON.parse(localStorage.getItem("token"));
-
   if (navigator.onLine) {
-    server(urlProfesor);
-    console.log(urlProfesor + usuario.CI);
-    fetch(urlProfesor + usuario.CI, {
-      method: "get",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resByCI) => resByCI.json())
-      .then((resByCI) => {
-        var nombreUsuario = document.getElementById("nombreUsuario");
-        nombreUsuario.innerHTML = "" + usuario.name;
-      })
-      .finally(() => {
-        quitarDiv();
-      });
+    var nombreUsuario = document.getElementById("nombreUsuario");
+    nombreUsuario.innerHTML = "" + usuario.name;
   } else {
     $("#modalInformacion").modal("hide");
     $("#internet").modal("show");

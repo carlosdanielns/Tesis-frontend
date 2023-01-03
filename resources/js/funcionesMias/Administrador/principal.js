@@ -6,7 +6,6 @@ function modalInformacion() {
   $("#modalInformacion").modal("show");
   var nombreUsuario = document.getElementById("nombreUsuario");
   if (nombreUsuario.innerHTML == "") {
-    onClickModal();
     buscarProfesor();
   }
 }
@@ -15,39 +14,11 @@ function buscarProfesor() {
   var urlProfesor = "http://localhost:3000/api/v2/profesor/";
 
   if (navigator.onLine) {
-    server(urlProfesor);
-    console.log(urlProfesor + usuario.CI);
-    fetch(urlProfesor + usuario.CI, {
-      method: "get",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resByCI) => resByCI.json())
-      .then((resByCI) => {
-        var nombreUsuario = document.getElementById("nombreUsuario");
-        nombreUsuario.innerHTML = "" + usuario.name;
-      })
-      .finally(() => {
-        quitarDiv();
-      });
+    var nombreUsuario = document.getElementById("nombreUsuario");
+    nombreUsuario.innerHTML = "" + usuario.name;
   } else {
     $("#internet").modal("show");
   }
-}
-
-function onClickModal() {
-  var charger = document.getElementById("charger");
-  charger.style.visibility = "visible";
-  charger.style.opacity = "100";
-}
-
-function quitarDiv() {
-  var charger = document.getElementById("charger");
-  charger.style.visibility = "hidden";
-  charger.style.opacity = "0";
 }
 
 function server(url) {

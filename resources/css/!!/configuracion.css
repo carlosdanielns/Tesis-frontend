@@ -43,7 +43,7 @@ img {
 
 .chargerInsertar {
   position: absolute;
-  top: 89%;
+  top: 90%;
   left: 63%;
   right: 0;
   bottom: 0;
@@ -51,7 +51,7 @@ img {
 
 .chargerModificar {
   position: absolute;
-  top: 89%;
+  top: 90%;
   left: 63%;
   right: 0;
   bottom: 0;
@@ -82,10 +82,110 @@ img {
   font-size: 25px;
 }
 
+.aceptar {
+  margin-left: 160px !important;
+}
+
+.icono {
+  margin-left: 45% !important;
+}
+
 .comboBox {
   position: absolute;
-  top: 58.5%;
+  top: 55.5%;
   left: 87%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.imagenMal {
+  position: absolute;
+  top: 29.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.sonidoMal {
+  position: absolute;
+  top: 74%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.comboMal {
+  position: absolute;
+  top: 58%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.imagenSVG {
+  position: absolute;
+  top: 52%;
+  left: 27%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.imagenMalUpdate {
+  position: absolute;
+  top: 29%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.imagenMalUpdateSVG {
+  position: absolute;
+  top: 52%;
+  left: 27%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.comboMalUpdate {
+  position: absolute;
+  top: 58%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.comboMalUpdateSVG {
+  position: absolute;
+  top: 3%;
+  left: 44%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.sonidoMalUpdate {
+  position: absolute;
+  top: 74%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.sonidoMalUpdateSVG {
+  position: absolute;
+  top: 52%;
+  left: 27%;
   right: 0px;
   bottom: 0px;
 }
