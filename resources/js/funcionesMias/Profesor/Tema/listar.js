@@ -30,7 +30,7 @@ function cargarListado() {
     })
       .then((resFindDescripcion) => resFindDescripcion.json())
       .then((resFindDescripcion) => {
-        console.log(resFindDescripcion);
+
         //Aqui verifico si esta autenticado
         if (
           resFindDescripcion.status == 401 ||
