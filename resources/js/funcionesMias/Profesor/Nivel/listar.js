@@ -118,8 +118,6 @@ function buscarProfesor() {
     })
       .then((resByCI) => resByCI.json())
       .then((resByCI) => {
-        console.log(resByCI);
-        console.log(urlTema + temaId.id);
         fetch(urlTema + temaId.id, {
           method: "get",
           headers: {
@@ -130,7 +128,6 @@ function buscarProfesor() {
         })
           .then((resById) => resById.json())
           .then((resById) => {
-            console.log(resById);
             var nombreUsuario = document.getElementById("nombreUsuario");
             nombreUsuario.innerHTML = "" + resByCI.name;
             var nombreAsigantura = document.getElementById("nombreAsigantura");

@@ -1,5 +1,5 @@
 const expresiones = {
-  descripcion: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9\_\-]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 };
 
 const campos = {
@@ -115,7 +115,6 @@ function agregar(descripcion, nota5, tiempoDuracion) {
                 temaCrear.id +
                 "/nivel/" +
                 resPostNivel._id;
-              console.log(urlAddNivel);
               fetch(urlAddNivel, {
                 method: "post",
                 headers: {
@@ -220,7 +219,6 @@ function server(url) {
 }
 
 const validarFormulario = (e) => {
-  console.log(e);
   switch (e.target.name) {
     case "descripcion":
       validarCampo(expresiones.descripcion, e.target, "descripcion");

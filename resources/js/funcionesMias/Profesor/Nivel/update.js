@@ -1,5 +1,5 @@
 const expresionesUpdate = {
-  descripcion: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9\_\-]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 };
 
 const camposUpdate = {
@@ -257,7 +257,6 @@ function server(url) {
 }
 
 const validarFormularioUpdate = (e) => {
-  console.log(e);
   switch (e.target.name) {
     case "descripcionUpdate":
       validarCampoUpdate(

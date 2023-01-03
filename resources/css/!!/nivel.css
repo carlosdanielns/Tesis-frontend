@@ -91,7 +91,7 @@
 
 .descripcionMal {
   position: absolute;
-  top: 36.5%;
+  top: 40.5%;
   left: 8%;
   right: 0px;
   bottom: 0px;
@@ -101,8 +101,8 @@
 
 .descripcionSVG {
   position: absolute;
-  top: 52%;
-  left: 38%;
+  top: 51%;
+  left: 55%;
   right: 0px;
   bottom: 0px;
 }
