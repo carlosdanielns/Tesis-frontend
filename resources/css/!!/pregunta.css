@@ -40,11 +40,11 @@ img {
 }
 
 .chargerModificar4x1 {
-  position: absolute;
-  top: 73%;
-  left: 33%;
-  right: 0;
-  bottom: 0;
+    position: absolute;
+    top: 91%;
+    left: 63%;
+    right: 0;
+    bottom: 0;
 }
 
 .chargerInsertarVoF {
@@ -64,8 +64,8 @@ img {
 }
 .chargerInsertarImagen {
   position: absolute;
-  top: 73%;
-  left: 33%;
+  top: 93.4%;
+  left: 45%;
   right: 0;
   bottom: 0;
 }
@@ -244,4 +244,152 @@ img {
   bottom: 0px;
   height: 49px;
   width: 421px;
+}
+
+.descripcionMalImagen {
+  position: absolute;
+  top: 20.1%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.imagenMal {
+  position: absolute;
+  top: 33%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.respuestaCorrectaMalImagen {
+  position: absolute;
+  top: 45.3%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.respuestaIncorrectaMalImagen {
+  position: absolute;
+  top: 57.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.respuestaIncorrecta1MalImagen {
+  position: absolute;
+  top: 69.6%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.respuestaIncorrecta2MalImagen {
+  position: absolute;
+  top: 81.9%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 421px;
+}
+
+.ogligatorio {
+  position: absolute;
+  top: 88.6%;
+  left: 5%;
+  right: 0px;
+  bottom: 0px;
+  height: 25px;
+  width: 420px;
+}
+
+.respuestaIncorrectaMalImagenSVG {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.botones {
+  margin-top: 50px;
+}
+
+.imagenSVG {
+  position: absolute;
+  top: 4%;
+  left: 87%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.descripcionMalUpdate4x1 {
+  position: absolute;
+  top: 26.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.descripcionUpdateSVG {
+    position: absolute;
+    top: 52%;
+    left: 20%;
+    right: 0px;
+    bottom: 0px;
+}
+
+.respuestaCorrectaMalUpdate4x1 {
+  position: absolute;
+  top: 39.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.respuestaIncorrectaMalUpdate4x1 {
+  position: absolute;
+  top: 53%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.respuestaIncorrecta1MalUpdate {
+  position: absolute;
+  top: 65.8%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}
+
+.respuestaIncorrecta2MalUpdate4x1 {
+  position: absolute;
+  top: 79%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
 }

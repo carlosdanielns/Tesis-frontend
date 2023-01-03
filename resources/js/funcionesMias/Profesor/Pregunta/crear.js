@@ -1,9 +1,9 @@
 const expresiones4x1 = {
-  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,100}$/, // Letras y espacios, pueden llevar acentos.
-  respuestaCorrecta: /^[a-zA-Z0-9\_\-]{1,100}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta: /^[a-zA-Z0-9\_\-]{1,100}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta1: /^[a-zA-Z0-9\_\-]{1,100}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta2: /^[a-zA-Z0-9\_\-]{1,100}$/, // Letras, numeros, guion y guion_bajo
+  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  respuestaCorrecta: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta1: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta2: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
 };
 
 const campos4x1 = {
@@ -15,7 +15,7 @@ const campos4x1 = {
 };
 
 const expresionesVoF = {
-  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,100}$/, // Letras y espacios, pueden llevar acentos.
+  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
 };
 
 const camposVoF = {
@@ -23,12 +23,11 @@ const camposVoF = {
 };
 
 const expresionesImagen = {
-  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,100}$/, // Letras y espacios, pueden llevar acentos.
-  respuestaCorrecta: /^[a-zA-Z0-9\_\-]{1,100}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta: /^[a-zA-Z0-9\_\-]{1,100}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta1: /^[a-zA-Z0-9\_\-]{1,100}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta2: /^[a-zA-Z0-9\_\-]{1,100}$/, // Letras, numeros, guion y guion_bajo
-  imagen: /(\.wav|\.mp3|\.mp4|\.mid)$/,
+  descripcion: /^[a-zA-ZÀ-ÿ\s]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  respuestaCorrecta: /^[a-zA-Z0-9\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta: /^[a-zA-Z0-9\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta1: /^[a-zA-Z0-9\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta2: /^[a-zA-Z0-9\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
 };
 
 const camposImagen = {
@@ -383,74 +382,232 @@ function agregarVoF(descripcion, respuestaCorrecta, respuestaIncorrecta) {
 }
 // Fin Crear Pregunta V o F
 
+function validarExtensionArchivo() {
+  var fileInput = document.getElementById("imagen");
+  console.log(fileInput);
+  var filePath = fileInput.value;
+  var allowedExtensions = /\.(jpg|jpeg|png)$/i;
+  if (!allowedExtensions.exec(filePath)) {
+    var imagenMal = document.getElementById("imagenMal");
+    imagenMal.style.visibility = "visible";
+
+    fileInput.value = "";
+    return false;
+  } else {
+    var imagenMal = document.getElementById("imagenMal");
+    imagenMal.style.visibility = "hidden";
+    return true;
+  }
+}
+
 //Crear Pregunta Imagen
 $("#formularioCreateImagen").on("submit", function (e) {
-  const urlPreguntaImagen = "http://localhost:3000/api/v2/pregunta/imagen";
-  let token = JSON.parse(localStorage.getItem("token"));
-
   e.preventDefault();
+
+  const urlPreguntaImagen = "http://localhost:3000/api/v2/pregunta/imagen";
+
+  if (navigator.onLine) {
+    server(urlPreguntaImagen);
+
+    var newDescripcion = $("#descripcionImagen");
+    var newRespuestaCorrecta = $("#respuestaCorrectaImagen");
+    var newRespuestaIncorrecta = $("#respuestaIncorrectaImagen");
+    var newRespuestaIncorrecta1 = $("#respuestaIncorrecta1Imagen");
+    var newRespuestaIncorrecta2 = $("#respuestaIncorrecta2Imagen");
+    var files = $("#imagen")[0].files[0];
+
+    /*if (!expresionesImagen.descripcion.test(newDescripcion.val())) {
+      var descripcionMalImagen = document.getElementById(
+        "descripcionMalImagen"
+      );
+      descripcionMalImagen.style.visibility = "visible";
+      return;
+    }
+
+    if (!expresionesImagen.respuestaCorrecta.test(newRespuestaCorrecta.val())) {
+      var respuestaCorrectaMalImagen = document.getElementById(
+        "respuestaCorrectaMalImagen"
+      );
+      respuestaCorrectaMalImagen.style.visibility = "visible";
+      return;
+    }
+
+    if (
+      !expresionesImagen.respuestaIncorrecta.test(newRespuestaIncorrecta.val())
+    ) {
+      var respuestaIncorrectaMalImagen = document.getElementById(
+        "respuestaIncorrectaMalImagen"
+      );
+      respuestaIncorrectaMalImagen.style.visibility = "visible";
+      return;
+    }
+
+    if (
+      !expresionesImagen.respuestaIncorrecta1.test(
+        newRespuestaIncorrecta1.val()
+      )
+    ) {
+      var respuestaIncorrecta1MalImagen = document.getElementById(
+        "respuestaIncorrecta1MalImagen"
+      );
+      respuestaIncorrecta1MalImagen.style.visibility = "visible";
+      return;
+    }
+
+    if (
+      !expresionesImagen.respuestaIncorrecta2.test(
+        newRespuestaIncorrecta1.val()
+      )
+    ) {
+      var respuestaIncorrecta2MalImagen = document.getElementById(
+        "respuestaIncorrecta2MalImagen"
+      );
+      respuestaIncorrecta2MalImagen.style.visibility = "visible";
+      return;
+    }*/
+
+    agregarImagen(
+      newDescripcion.val(),
+      newRespuestaCorrecta.val(),
+      newRespuestaIncorrecta.val(),
+      newRespuestaIncorrecta1.val(),
+      newRespuestaIncorrecta2.val(),
+      files
+    );
+  } else {
+    $("#modalCrearImagen").modal("hide");
+    $("#internet").modal("show");
+  }
+});
+
+function agregarImagen(
+  descripcion,
+  respuestaCorrecta,
+  respuestaIncorrecta,
+  respuestaIncorrecta1,
+  respuestaIncorrecta2,
+  imagen
+) {
+  const urlPreguntaImagen = "http://localhost:3000/api/v2/pregunta/imagen/";
+  const PreguntaImagen = "http://localhost:3000/api/v2/pregunta/";
+  let token = JSON.parse(localStorage.getItem("token"));
+  console.log(imagen);
   onClickBotonCrearImagen();
 
-  var newDescripcion = $("#descripcionImagen");
-  var newRespuestaCorrecta = $("#respuestaCorrectaImagen");
-  var newRespuestaIncorrecta = $("#respuestaIncorrectaImagen");
-  var newRespuestaIncorrecta1 = $("#respuestaIncorrecta1Imagen");
-  var newRespuestaIncorrecta2 = $("#respuestaIncorrecta2Imagen");
+  if (navigator.onLine) {
+    server(urlPreguntaImagen);
 
-  var formData = new FormData();
-  var files = $("#imagen")[0].files[0];
-  formData.append("file", files);
-
-  formData.append("descripcion", newDescripcion.val());
-  formData.append("respuestaCorrecta", newRespuestaCorrecta.val());
-  formData.append("respuestaIncorrecta", newRespuestaIncorrecta.val());
-  formData.append("respuestaIncorrecta1", newRespuestaIncorrecta1.val());
-  formData.append("respuestaIncorrecta2", newRespuestaIncorrecta2.val());
-  formData.append("tiposDePregunta", "Imagen");
-
-  fetch(urlPreguntaImagen, {
-    method: "post",
-    body: formData,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((resPost) => resPost.json())
-    .then((resPost) => {
-      const urlAddPregunta =
-        "http://localhost:3000/api/v2/nivel/" +
-        nivelCrear.id +
-        "/pregunta/" +
-        resPost._id;
-
-      console.log(urlAddPregunta);
-      fetch(urlAddPregunta, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json, text/plain, */*",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((resAddPregunta) => resAddPregunta.json())
-        .then((resAddPregunta) => {
+    fetch(PreguntaImagen, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text/plain, */*",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        var find = false;
+        for (let j = 0; j < res.length && find == false; j++) {
           if (
-            resAddPregunta.status == 401 ||
-            resAddPregunta.statusCode == 401
+            res[j].descripcion == descripcion &&
+            res[j].respuestaCorrecta == respuestaCorrecta &&
+            res[j].respuestaIncorrecta == respuestaIncorrecta &&
+            res[j].respuestaIncorrecta1 == respuestaIncorrecta1 &&
+            res[j].respuestaIncorrecta2 == respuestaIncorrecta2 &&
+            res[j].tiposDePregunta == "Imagen"
           ) {
-            $("#modal401").modal({
-              backdrop: "static",
-              keyboard: false,
-            });
-            $("#modal401").modal("show");
+            var descripcionBienImagen = document.getElementById(
+              "descripcionBienImagen"
+            );
+            descripcionBienImagen.style.visibility = "visible";
+
+            var respuestaCorrectaBienImagen = document.getElementById(
+              "respuestaCorrectaBienImagen"
+            );
+            respuestaCorrectaBienImagen.style.visibility = "visible";
+
+            var respuestaIncorrectaBienImagen = document.getElementById(
+              "respuestaIncorrectaBienImagen"
+            );
+            respuestaIncorrectaBienImagen.style.visibility = "visible";
+
+            var respuestaIncorrecta1BienImagen = document.getElementById(
+              "respuestaIncorrecta1BienImagen"
+            );
+            respuestaIncorrecta1BienImagen.style.visibility = "visible";
+
+            var respuestaIncorrecta2BienImagen = document.getElementById(
+              "respuestaIncorrecta2BienImagen"
+            );
+            respuestaIncorrecta2BienImagen.style.visibility = "visible";
+            find = true;
           }
-        })
-        .finally(() => {
-          quitarDivCrearImagen();
-          location.replace("/pregunta/listado");
-        });
-    });
-});
+        }
+
+        if (find == false) {
+          onClickBotonCrearImagen();
+
+          var formData = new FormData();
+          formData.append("file", imagen);
+          formData.append("descripcion", descripcion);
+          formData.append("respuestaCorrecta", respuestaCorrecta);
+          formData.append("respuestaIncorrecta", respuestaIncorrecta);
+          formData.append("respuestaIncorrecta1", respuestaIncorrecta1);
+          formData.append("respuestaIncorrecta2", respuestaIncorrecta2);
+          formData.append("tiposDePregunta", "Imagen");
+          fetch(urlPreguntaImagen, {
+            method: "post",
+            body: formData,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+            .then((resPost) => resPost.json())
+            .then((resPost) => {
+              console.log(resPost);
+              const urlAddPregunta =
+                "http://localhost:3000/api/v2/nivel/" +
+                nivelCrear.id +
+                "/pregunta/" +
+                resPost._id;
+
+              console.log(urlAddPregunta);
+              fetch(urlAddPregunta, {
+                method: "post",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json, text/plain, */*",
+                  Authorization: `Bearer ${token}`,
+                },
+              })
+                .then((resAddPregunta) => resAddPregunta.json())
+                .then((resAddPregunta) => {
+                  if (
+                    resAddPregunta.status == 401 ||
+                    resAddPregunta.statusCode == 401
+                  ) {
+                    $("#modal401").modal({
+                      backdrop: "static",
+                      keyboard: false,
+                    });
+                    $("#modal401").modal("show");
+                  }
+                })
+                .finally(() => {
+                  quitarDivCrearImagen();
+                  location.replace("/pregunta/listado");
+                });
+            });
+        }
+      })
+      .finally(() => {
+        quitarDivCrearImagen();
+      });
+  }
+}
+
 // Fin Crear Pregunta Imagen
 
 function cargarTipoPregunta() {
@@ -546,6 +703,34 @@ function cargarTipoPregunta() {
         quitarDivCrear4x1();
         break;
       case "Imagen":
+        var descripcionBienImagen = document.getElementById(
+          "descripcionBienImagen"
+        );
+        descripcionBienImagen.style.visibility = "hidden";
+
+        var imagenBien = document.getElementById("imagenBien");
+        imagenBien.style.visibility = "hidden";
+
+        var respuestaCorrectaBienImagen = document.getElementById(
+          "respuestaCorrectaBienImagen"
+        );
+        respuestaCorrectaBienImagen.style.visibility = "hidden";
+
+        var respuestaIncorrectaBienImagen = document.getElementById(
+          "respuestaIncorrectaBienImagen"
+        );
+        respuestaIncorrectaBienImagen.style.visibility = "hidden";
+
+        var respuestaIncorrecta1BienImagen = document.getElementById(
+          "respuestaIncorrecta1BienImagen"
+        );
+        respuestaIncorrecta1BienImagen.style.visibility = "hidden";
+
+        var respuestaIncorrecta2BienImagen = document.getElementById(
+          "respuestaIncorrecta2BienImagen"
+        );
+        respuestaIncorrecta2BienImagen.style.visibility = "hidden";
+
         $("#modalTipoPregunta").modal("hide");
         $("#modalCrearImagen").modal({ backdrop: "static", keyboard: false });
         $("#modalCrearImagen").modal("show");
@@ -645,6 +830,32 @@ function onClickBotonCrearImagen() {
 }
 
 function quitarDivCrearImagen() {
+  var descripcionMalImagen = document.getElementById("descripcionMalImagen");
+  descripcionMalImagen.style.visibility = "hidden";
+
+  var imagenMal = document.getElementById("imagenMal");
+  imagenMal.style.visibility = "hidden";
+
+  var respuestaCorrectaMalImagen = document.getElementById(
+    "respuestaCorrectaMalImagen"
+  );
+  respuestaCorrectaMalImagen.style.visibility = "hidden";
+
+  var respuestaIncorrectaMalImagen = document.getElementById(
+    "respuestaIncorrectaMalImagen"
+  );
+  respuestaIncorrectaMalImagen.style.visibility = "hidden";
+
+  var respuestaIncorrecta1MalImagen = document.getElementById(
+    "respuestaIncorrecta1MalImagen"
+  );
+  respuestaIncorrecta1MalImagen.style.visibility = "hidden";
+
+  var respuestaIncorrecta2MalImagen = document.getElementById(
+    "respuestaIncorrecta2MalImagen"
+  );
+  respuestaIncorrecta2MalImagen.style.visibility = "hidden";
+
   var botonInsertarImagen = document.getElementById("botonInsertarImagen");
   var chargerInsertarImagen = document.getElementById("chargerInsertarImagen");
 
@@ -1146,4 +1357,123 @@ const inputsVoF = document.querySelectorAll("#formularioCreateVoF input");
 
 inputsVoF.forEach((input) => {
   input.addEventListener("keyup", validarFormularioVoF);
+});
+
+const validarFormularioImagen = (e) => {
+  console.log(e);
+  switch (e.target.name) {
+    case "descripcionImagen":
+      validarCampo(expresionesImagen.descripcion, e.target, "descripcion");
+      break;
+    case "imagen":
+      validarCampo(expresionesImagen.imagen, e.target, "imagen");
+      break;
+    case "respuestaCorrectaImagen":
+      validarCampo(
+        expresionesImagen.respuestaCorrecta,
+        e.target,
+        "respuestaCorrecta"
+      );
+      break;
+    case "respuestaIncorrectaImagen":
+      validarCampo(
+        expresionesImagen.respuestaIncorrecta,
+        e.target,
+        "respuestaIncorrecta"
+      );
+      break;
+    case "respuestaIncorrecta1Imagen":
+      validarCampo(
+        expresionesImagen.respuestaIncorrecta1,
+        e.target,
+        "respuestaIncorrecta1"
+      );
+      break;
+    case "respuestaIncorrecta2Imagen":
+      validarCampo(
+        expresionesImagen.respuestaIncorrecta2,
+        e.target,
+        "respuestaIncorrecta2"
+      );
+      break;
+  }
+};
+
+const validarCampoImagen = (expresion, input, campo) => {
+  var descripcionBienImagen = document.getElementById("descripcionBienImagen");
+  descripcionBienImagen.style.visibility = "hidden";
+
+  var respuestaCorrectaBienImagen = document.getElementById(
+    "respuestaCorrectaBienImagen"
+  );
+  respuestaCorrectaBienImagen.style.visibility = "hidden";
+
+  var respuestaIncorrectaBienImagen = document.getElementById(
+    "respuestaIncorrectaBienImagen"
+  );
+  respuestaIncorrectaBienImagen.style.visibility = "hidden";
+
+  var respuestaIncorrecta1BienImagen = document.getElementById(
+    "respuestaIncorrecta1BienImagen"
+  );
+  respuestaIncorrecta1BienImagen.style.visibility = "hidden";
+
+  var respuestaIncorrecta2BienImagen = document.getElementById(
+    "respuestaIncorrecta2BienImagen"
+  );
+  respuestaIncorrecta2BienImagen.style.visibility = "hidden";
+
+  var descripcionMalImagen = document.getElementById("descripcionMalImagen");
+  descripcionMalImagen.style.visibility = "hidden";
+
+  var imagenMal = document.getElementById("imagenMal");
+  imagenMal.style.visibility = "hidden";
+
+  var respuestaCorrectaMalImagen = document.getElementById(
+    "respuestaCorrectaMalImagen"
+  );
+  respuestaCorrectaMalImagen.style.visibility = "hidden";
+
+  var respuestaIncorrectaMalImagen = document.getElementById(
+    "respuestaIncorrectaMalImagen"
+  );
+  respuestaIncorrectaMalImagen.style.visibility = "hidden";
+
+  var respuestaIncorrecta1MalImagen = document.getElementById(
+    "respuestaIncorrecta1MalImagen"
+  );
+  respuestaIncorrecta1MalImagen.style.visibility = "hidden";
+
+  var respuestaIncorrecta2MalImagen = document.getElementById(
+    "respuestaIncorrecta2MalImagen"
+  );
+  respuestaIncorrecta2MalImagen.style.visibility = "hidden";
+
+  if (expresion.test(input.value)) {
+    camposImagen[campo] = true;
+  } else if (campo == "descripcion") {
+    descripcionMalImagen.style.visibility = "visible";
+    camposImagen[campo] = false;
+  } else if (campo == "imagen") {
+    imagenMal.style.visibility = "visible";
+    camposImagen[campo] = false;
+  } else if (campo == "respuestaCorrecta") {
+    respuestaCorrectaMalImagen.style.visibility = "visible";
+    camposImagen[campo] = false;
+  } else if (campo == "respuestaIncorrecta") {
+    respuestaIncorrectaMalImagen.style.visibility = "visible";
+    camposImagen[campo] = false;
+  } else if (campo == "respuestaIncorrecta1") {
+    respuestaIncorrecta1MalImagen.style.visibility = "visible";
+    camposImagen[campo] = false;
+  } else if (campo == "respuestaIncorrecta2") {
+    respuestaIncorrecta2MalImagen.style.visibility = "visible";
+    camposImagen[campo] = false;
+  }
+};
+
+const inputsImagen = document.querySelectorAll("#formularioCreateImagen input");
+
+inputsImagen.forEach((input) => {
+  input.addEventListener("keyup", validarFormularioImagen);
 });
