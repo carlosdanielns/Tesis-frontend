@@ -3,79 +3,86 @@
 }
 
 .columnaID {
-    visibility: hidden;
-    display: none;
-  }
-  
-  .charger {
-    position: relative;
-    top: 35px;
-    bottom: 0;
-    left: 223px;
-    right: 0;
-  }
-  
-  .clickInformacion {
-    cursor: pointer;
-  }
-  
-  .chargerTable {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: 0;
-    bottom: 0;
-  }
-  
-  .fotoModal {
-    width: 300px;
-    height: 300px;
-    margin-left: 45px;
-  }
-  
-  img {
-    cursor: pointer;
-  }
-  
-  .imageSelected {
-    margin-bottom: 10px;
-    width: 100px;
-    height: 100px;
-    margin-top: 10px;
-    margin-left: 50px;
-  }
-  
-  .chargerInsertar,
-  .chargerModificar {
-    position: absolute;
-    top: 88.5%;
-    left: 63%;
-    right: 0;
-    bottom: 0;
-  }
-  
-  .chargerEliminar {
-    position: absolute;
-    top: 72%;
-    left: 77.5%;
-    right: 0;
-    bottom: 0;
-  }
-  
-  .logo,
-  .user {
-    font-size: 45px;
-  }
-  
-  .inicio {
-    font-size: 15px;
-  }
-  
-  .modificar {
-    font-size: 25px;
-  }
-  
-  .eliminar {
-    font-size: 25px;
-  }
-  
+  visibility: hidden;
+  display: none;
+}
+
+.charger {
+  position: relative;
+  top: 35px;
+  bottom: 0;
+  left: 223px;
+  right: 0;
+}
+
+.clickInformacion {
+  cursor: pointer;
+}
+
+.chargerTable {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+}
+
+.fotoModal {
+  width: 300px;
+  height: 300px;
+  margin-left: 45px;
+}
+
+img {
+  cursor: pointer;
+}
+
+.imageSelected {
+  margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.chargerInsertar,
+.chargerModificar {
+  position: absolute;
+  top: 88.5%;
+  left: 63%;
+  right: 0;
+  bottom: 0;
+}
+
+.chargerEliminar {
+  position: absolute;
+  top: 72%;
+  left: 77.5%;
+  right: 0;
+  bottom: 0;
+}
+
+.logo,
+.user {
+  font-size: 40px;
+}
+
+.inicio {
+  font-size: 15px;
+}
+
+.aceptar {
+  margin-left: 160px !important;
+}
+
+.icono {
+  margin-left: 45% !important;
+}
+
+.chargerTableNotas {
+  position: absolute;
+  top: 25.5%;
+  left: 45%;
+  right: 0;
+  bottom: 0;
+}
