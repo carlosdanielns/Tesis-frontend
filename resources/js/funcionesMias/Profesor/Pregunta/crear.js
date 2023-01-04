@@ -1,9 +1,9 @@
 const expresiones4x1 = {
-  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
-  respuestaCorrecta: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta1: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta2: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  respuestaCorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta1: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta2: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
 };
 
 const campos4x1 = {
@@ -15,7 +15,7 @@ const campos4x1 = {
 };
 
 const expresionesVoF = {
-  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
 };
 
 const camposVoF = {
@@ -23,11 +23,11 @@ const camposVoF = {
 };
 
 const expresionesImagen = {
-  descripcion: /^[a-zA-ZÀ-ÿ\s]{1,250}$/, // Letras y espacios, pueden llevar acentos.
-  respuestaCorrecta: /^[a-zA-Z0-9\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta: /^[a-zA-Z0-9\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta1: /^[a-zA-Z0-9\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta2: /^[a-zA-Z0-9\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  respuestaCorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta1: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta2: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
 };
 
 const camposImagen = {
@@ -416,7 +416,7 @@ $("#formularioCreateImagen").on("submit", function (e) {
     var newRespuestaIncorrecta2 = $("#respuestaIncorrecta2Imagen");
     var files = $("#imagen")[0].files[0];
 
-    /*if (!expresionesImagen.descripcion.test(newDescripcion.val())) {
+    if (!expresionesImagen.descripcion.test(newDescripcion.val())) {
       var descripcionMalImagen = document.getElementById(
         "descripcionMalImagen"
       );
@@ -456,7 +456,7 @@ $("#formularioCreateImagen").on("submit", function (e) {
 
     if (
       !expresionesImagen.respuestaIncorrecta2.test(
-        newRespuestaIncorrecta1.val()
+        newRespuestaIncorrecta2.val()
       )
     ) {
       var respuestaIncorrecta2MalImagen = document.getElementById(
@@ -464,7 +464,7 @@ $("#formularioCreateImagen").on("submit", function (e) {
       );
       respuestaIncorrecta2MalImagen.style.visibility = "visible";
       return;
-    }*/
+    }
 
     agregarImagen(
       newDescripcion.val(),
@@ -743,9 +743,9 @@ function cargarTipoPregunta() {
 var formulario4x1 = document.getElementById("formularioCreate4x1");
 var formularioVoF = document.getElementById("formularioCreateVoF");
 var formularioImagen = document.getElementById("formularioCreateImagen");
-var close4x1 = document.getElementById("close");
-var closeVoF = document.getElementById("close");
-var closeImagen = document.getElementById("close");
+var close4x1 = document.getElementById("close4x1");
+var closeVoF = document.getElementById("closeVoF");
+var closeImagen = document.getElementById("closeImagen");
 
 close4x1.addEventListener("click", function () {
   formulario4x1.reset();
@@ -1328,7 +1328,7 @@ const validarFormularioVoF = (e) => {
   console.log(e);
   switch (e.target.name) {
     case "descripcionVoF":
-      validarCampo(expresiones4x1.descripcion, e.target, "descripcion");
+      validarCampoVoF(expresionesVoF.descripcion, e.target, "descripcion");
       break;
   }
 };
@@ -1348,8 +1348,8 @@ const validarCampoVoF = (expresion, input, campo) => {
   if (expresion.test(input.value)) {
     camposVoF[campo] = true;
   } else if (campo == "descripcion") {
-    descripcionMal.style.visibility = "visible";
-    campos4x1[campo] = false;
+    descripcionMalVoF.style.visibility = "visible";
+    camposVoF[campo] = false;
   }
 };
 
@@ -1363,34 +1363,38 @@ const validarFormularioImagen = (e) => {
   console.log(e);
   switch (e.target.name) {
     case "descripcionImagen":
-      validarCampo(expresionesImagen.descripcion, e.target, "descripcion");
+      validarCampoImagen(
+        expresionesImagen.descripcion,
+        e.target,
+        "descripcion"
+      );
       break;
     case "imagen":
-      validarCampo(expresionesImagen.imagen, e.target, "imagen");
+      validarCampoImagen(expresionesImagen.imagen, e.target, "imagen");
       break;
     case "respuestaCorrectaImagen":
-      validarCampo(
+      validarCampoImagen(
         expresionesImagen.respuestaCorrecta,
         e.target,
         "respuestaCorrecta"
       );
       break;
     case "respuestaIncorrectaImagen":
-      validarCampo(
+      validarCampoImagen(
         expresionesImagen.respuestaIncorrecta,
         e.target,
         "respuestaIncorrecta"
       );
       break;
     case "respuestaIncorrecta1Imagen":
-      validarCampo(
+      validarCampoImagen(
         expresionesImagen.respuestaIncorrecta1,
         e.target,
         "respuestaIncorrecta1"
       );
       break;
     case "respuestaIncorrecta2Imagen":
-      validarCampo(
+      validarCampoImagen(
         expresionesImagen.respuestaIncorrecta2,
         e.target,
         "respuestaIncorrecta2"

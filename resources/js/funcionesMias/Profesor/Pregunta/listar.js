@@ -111,7 +111,7 @@ function crearThead(tipo) {
     heading_2.className = "py-3 px-6";
 
     let heading_3 = document.createElement("th");
-    heading_3.innerHTML = "Descripcion";
+    heading_3.innerHTML = "Descripción";
     heading_3.scope = "col";
     heading_3.className = "py-3 px-6";
 
@@ -163,7 +163,7 @@ function crearThead(tipo) {
     heading_2.className = "py-3 px-6";
 
     let heading_3 = document.createElement("th");
-    heading_3.innerHTML = "Descripcion";
+    heading_3.innerHTML = "Descripción";
     heading_3.scope = "col";
     heading_3.className = "py-3 px-6";
 
@@ -207,7 +207,7 @@ function crearThead(tipo) {
     heading_3.className = "py-3";
 
     let heading_4 = document.createElement("th");
-    heading_4.innerHTML = "Descripcion";
+    heading_4.innerHTML = "Descripción";
     heading_4.scope = "col";
     heading_4.className = "py-3 px-6";
 

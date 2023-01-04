@@ -1,9 +1,9 @@
 const expresiones4x1Update = {
-  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
-  respuestaCorrecta: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta1: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta2: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  respuestaCorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta1: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta2: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
 };
 
 const campos4x1Update = {
@@ -15,7 +15,7 @@ const campos4x1Update = {
 };
 
 const expresionesVoFUpdate = {
-  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
 };
 
 const camposVoFUpdate = {
@@ -23,11 +23,11 @@ const camposVoFUpdate = {
 };
 
 const expresionesImagenUpdate = {
-  descripcion: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
-  respuestaCorrecta: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta1: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta2: /^[a-zA-Z0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  respuestaCorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta1: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta2: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
 };
 
 const camposImagenUpdate = {
@@ -514,15 +514,15 @@ function updateFunctionVoF(
       if (newDescripcion.val() == "") {
         descripcionOK = descripcion;
       } else {
-        /*if (!expresionesVoFUpdate.descripcion.test(newDescripcion.val())) {
+        if (!expresionesVoFUpdate.descripcion.test(newDescripcion.val())) {
           var descripcionMalUpdateVoF = document.getElementById(
             "descripcionMalUpdateVoF"
           );
           descripcionMalUpdateVoF.style.visibility = "visible";
           return;
-        } else {*/
-        descripcionOK = newDescripcion.val();
-        //}
+        } else {
+          descripcionOK = newDescripcion.val();
+        }
       }
 
       var respuestaCorrectaOk;
@@ -602,7 +602,7 @@ function updateFunctionVoF(
               putVoF(
                 id,
                 descripcionOK,
-                respuestaCorrectaOK,
+                respuestaCorrectaOk,
                 respuestaIncorrectaOK
               );
             }
@@ -686,22 +686,22 @@ function updateFunctionImagen(
       if (newDescripcion.val() == "") {
         descripcionOK = descripcion;
       } else {
-        /*if (!expresionesImagenUpdate.descripcion.test(newDescripcion.val())) {
+        if (!expresionesImagenUpdate.descripcion.test(newDescripcion.val())) {
           var descripcionMalImagenUpdate = document.getElementById(
             "descripcionMalImagenUpdate"
           );
           descripcionMalImagenUpdate.style.visibility = "visible";
           return;
-        } else {*/
-        descripcionOK = newDescripcion.val();
-        //}
+        } else {
+          descripcionOK = newDescripcion.val();
+        }
       }
 
       var respuestaCorrectaOK;
       if (newRespuestaCorrecta.val() == "") {
         respuestaCorrectaOK = respuestaCorrecta;
       } else {
-        /*if (
+        if (
           !expresionesImagenUpdate.respuestaCorrecta.test(
             newRespuestaCorrecta.val()
           )
@@ -711,66 +711,66 @@ function updateFunctionImagen(
           );
           respuestaCorrectaMalImagenUpdate.style.visibility = "visible";
           return;
-        } else {*/
-        respuestaCorrectaOK = newRespuestaCorrecta.val();
-        //}
+        } else {
+          respuestaCorrectaOK = newRespuestaCorrecta.val();
+        }
       }
 
       var respuestaIncorrectaOK;
       if (newRespuestaIncorrecta.val() == "") {
         respuestaIncorrectaOK = respuestaIncorrecta;
       } else {
-        /* if (
-          !expresiones4x1Update.respuestaIncorrecta.test(
+        if (
+          !expresionesImagenUpdate.respuestaIncorrecta.test(
             newRespuestaIncorrecta.val()
           )
         ) {
-          var respuestaIncorrectaMalUpdate4x1 = document.getElementById(
-            "respuestaIncorrectaMalUpdate4x1"
+          var respuestaIncorrectaMalImagenUpdate = document.getElementById(
+            "respuestaIncorrectaMalImagenUpdate"
           );
-          respuestaIncorrectaMalUpdate4x1.style.visibility = "visible";
+          respuestaIncorrectaMalImagenUpdate.style.visibility = "visible";
           return;
-        } else {*/
-        respuestaIncorrectaOK = newRespuestaIncorrecta.val();
-        //}
+        } else {
+          respuestaIncorrectaOK = newRespuestaIncorrecta.val();
+        }
       }
 
       var respuestaIncorrecta1OK;
       if (newRespuestaIncorrecta1.val() == "") {
         respuestaIncorrecta1OK = respuestaIncorrecta1;
       } else {
-        /* if (
-          !expresiones4x1Update.respuestaIncorrecta1.test(
+        if (
+          !expresionesImagenUpdate.respuestaIncorrecta1.test(
             newRespuestaIncorrecta1.val()
           )
         ) {
-          var respuestaIncorrecta1MalUpdate = document.getElementById(
-            "respuestaIncorrecta1MalUpdate"
+          var respuestaIncorrecta1MalImagenUpdate = document.getElementById(
+            "respuestaIncorrecta1MalImagenUpdate"
           );
-          respuestaIncorrecta1MalUpdate.style.visibility = "visible";
+          respuestaIncorrecta1MalImagenUpdate.style.visibility = "visible";
           return;
-        } else {*/
-        respuestaIncorrecta1OK = newRespuestaIncorrecta1.val();
-        //}
+        } else {
+          respuestaIncorrecta1OK = newRespuestaIncorrecta1.val();
+        }
       }
 
       var respuestaIncorrecta2OK;
       if (newRespuestaIncorrecta2.val() == "") {
         respuestaIncorrecta2OK = respuestaIncorrecta2;
       } else {
-        /*if (
-          !expresiones4x1Update.respuestaIncorrecta2.test(
+        if (
+          !expresionesImagenUpdate.respuestaIncorrecta2.test(
             newRespuestaIncorrecta2.val()
           )
         ) {
-          var respuestaIncorrecta2MalUpdate4x1 = document.getElementById(
-            "respuestaIncorrecta2MalUpdate4x1"
+          var respuestaIncorrecta2MalImagenUpdate = document.getElementById(
+            "respuestaIncorrecta2MalImagenUpdate"
           );
-          respuestaIncorrecta2MalUpdate4x1.style.visibility = "visible";
+          respuestaIncorrecta2MalImagenUpdate.style.visibility = "visible";
           return;
-        } else {*/
-        respuestaIncorrecta2OK = newRespuestaIncorrecta2.val();
-        //}
+        } else {
+          respuestaIncorrecta2OK = newRespuestaIncorrecta2.val();
+        }
       }
 
       updateImagen(
@@ -1344,74 +1344,74 @@ function validarExtensionArchivoUpdate() {
 }
 
 const validarCampoUpdateImagen = (expresion, input, campo) => {
-  var descripcionMalUpdate4x1 = document.getElementById(
-    "descripcionMalUpdate4x1"
+  var descripcionMalImagenUpdate = document.getElementById(
+    "descripcionMalImagenUpdate"
   );
-  descripcionMalUpdate4x1.style.visibility = "hidden";
+  descripcionMalImagenUpdate.style.visibility = "hidden";
 
-  var respuestaCorrectaMalUpdate4x1 = document.getElementById(
-    "respuestaCorrectaMalUpdate4x1"
+  var respuestaCorrectaMalImagenUpdate = document.getElementById(
+    "respuestaCorrectaMalImagenUpdate"
   );
-  respuestaCorrectaMalUpdate4x1.style.visibility = "hidden";
+  respuestaCorrectaMalImagenUpdate.style.visibility = "hidden";
 
-  var respuestaIncorrectaMalUpdate4x1 = document.getElementById(
-    "respuestaIncorrectaMalUpdate4x1"
+  var respuestaIncorrectaMalImagenUpdate = document.getElementById(
+    "respuestaIncorrectaMalImagenUpdate"
   );
-  respuestaIncorrectaMalUpdate4x1.style.visibility = "hidden";
+  respuestaIncorrectaMalImagenUpdate.style.visibility = "hidden";
 
-  var respuestaIncorrecta1MalUpdate = document.getElementById(
-    "respuestaIncorrecta1MalUpdate"
+  var respuestaIncorrecta1MalImagenUpdate = document.getElementById(
+    "respuestaIncorrecta1MalImagenUpdate"
   );
-  respuestaIncorrecta1MalUpdate.style.visibility = "hidden";
+  respuestaIncorrecta1MalImagenUpdate.style.visibility = "hidden";
 
-  var respuestaIncorrecta2MalUpdate4x1 = document.getElementById(
-    "respuestaIncorrecta2MalUpdate4x1"
+  var respuestaIncorrecta2MalImagenUpdate = document.getElementById(
+    "respuestaIncorrecta2MalImagenUpdate"
   );
-  respuestaIncorrecta2MalUpdate4x1.style.visibility = "hidden";
+  respuestaIncorrecta2MalImagenUpdate.style.visibility = "hidden";
 
   //Aqui
-  var descripcionBienUpdate4x1 = document.getElementById(
-    "descripcionBienUpdate4x1"
+  var descripcionBienImagenUpdate = document.getElementById(
+    "descripcionBienImagenUpdate"
   );
-  descripcionBienUpdate4x1.style.visibility = "hidden";
+  descripcionBienImagenUpdate.style.visibility = "hidden";
 
-  var respuestaCorrectaBienUpdate4x1 = document.getElementById(
-    "respuestaCorrectaBienUpdate4x1"
+  var respuestaCorrectaBienImagenUpdate = document.getElementById(
+    "respuestaCorrectaBienImagenUpdate"
   );
-  respuestaCorrectaBienUpdate4x1.style.visibility = "hidden";
+  respuestaCorrectaBienImagenUpdate.style.visibility = "hidden";
 
-  var respuestaIncorrectaBienUpdate4x1 = document.getElementById(
-    "respuestaIncorrectaBienUpdate4x1"
+  var respuestaIncorrectaBienImagenUpdate = document.getElementById(
+    "respuestaIncorrectaBienImagenUpdate"
   );
-  respuestaIncorrectaBienUpdate4x1.style.visibility = "hidden";
+  respuestaIncorrectaBienImagenUpdate.style.visibility = "hidden";
 
-  var respuestaIncorrecta1BienUpdate = document.getElementById(
-    "respuestaIncorrecta1BienUpdate"
+  var respuestaIncorrecta1BienImagenUpdate = document.getElementById(
+    "respuestaIncorrecta1BienImagenUpdate"
   );
-  respuestaIncorrecta1BienUpdate.style.visibility = "hidden";
+  respuestaIncorrecta1BienImagenUpdate.style.visibility = "hidden";
 
-  var respuestaIncorrecta2BienUpdate4x1 = document.getElementById(
-    "respuestaIncorrecta2BienUpdate4x1"
+  var respuestaIncorrecta2BienImagenUpdate = document.getElementById(
+    "respuestaIncorrecta2BienImagenUpdate"
   );
-  respuestaIncorrecta2BienUpdate4x1.style.visibility = "hidden";
+  respuestaIncorrecta2BienImagenUpdate.style.visibility = "hidden";
 
   if (expresion.test(input.value)) {
-    campos4x1Update[campo] = true;
+    camposImagenUpdate[campo] = true;
   } else if (campo == "descripcion") {
-    descripcionMalUpdate4x1.style.visibility = "visible";
-    campos4x1Update[campo] = false;
+    descripcionMalImagenUpdate.style.visibility = "visible";
+    camposImagenUpdate[campo] = false;
   } else if (campo == "respuestaCorrecta") {
-    respuestaCorrectaMalUpdate4x1.style.visibility = "visible";
-    campos4x1Update[campo] = false;
+    respuestaCorrectaMalImagenUpdate.style.visibility = "visible";
+    camposImagenUpdate[campo] = false;
   } else if (campo == "respuestaIncorrecta") {
-    respuestaIncorrectaMalUpdate4x1.style.visibility = "visible";
-    campos4x1Update[campo] = false;
+    respuestaIncorrectaMalImagenUpdate.style.visibility = "visible";
+    camposImagenUpdate[campo] = false;
   } else if (campo == "respuestaIncorrecta1") {
-    respuestaIncorrecta1MalUpdate.style.visibility = "visible";
-    campos4x1Update[campo] = false;
+    respuestaIncorrecta1MalImagenUpdate.style.visibility = "visible";
+    camposImagenUpdate[campo] = false;
   } else if (campo == "respuestaIncorrecta2") {
-    respuestaIncorrecta2MalUpdate4x1.style.visibility = "visible";
-    campos4x1Update[campo] = false;
+    respuestaIncorrecta2MalImagenUpdate.style.visibility = "visible";
+    camposImagenUpdate[campo] = false;
   }
 };
 
