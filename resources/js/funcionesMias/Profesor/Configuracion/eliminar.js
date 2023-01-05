@@ -14,40 +14,37 @@ function eliminarCorrecto() {
   const token = JSON.parse(localStorage.getItem("token"));
   const urlAsignatura = "http://localhost:3000/api/v2/asignatura/descripcion/";
   const url = "http://localhost:3000/api/v2/asignatura/";
+  const urlProfesor = "http://localhost:3000/api/v2/profesor/";
 
   if (navigator.onLine) {
     server(urlAsignatura);
     server(url);
 
-    fetch(urlAsignatura + profesorDelete, {
+    fetch(urlProfesor + usuario.CI, {
       method: "get",
       headers: {
+        Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */ /*",
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((resByDescripcion) => resByDescripcion.json())
-      .then((resByDescripcion) => {
-        var urlDeleteConfiguracion =
-          "http://localhost:3000/api/v2/configuracion/";
-
-        fetch(urlDeleteConfiguracion + resByDescripcion.configuracion[0]._id, {
-          method: "delete",
+      .then((resByCI) => resByCI.json())
+      .then((resByCI) => {
+        fetch(urlAsignatura + resByCI.asignatura, {
+          method: "get",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json, text/plain, */ /*",
             Authorization: `Bearer ${token}`,
           },
         })
-          .then((resEliminarConfiguracion) => resEliminarConfiguracion.json())
-          .then((resEliminarConfiguracion) => {
-            var idAsignatura = resByDescripcion._id;
+          .then((resByDescripcion) => resByDescripcion.json())
+          .then((resByDescripcion) => {
+            var urlDeleteConfiguracion =
+              "http://localhost:3000/api/v2/configuracion/";
+
             fetch(
-              url +
-                idAsignatura +
-                "/configuracion/" +
-                resByDescripcion.configuracion[0]._id,
+              urlDeleteConfiguracion + resByDescripcion.configuracion[0]._id,
               {
                 method: "delete",
                 headers: {
@@ -57,22 +54,44 @@ function eliminarCorrecto() {
                 },
               }
             )
-              .then((resDeleteConfAsignatura) => resDeleteConfAsignatura.json())
-              .then((resDeleteConfAsignatura) => {
-                if (
-                  resDeleteConfAsignatura.status == 401 ||
-                  resDeleteConfAsignatura.statusCode == 401
-                ) {
-                  $("#modal401").modal({
-                    backdrop: "static",
-                    keyboard: false,
+              .then((resEliminarConfiguracion) =>
+                resEliminarConfiguracion.json()
+              )
+              .then((resEliminarConfiguracion) => {
+                var idAsignatura = resByDescripcion._id;
+                fetch(
+                  url +
+                    idAsignatura +
+                    "/configuracion/" +
+                    resByDescripcion.configuracion[0]._id,
+                  {
+                    method: "delete",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Accept: "application/json, text/plain, */ /*",
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
+                )
+                  .then((resDeleteConfAsignatura) =>
+                    resDeleteConfAsignatura.json()
+                  )
+                  .then((resDeleteConfAsignatura) => {
+                    if (
+                      resDeleteConfAsignatura.status == 401 ||
+                      resDeleteConfAsignatura.statusCode == 401
+                    ) {
+                      $("#modal401").modal({
+                        backdrop: "static",
+                        keyboard: false,
+                      });
+                      $("#modal401").modal("show");
+                    }
+                  })
+                  .finally(() => {
+                    quitarDivEliminar();
+                    location.replace("/profesor/configuracion");
                   });
-                  $("#modal401").modal("show");
-                }
-              })
-              .finally(() => {
-                quitarDivEliminar();
-                location.replace("/profesor/configuracion");
               });
           });
       });

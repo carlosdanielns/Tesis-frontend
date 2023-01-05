@@ -1,9 +1,9 @@
 const expresiones4x1 = {
-  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
-  respuestaCorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta1: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta2: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  respuestaCorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta1: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta2: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
 };
 
 const campos4x1 = {
@@ -15,7 +15,7 @@ const campos4x1 = {
 };
 
 const expresionesVoF = {
-  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
 };
 
 const camposVoF = {
@@ -23,11 +23,11 @@ const camposVoF = {
 };
 
 const expresionesImagen = {
-  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
-  respuestaCorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta1: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
-  respuestaIncorrecta2: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras y espacios, pueden llevar acentos.
+  respuestaCorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta1: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
+  respuestaIncorrecta2: /^[a-zA-ZÀ-ÿ\sZ0-9_.+-?¿\_\-]{1,250}$/, // Letras, numeros, guion y guion_bajo
 };
 
 const camposImagen = {

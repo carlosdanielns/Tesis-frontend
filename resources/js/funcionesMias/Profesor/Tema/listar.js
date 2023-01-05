@@ -14,40 +14,52 @@ function modalInformacion() {
 }
 
 function cargarListado() {
-  var urlAsignatura = "http://localhost:3000/api/v2/asignatura/descripcion/";
+  var urlProfesor = "http://localhost:3000/api/v2/profesor/";
   let token = JSON.parse(localStorage.getItem("token"));
 
-  if (navigator.onLine) {
-    server(urlAsignatura);
-    //Aqui obtengo la asignatura por la cual el profesor hizo login
-    fetch(urlAsignatura + asignatura, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */*",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resFindDescripcion) => resFindDescripcion.json())
-      .then((resFindDescripcion) => {
+  fetch(urlProfesor + usuario.CI, {
+    method: "get",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((resByCI) => resByCI.json())
+    .then((resByCI) => {
+      var urlAsignatura =
+        "http://localhost:3000/api/v2/asignatura/descripcion/";
 
-        //Aqui verifico si esta autenticado
-        if (
-          resFindDescripcion.status == 401 ||
-          resFindDescripcion.statusCode == 401
-        ) {
-          $("#modal401").modal({
-            backdrop: "static",
-            keyboard: false,
-          });
-          $("#modal401").modal("show");
-        } else if (
-          resFindDescripcion.status != 500 ||
-          resFindDescripcion.statusCode != 500
-        ) {
-          for (let i = 0; i < resFindDescripcion.temas.length; i++) {
-            var tbody = $("tbody");
-            tbody.append(`
+      if (navigator.onLine) {
+        server(urlAsignatura);
+        //Aqui obtengo la asignatura por la cual el profesor hizo login
+        fetch(urlAsignatura + resByCI.asignatura, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((resFindDescripcion) => resFindDescripcion.json())
+          .then((resFindDescripcion) => {
+            //Aqui verifico si esta autenticado
+            if (
+              resFindDescripcion.status == 401 ||
+              resFindDescripcion.statusCode == 401
+            ) {
+              $("#modal401").modal({
+                backdrop: "static",
+                keyboard: false,
+              });
+              $("#modal401").modal("show");
+            } else if (
+              resFindDescripcion.status != 500 ||
+              resFindDescripcion.statusCode != 500
+            ) {
+              for (let i = 0; i < resFindDescripcion.temas.length; i++) {
+                var tbody = $("tbody");
+                tbody.append(`
                                 <tr class="bg-white border-b hover:bg-gray-50">
                                   <td class="p-4 w-32 id columnaID">${
                                     resFindDescripcion.temas[i]._id
@@ -60,8 +72,8 @@ function cargarListado() {
                                   <button class="modificar font-medium text-cyan-600 hover:underline" onclick="update('${
                                     resFindDescripcion.temas[i]._id
                                   }','${
-              resFindDescripcion.temas[i].descripcion
-            }')"><i class="far fa-edit"></i></button>
+                  resFindDescripcion.temas[i].descripcion
+                }')"><i class="far fa-edit"></i></button>
                                   <button class="eliminar font-medium text-red-600 hover:underline" onclick="eliminar('${
                                     resFindDescripcion.temas[i]._id
                                   }')"><i class="far fa-trash-alt"></i></button>
@@ -69,15 +81,16 @@ function cargarListado() {
                                   </td>
                                 </tr>                        
                               `);
-          }
-        }
-      })
-      .finally(() => {
-        quitarDivTable();
-      });
-  } else {
-    $("#internet").modal("show");
-  }
+              }
+            }
+          })
+          .finally(() => {
+            quitarDivTable();
+          });
+      } else {
+        $("#internet").modal("show");
+      }
+    });
 }
 
 function onClickModal() {

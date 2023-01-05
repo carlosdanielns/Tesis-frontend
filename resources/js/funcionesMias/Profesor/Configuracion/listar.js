@@ -17,37 +17,48 @@ window.addEventListener("load", cargarListado);
 function cargarListado() {
   var urlAsignatura = "http://localhost:3000/api/v2/asignatura/descripcion/";
   let token = JSON.parse(localStorage.getItem("token"));
+  var urlProfesor = "http://localhost:3000/api/v2/profesor/";
 
-  if (navigator.onLine) {
-    server(urlAsignatura);
-    //Aqui obtengo la asignatura por la cual el profesor hizo login
-    fetch(urlAsignatura + asignatura, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */*",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resFindDescripcion) => resFindDescripcion.json())
-      .then((resFindDescripcion) => {
-        //Aqui verifico si esta autenticado
-        if (
-          resFindDescripcion.status == 401 ||
-          resFindDescripcion.statusCode == 401
-        ) {
-          $("#modal401").modal({
-            backdrop: "static",
-            keyboard: false,
-          });
-          $("#modal401").modal("show");
-        } else if (
-          resFindDescripcion.status != 500 ||
-          resFindDescripcion.statusCode != 500
-        ) {
-          if (resFindDescripcion.configuracion.length != 0) {
-            var tbody = $("tbody");
-            tbody.append(`
+  fetch(urlProfesor + usuario.CI, {
+    method: "get",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((resByCI) => resByCI.json())
+    .then((resByCI) => {
+      if (navigator.onLine) {
+        server(urlAsignatura);
+        //Aqui obtengo la asignatura por la cual el profesor hizo login
+        fetch(urlAsignatura + resByCI.asignatura, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json, text/plain, */*",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((resFindDescripcion) => resFindDescripcion.json())
+          .then((resFindDescripcion) => {
+            //Aqui verifico si esta autenticado
+            if (
+              resFindDescripcion.status == 401 ||
+              resFindDescripcion.statusCode == 401
+            ) {
+              $("#modal401").modal({
+                backdrop: "static",
+                keyboard: false,
+              });
+              $("#modal401").modal("show");
+            } else if (
+              resFindDescripcion.status != 500 ||
+              resFindDescripcion.statusCode != 500
+            ) {
+              if (resFindDescripcion.configuracion.length != 0) {
+                var tbody = $("tbody");
+                tbody.append(`
                         <tr class="bg-white border-b hover:bg-gray-50">
                           <td class="p-4 w-32 id columnaID">${resFindDescripcion.configuracion[0]._id}</td>
                           <td class="p-4 w-32 imagen" id="imagenTabla"><img src="${resFindDescripcion.configuracion[0].imagen}" width="100" height="80"></td>
@@ -62,39 +73,40 @@ function cargarListado() {
                           </td>
                           </tr>  
                           `);
-            var timeout = setTimeout(mostrar(), 5000);
-            function mostrar() {
-              var iconoTabla = document.getElementById("iconoTabla");
-              var imagenTabla = document.getElementById("imagenTabla");
-              iconoTabla.addEventListener("click", () => {
-                var imagen = document.getElementById("fotoModal");
-                imagen.src = `/images/iconos/${resFindDescripcion.configuracion[0].icono}`;
-                $("#modalFoto").modal("show");
-              });
+                var timeout = setTimeout(mostrar(), 5000);
+                function mostrar() {
+                  var iconoTabla = document.getElementById("iconoTabla");
+                  var imagenTabla = document.getElementById("imagenTabla");
+                  iconoTabla.addEventListener("click", () => {
+                    var imagen = document.getElementById("fotoModal");
+                    imagen.src = `/images/iconos/${resFindDescripcion.configuracion[0].icono}`;
+                    $("#modalFoto").modal("show");
+                  });
 
-              imagenTabla.addEventListener("click", () => {
-                var imagen = document.getElementById("fotoModal");
+                  imagenTabla.addEventListener("click", () => {
+                    var imagen = document.getElementById("fotoModal");
 
-                imagen.src = `${resFindDescripcion.configuracion[0].imagen}`;
-                $("#modalFoto").modal("show");
-              });
+                    imagen.src = `${resFindDescripcion.configuracion[0].imagen}`;
+                    $("#modalFoto").modal("show");
+                  });
+                }
+              }
             }
-          }
-        }
-      })
-      .finally(() => {
-        var divPrincipal = document.getElementById("divPrincipal");
-        var mainPrincipal = document.getElementById("mainPrincipal");
-        var chargerTable = document.getElementById("chargerTable");
+          })
+          .finally(() => {
+            var divPrincipal = document.getElementById("divPrincipal");
+            var mainPrincipal = document.getElementById("mainPrincipal");
+            var chargerTable = document.getElementById("chargerTable");
 
-        chargerTable.style.visibility = "hidden";
-        chargerTable.style.opacity = "0";
-        mainPrincipal.style.display = "block";
-        divPrincipal.style.display = "block";
-      });
-  } else {
-    $("#internet").modal("show");
-  }
+            chargerTable.style.visibility = "hidden";
+            chargerTable.style.opacity = "0";
+            mainPrincipal.style.display = "block";
+            divPrincipal.style.display = "block";
+          });
+      } else {
+        $("#internet").modal("show");
+      }
+    });
 }
 
 function onClickModal() {
@@ -112,7 +124,7 @@ function quitarDiv() {
 function buscarProfesor() {
   var urlProfesor = "http://localhost:3000/api/v2/profesor/";
 
-  if ((navigator.onLine)) {
+  if (navigator.onLine) {
     server(urlProfesor);
     fetch(urlProfesor + usuario.CI, {
       method: "get",

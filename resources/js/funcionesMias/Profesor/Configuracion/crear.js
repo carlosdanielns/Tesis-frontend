@@ -110,92 +110,101 @@ function crearConfiguracion(foto, sonido, icono) {
   onClickBotonCrear();
   const urlConfiguracion = "http://localhost:3000/api/v2/configuracion/";
   const urlAsignatura = "http://localhost:3000/api/v2/asignatura/descripcion/";
+  const urlProfesor = "http://localhost:3000/api/v2/profesor/";
   let token = JSON.parse(localStorage.getItem("token"));
 
   if (navigator.onLine) {
     server(urlAsignatura);
     server(urlConfiguracion);
 
-    fetch(urlAsignatura + configuracionCrear, {
+    fetch(urlProfesor + usuario.CI, {
       method: "get",
       headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((resFindByDescripcion) => resFindByDescripcion.json())
-      .then((resFindByDescripcion) => {
-        if (resFindByDescripcion.configuracion.length != 0) {
-          eliminando(
-            token,
-            urlConfiguracion,
-            resFindByDescripcion.configuracion[0]._id,
-            resFindByDescripcion._id
-          );
-        }
-        var formData = new FormData();
-
-        formData.append("file", foto);
-        formData.append("icono", icono);
-
-        fetch(urlConfiguracion, {
-          method: "post",
-          body: formData,
+      .then((resByCI) => resByCI.json())
+      .then((resByCI) => {
+        console.log(resByCI);
+        fetch(urlAsignatura + resByCI.asignatura, {
+          method: "get",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-          .then((resCreate) => resCreate.json())
-          .then((resCreate) => {
+          .then((resFindByDescripcion) => resFindByDescripcion.json())
+          .then((resFindByDescripcion) => {
+            if (resFindByDescripcion.configuracion.length != 0) {
+              eliminando(
+                token,
+                urlConfiguracion,
+                resFindByDescripcion.configuracion[0]._id,
+                resFindByDescripcion._id
+              );
+            }
+            var formData = new FormData();
 
-            const urlSonido =
-              "http://localhost:3000/api/v2/sonido/" + resCreate._id;
-            var formDataSonido = new FormData();
-            formDataSonido.append("file", sonido);
+            formData.append("file", foto);
+            formData.append("icono", icono);
 
-            fetch(urlSonido, {
-              method: "put",
-              body: formDataSonido,
+            fetch(urlConfiguracion, {
+              method: "post",
+              body: formData,
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             })
-              .then((resUpdate) => resUpdate.json())
-              .then((resUpdate) => {
+              .then((resCreate) => resCreate.json())
+              .then((resCreate) => {
+                const urlSonido =
+                  "http://localhost:3000/api/v2/sonido/" + resCreate._id;
+                var formDataSonido = new FormData();
+                formDataSonido.append("file", sonido);
 
-              
-                var urlAsignatura =
-                  "http://localhost:3000/api/v2/asignatura/" +
-                  resFindByDescripcion._id +
-                  "/configuracion/" +
-                  resCreate._id;
-
-                fetch(urlAsignatura, {
-                  method: "post",
+                fetch(urlSonido, {
+                  method: "put",
+                  body: formDataSonido,
                   headers: {
                     Authorization: `Bearer ${token}`,
                   },
                 })
-                  .then((resAgregarConfi) => resAgregarConfi.json())
-                  .then((resAgregarConfi) => {
+                  .then((resUpdate) => resUpdate.json())
+                  .then((resUpdate) => {
+                    var urlAsignatura =
+                      "http://localhost:3000/api/v2/asignatura/" +
+                      resFindByDescripcion._id +
+                      "/configuracion/" +
+                      resCreate._id;
 
-                    if (
-                      resAgregarConfi.status == 401 ||
-                      resAgregarConfi.statusCode == 401
-                    ) {
-                      $("#modal401").modal({
-                        backdrop: "static",
-                        keyboard: false,
+                    fetch(urlAsignatura, {
+                      method: "post",
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    })
+                      .then((resAgregarConfi) => resAgregarConfi.json())
+                      .then((resAgregarConfi) => {
+                        if (
+                          resAgregarConfi.status == 401 ||
+                          resAgregarConfi.statusCode == 401
+                        ) {
+                          $("#modal401").modal({
+                            backdrop: "static",
+                            keyboard: false,
+                          });
+                          $("#modal401").modal("show");
+                        } else if (
+                          resAgregarConfi.status != 401 ||
+                          resAgregarConfi.statusCode != 401
+                        ) {
+                        }
+                      })
+                      .finally(() => {
+                        quitarDivCrear();
+                        location.replace("/profesor/configuracion");
                       });
-                      $("#modal401").modal("show");
-                    } else if (
-                      resAgregarConfi.status != 401 ||
-                      resAgregarConfi.statusCode != 401
-                    ) {
-                    }
-                  })
-                  .finally(() => {
-                    quitarDivCrear();
-                    location.replace("/profesor/configuracion");
                   });
               });
           });
@@ -207,7 +216,6 @@ function crearConfiguracion(foto, sonido, icono) {
 }
 
 function eliminando(token, urlConfiguracion, configuracionId, asignaturaID) {
-
   if (navigator.onLine) {
     server(urlConfiguracion);
     fetch(urlConfiguracion + configuracionId, {
@@ -236,7 +244,6 @@ function eliminando(token, urlConfiguracion, configuracionId, asignaturaID) {
         })
           .then((resDelete) => resDelete.json())
           .then((resDelete) => {
-
             if (resDelete.status == 401 || resDelete.statusCode == 401) {
               $("#modal401").modal({
                 backdrop: "static",

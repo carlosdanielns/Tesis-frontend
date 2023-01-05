@@ -18,26 +18,24 @@ function cargarDatos() {
   const urlAsignatura = "http://localhost:3000/api/v2/asignatura/descripcion/";
   const urlNotas = "http://localhost:3000/api/v2/notas";
   const estudiantes = "http://localhost:3000/api/v2/estudiante";
+  var urlProfesor = "http://localhost:3000/api/v2/profesor/";
   let token = JSON.parse(localStorage.getItem("token"));
 
   if (navigator.onLine) {
     server(urlAsignatura);
     server(urlNotas);
     server(estudiantes);
-
-    fetch(urlAsignatura + asignatura, {
+    fetch(urlProfesor + usuario.CI, {
       method: "get",
       headers: {
-        "Content-Type": "application/json",
         Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((resGetAsignatura) => resGetAsignatura.json())
-      .then((resGetAsignatura) => {
-        console.log(resGetAsignatura);
-
-        fetch(urlNotas, {
+      .then((resByCI) => resByCI.json())
+      .then((resByCI) => {
+        fetch(urlAsignatura + resByCI.asignatura, {
           method: "get",
           headers: {
             "Content-Type": "application/json",
@@ -45,9 +43,11 @@ function cargarDatos() {
             Authorization: `Bearer ${token}`,
           },
         })
-          .then((resGetNotas) => resGetNotas.json())
-          .then((resGetNotas) => {
-            fetch(estudiantes, {
+          .then((resGetAsignatura) => resGetAsignatura.json())
+          .then((resGetAsignatura) => {
+            console.log(resGetAsignatura);
+
+            fetch(urlNotas, {
               method: "get",
               headers: {
                 "Content-Type": "application/json",
@@ -55,31 +55,43 @@ function cargarDatos() {
                 Authorization: `Bearer ${token}`,
               },
             })
-              .then((resGetEstudiante) => resGetEstudiante.json())
-              .then((resGetEstudiante) => {
-                if (resGetNotas.length == 0) {
-                  cargarDatosTabla(
-                    resGetNotas,
-                    resGetEstudiante,
-                    resGetAsignatura
-                  );
-                } else {
-                  cargarDatosTablaConNotas(
-                    resGetNotas,
-                    resGetEstudiante,
-                    resGetAsignatura
-                  );
-                }
-              })
-              .finally(() => {
-                var divPrincipal = document.getElementById("divPrincipal");
-                var mainPrincipal = document.getElementById("mainPrincipal");
-                var chargerTable = document.getElementById("chargerTable");
+              .then((resGetNotas) => resGetNotas.json())
+              .then((resGetNotas) => {
+                fetch(estudiantes, {
+                  method: "get",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json, text/plain, */*",
+                    Authorization: `Bearer ${token}`,
+                  },
+                })
+                  .then((resGetEstudiante) => resGetEstudiante.json())
+                  .then((resGetEstudiante) => {
+                    if (resGetNotas.length == 0) {
+                      cargarDatosTabla(
+                        resGetNotas,
+                        resGetEstudiante,
+                        resGetAsignatura
+                      );
+                    } else {
+                      cargarDatosTablaConNotas(
+                        resGetNotas,
+                        resGetEstudiante,
+                        resGetAsignatura
+                      );
+                    }
+                  })
+                  .finally(() => {
+                    var divPrincipal = document.getElementById("divPrincipal");
+                    var mainPrincipal =
+                      document.getElementById("mainPrincipal");
+                    var chargerTable = document.getElementById("chargerTable");
 
-                chargerTable.style.visibility = "hidden";
-                chargerTable.style.opacity = "0";
-                mainPrincipal.style.display = "block";
-                divPrincipal.style.display = "block";
+                    chargerTable.style.visibility = "hidden";
+                    chargerTable.style.opacity = "0";
+                    mainPrincipal.style.display = "block";
+                    divPrincipal.style.display = "block";
+                  });
               });
           });
       });
@@ -137,13 +149,21 @@ function eliminarTabla() {
 }
 
 function modal(estudiante) {
-  eliminarTabla();
+  const tabla = document.getElementById("tablaNotasTbody");
+  var contador = 0;
+  if (contador == 0) {
+    eliminarTabla();
+    contador++;
+  } else if (tabla != null) {
+    eliminarTabla();
+  }
 
   console.log(estudiante);
   $("#modal").modal("show");
   const urlNotas = "http://localhost:3000/api/v2/notas";
   const urlAsignatura = "http://localhost:3000/api/v2/asignatura/descripcion/";
   const urlEstudiante = "http://localhost:3000/api/v2/estudiante";
+  const urlProfesor = "http://localhost:3000/api/v2/profesor/";
   let token = JSON.parse(localStorage.getItem("token"));
 
   console.log("entroasfadsgsadgfad hgfadhgfdahdfahfad fhfadh adhf");
@@ -151,18 +171,17 @@ function modal(estudiante) {
     server(urlAsignatura);
     server(urlNotas);
     server(urlEstudiante);
-
-    fetch(urlAsignatura + asignatura, {
+    fetch(urlProfesor + usuario.CI, {
       method: "get",
       headers: {
-        "Content-Type": "application/json",
         Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((resGetAsignatura) => resGetAsignatura.json())
-      .then((resGetAsignatura) => {
-        fetch(urlNotas, {
+      .then((resByCI) => resByCI.json())
+      .then((resByCI) => {
+        fetch(urlAsignatura + resByCI.asignatura, {
           method: "get",
           headers: {
             "Content-Type": "application/json",
@@ -170,9 +189,9 @@ function modal(estudiante) {
             Authorization: `Bearer ${token}`,
           },
         })
-          .then((resGetNotas) => resGetNotas.json())
-          .then((resGetNotas) => {
-            fetch(urlEstudiante, {
+          .then((resGetAsignatura) => resGetAsignatura.json())
+          .then((resGetAsignatura) => {
+            fetch(urlNotas, {
               method: "get",
               headers: {
                 "Content-Type": "application/json",
@@ -180,90 +199,101 @@ function modal(estudiante) {
                 Authorization: `Bearer ${token}`,
               },
             })
-              .then((resGetEstudiante) => resGetEstudiante.json())
-              .then((resGetEstudiante) => {
-                var posicion;
-                var find = false;
+              .then((resGetNotas) => resGetNotas.json())
+              .then((resGetNotas) => {
+                fetch(urlEstudiante, {
+                  method: "get",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json, text/plain, */*",
+                    Authorization: `Bearer ${token}`,
+                  },
+                })
+                  .then((resGetEstudiante) => resGetEstudiante.json())
+                  .then((resGetEstudiante) => {
+                    var tablaNotas = document.getElementById("tablaNotas");
+                    var tbody = document.createElement("tbody");
+                    tbody.id = "tablaNotasTbody";
+                    tablaNotas.appendChild(tbody);
+                    var posicion;
+                    var find = false;
 
-                for (
-                  let w = 0;
-                  w < resGetEstudiante.length && find == false;
-                  w++
-                ) {
-                  if (resGetEstudiante[w]._id == estudiante) {
-                    posicion = w;
-                    find = true;
-                  }
-                }
-
-                if (
-                  resGetEstudiante[posicion].annoCurso == resGetAsignatura.anno
-                ) {
-                  for (let i = 0; i < resGetAsignatura.temas.length; i++) {
                     for (
-                      let j = 0;
-                      j < resGetAsignatura.temas[i].niveles.length;
-                      j++
+                      let w = 0;
+                      w < resGetEstudiante.length && find == false;
+                      w++
                     ) {
-                      var isEstudiante = isExist(
-                        resGetEstudiante[posicion]._id,
-                        resGetNotas
-                      );
-                      if (isEstudiante) {
-                        console.log("entro el estudiante");
-                        for (let q = 0; q < resGetNotas.length; q++) {
-                          if (
-                            resGetAsignatura.temas[i]._id ==
-                            resGetNotas[q].tema[0]._id
-                          ) {
-                            console.log("entro al tema");
-                            if (
-                              resGetAsignatura.temas[i].niveles[j]._id ==
-                                resGetNotas[q].nivel[0]._id &&
-                              resGetEstudiante[posicion]._id ==
-                                resGetNotas[q].estudiante[0]._id
-                            ) {
-                              console.log("ebtr safadsfdgsdag");
-                              var tablaNotas =
-                                document.getElementById("tablaNotas");
-                              var tbody = document.createElement("tbody");
-                              tbody.id = "tablaNotasTbody";
-                              tablaNotas.appendChild(tbody);
+                      if (resGetEstudiante[w]._id == estudiante) {
+                        posicion = w;
+                        find = true;
+                      }
+                    }
 
-                              let row_1 = document.createElement("tr");
-                              row_1.className =
-                                "bg-white border-b hover:bg-gray-50 text-base";
-                              let heading_2 = document.createElement("td");
-                              heading_2.innerHTML = `${resGetAsignatura.temas[i].descripcion}`;
-                              heading_2.className = "p-4 w-32";
-                              let heading_3 = document.createElement("td");
-                              heading_3.innerHTML = `${resGetAsignatura.temas[i].niveles[j].descripcion}`;
-                              heading_3.className = "p-4 w-32";
-                              let heading_4 = document.createElement("td");
-                              heading_4.innerHTML = `${resGetNotas[q].nota}`;
-                              heading_4.className = "p-4 w-32";
+                    if (
+                      resGetEstudiante[posicion].annoCurso ==
+                      resGetAsignatura.anno
+                    ) {
+                      for (let i = 0; i < resGetAsignatura.temas.length; i++) {
+                        for (
+                          let j = 0;
+                          j < resGetAsignatura.temas[i].niveles.length;
+                          j++
+                        ) {
+                          var isEstudiante = isExist(
+                            resGetEstudiante[posicion]._id,
+                            resGetNotas
+                          );
+                          if (isEstudiante) {
+                            console.log("entro el estudiante");
+                            for (let q = 0; q < resGetNotas.length; q++) {
+                              if (
+                                resGetAsignatura.temas[i]._id ==
+                                resGetNotas[q].tema[0]._id
+                              ) {
+                                console.log("entro al tema");
+                                if (
+                                  resGetAsignatura.temas[i].niveles[j]._id ==
+                                    resGetNotas[q].nivel[0]._id &&
+                                  resGetEstudiante[posicion]._id ==
+                                    resGetNotas[q].estudiante[0]._id
+                                ) {
+                                  console.log("ebtr safadsfdgsdag");
 
-                              row_1.appendChild(heading_2);
-                              row_1.appendChild(heading_3);
-                              row_1.appendChild(heading_4);
-                              tbody.appendChild(row_1);
-                              tablaNotas.appendChild(tbody);
+                                  let row_1 = document.createElement("tr");
+                                  row_1.className =
+                                    "bg-white border-b hover:bg-gray-50 text-base";
+                                  let heading_2 = document.createElement("td");
+                                  heading_2.innerHTML = `${resGetAsignatura.temas[i].descripcion}`;
+                                  heading_2.className = "p-4 w-32";
+                                  let heading_3 = document.createElement("td");
+                                  heading_3.innerHTML = `${resGetAsignatura.temas[i].niveles[j].descripcion}`;
+                                  heading_3.className = "p-4 w-32";
+                                  let heading_4 = document.createElement("td");
+                                  heading_4.innerHTML = `${resGetNotas[q].nota}`;
+                                  heading_4.className = "p-4 w-32";
+
+                                  row_1.appendChild(heading_2);
+                                  row_1.appendChild(heading_3);
+                                  row_1.appendChild(heading_4);
+                                  tbody.appendChild(row_1);
+                                  tablaNotas.appendChild(tbody);
+                                }
+                              }
                             }
                           }
                         }
                       }
                     }
-                  }
-                }
-              });
-          })
-          .finally(() => {
-            var tablaNotas = document.getElementById("tablaNotas");
-            var chargerTable = document.getElementById("chargerTableNotas");
+                  });
+              })
+              .finally(() => {
+                var tablaNotas = document.getElementById("tablaNotas");
+                var chargerTable = document.getElementById("chargerTableNotas");
 
-            chargerTable.style.visibility = "hidden";
-            chargerTable.style.opacity = "0";
-            tablaNotas.style.display = "table";
+                chargerTable.style.visibility = "hidden";
+                chargerTable.style.opacity = "0";
+                tablaNotas.style.display = "table";
+              });
           });
       });
   }

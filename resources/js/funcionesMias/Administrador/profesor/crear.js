@@ -121,7 +121,7 @@ function quitarDivCrear() {
   var chargerInsertar = document.getElementById("chargerInsertar");
   chargerInsertar.style.visibility = "hidden";
   chargerInsertar.style.opacity = "0";
-  boton.innerHTML = "Insertar Estudiante";
+  boton.innerHTML = "Insertar Profesor";
   boton.disabled = false;
 }
 

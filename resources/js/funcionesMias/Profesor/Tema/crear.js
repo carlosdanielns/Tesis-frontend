@@ -1,5 +1,5 @@
 const expresiones = {
-  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9\_\-]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+  descripcion: /^[a-zA-ZÀ-ÿ\sZ0-9?¿\_\-]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 };
 
 const campos = {
@@ -50,23 +50,24 @@ function agregar(descripcion) {
   let token = JSON.parse(localStorage.getItem("token"));
 
   onClickBotonCrear();
+  var urlProfesor = "http://localhost:3000/api/v2/profesor/";
 
-  if (navigator.onLine) {
-    server(url);
-    server(urlAsignatura);
+  fetch(urlProfesor + usuario.CI, {
+    method: "get",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((resByCI) => resByCI.json())
+    .then((resByCI) => {
+      if (navigator.onLine) {
+        server(url);
+        server(urlAsignatura);
 
-    //Aqui obtengo la asignatura por la cual el profesor hizo login
-    fetch(urlAsignatura + asiganturaCrear, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */*",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resFindDescripcion) => resFindDescripcion.json())
-      .then((resFindDescripcion) => {
-        fetch(url, {
+        //Aqui obtengo la asignatura por la cual el profesor hizo login
+        fetch(urlAsignatura + resByCI.asignatura, {
           method: "get",
           headers: {
             "Content-Type": "application/json",
@@ -74,69 +75,83 @@ function agregar(descripcion) {
             Authorization: `Bearer ${token}`,
           },
         })
-          .then((res) => res.json())
-          .then((res) => {
-            var find = false;
-            for (let j = 0; j < res.length && find == false; j++) {
-              if (res[j].descripcion == descripcion) {
-                var descripcionBien =
-                  document.getElementById("descripcionBien");
-                descripcionBien.style.visibility = "visible";
-                find = true;
-              }
-            }
+          .then((resFindDescripcion) => resFindDescripcion.json())
+          .then((resFindDescripcion) => {
+            fetch(url, {
+              method: "get",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json, text/plain, */*",
+                Authorization: `Bearer ${token}`,
+              },
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                var find = false;
+                for (let j = 0; j < res.length && find == false; j++) {
+                  if (res[j].descripcion == descripcion) {
+                    var descripcionBien =
+                      document.getElementById("descripcionBien");
+                    descripcionBien.style.visibility = "visible";
+                    find = true;
+                  }
+                }
 
-            if (find == false) {
-              onClickBotonCrear();
-              var data = { descripcion: descripcion };
+                if (find == false) {
+                  onClickBotonCrear();
+                  var data = { descripcion: descripcion };
 
-              fetch(url, {
-                method: "post",
-                headers: {
-                  "Content-Type": "application/json",
-                  Accept: "application/json, text/plain, */*",
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(data),
-              })
-                .then((resPost) => resPost.json())
-                .then((resPost) => {
-                  const urlAddTema =
-                    "http://localhost:3000/api/v2/asignatura/" +
-                    resFindDescripcion._id +
-                    "/tema/" +
-                    resPost._id;
-
-                  fetch(urlAddTema, {
+                  fetch(url, {
                     method: "post",
                     headers: {
                       "Content-Type": "application/json",
                       Accept: "application/json, text/plain, */*",
                       Authorization: `Bearer ${token}`,
                     },
+                    body: JSON.stringify(data),
                   })
-                    .then((resAdd) => resAdd.json())
-                    .then((resAdd) => {
-                      if (resAdd.status == 401 || resAdd.statusCode == 401) {
-                        $("#modal401").modal({
-                          backdrop: "static",
-                          keyboard: false,
+                    .then((resPost) => resPost.json())
+                    .then((resPost) => {
+                      const urlAddTema =
+                        "http://localhost:3000/api/v2/asignatura/" +
+                        resFindDescripcion._id +
+                        "/tema/" +
+                        resPost._id;
+
+                      fetch(urlAddTema, {
+                        method: "post",
+                        headers: {
+                          "Content-Type": "application/json",
+                          Accept: "application/json, text/plain, */*",
+                          Authorization: `Bearer ${token}`,
+                        },
+                      })
+                        .then((resAdd) => resAdd.json())
+                        .then((resAdd) => {
+                          if (
+                            resAdd.status == 401 ||
+                            resAdd.statusCode == 401
+                          ) {
+                            $("#modal401").modal({
+                              backdrop: "static",
+                              keyboard: false,
+                            });
+                            $("#modal401").modal("show");
+                          }
+                        })
+                        .finally(() => {
+                          quitarDivCrear();
+                          location.replace("/tema/listado");
                         });
-                        $("#modal401").modal("show");
-                      }
-                    })
-                    .finally(() => {
-                      quitarDivCrear();
-                      location.replace("/tema/listado");
                     });
-                });
-            }
-          })
-          .finally(() => {
-            quitarDivCrear();
+                }
+              })
+              .finally(() => {
+                quitarDivCrear();
+              });
           });
-      });
-  }
+      }
+    });
 }
 // Fin Crear Temas
 
