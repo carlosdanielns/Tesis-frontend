@@ -479,3 +479,13 @@ img {
   right: 0px;
   bottom: 0px;
 }
+
+.chargerTableCambio {
+  position: absolute;
+  top: 83.5%;
+  left: 8%;
+  right: 0px;
+  bottom: 0px;
+  height: 49px;
+  width: 417px;
+}

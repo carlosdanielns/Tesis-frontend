@@ -135,6 +135,7 @@ function eliminarTabla() {
   const tabla = document.getElementById("tablaNotasTbody");
   tabla.remove();
 }
+
 function modal(estudiante) {
   eliminarTabla();
 
@@ -262,7 +263,7 @@ function modal(estudiante) {
 
             chargerTable.style.visibility = "hidden";
             chargerTable.style.opacity = "0";
-            tablaNotas.style.display = "block";
+            tablaNotas.style.display = "table";
           });
       });
   }
